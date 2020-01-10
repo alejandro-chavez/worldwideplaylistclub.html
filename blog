@@ -1,0 +1,150 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" target="_blank">
+<style>
+body {margin: 0;}
+
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #da9100;}
+
+ul.topnav li a.active {background-color: #da9100;;
+	font-size: 100%;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+</style>
+</head>
+<body>
+
+<ul class="topnav" target="_blank">
+  <li><a class="active" href="#index" target="_blank"></a>Blog</li>
+  <li><a href="/archives.html" target="_blank">Archives</a></li>
+  <li><a href="/index.html" target="_blank">worldwideplaylist.club</a></li>
+  <li class="right" target="_blank"><a href="#about" target="_blank">About</a></li>
+</ul>
+
+
+</div>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" target="_blank">
+<style>
+body {
+  background-color: white;}
+  
+*{
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 300px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+</style>
+<style TYPE="text/css" target="_blank">
+
+  a:link, a:visited, a:hover, a:active { color: #000000;
+      text-decoration: none;
+
+    }
+h1 {color: 000000;
+	font-family: palatino
+	font-size: 300%} 
+ h2 {color: 000000;
+	font-family: palatino
+	font-size: 300%} 
+ h3 {color: 000000;
+	font-family: palatino
+	font-size: 250%} 
+    
+   </style>
+
+</head>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" target="_blank">
+<style>
+body {
+  background-color: white;}
+  
+*{
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 300px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+</style>
+<style TYPE="text/css" target="_blank">
+
+  a:link, a:visited, a:hover, a:active { color: #000000;
+      text-decoration: none;
+
+    }
+h1 {color: 000000;
+	font-family: palatino
+	font-size: 300%} 
+ h2 {color: 000000;
+	font-family: palatino
+	font-size: 300%} 
+ h3 {color: 000000;
+	font-family: palatino
+	font-size: 250%} 
+    
+   </style>
+
+</head>
+<body>
+<h1>blog</h1>
+
+<div class="row" target="_blank">
+
+<div class="column" style="" target="_blank">
+ 
+<a href="https://www.youtube.com/watch?v=zxrPnmeqt7E&list=PLc7djJmlhNtjgt7VZr0u4R3LHwhLxWfsP" target="_blank">   
+
+<h3>alejandro.</h3>
+
+<ul style="list-style-type:square" target="_blank">
+
+<li> Climbing the Walls <b> Brack Cantrell </b> </li>
