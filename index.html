@@ -1,16 +1,18 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" target="_blank">
 <style>
-body {margin: 0; background-image: "grid.jpg";
-}
+body {margin: 0;background-color:white }
 
 ul.topnav {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: white;
+  background-color: #FFEBEE;
+  font-family:courier;
+  font-size: 125%;
 }
 
 ul.topnav li {float: left;}
@@ -21,11 +23,14 @@ ul.topnav li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-family:courier;
+  font-size: 100%;
+   font-style: oblique;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #da9100;}
+ul.topnav li a:hover:not(.active) {background-color: #FCE964;}
 
-ul.topnav li a.active {background-color: #da9100;;
+ul.topnav li a.active {background-color: #1EDFC0;
 	font-size: 100%;}
 
 ul.topnav li.right {float: right;}
@@ -34,6 +39,60 @@ ul.topnav li.right {float: right;}
   ul.topnav li.right, 
   ul.topnav li {float: none;}
 }
+
+a:link,a:active,a:visited{ color: blue;
+      text-decoration: none;}
+      
+a:hover {color:#1E90FF;}
+
+h1 {color: #000000;
+	font-family:courier;
+	font-size: 150%;
+    padding: 0px;} 
+ h2 {color: #1EDFC0;
+	font-family:courier;
+    font-style: oblique;
+	font-size: 125%;
+    padding:0px;} 
+ h3 {color: blue;
+    font-family:courier;
+	font-size: 125%;
+    padding: 0px;} 
+h4 {color: #000000;
+	font-family:courier;
+		font-size: 100%;}
+s1{ color: #1EDFC0;
+	font-family:courier;
+		font-size: 100%;}
+p { color: #1E90FF;
+	font-family:courier
+		font-size: 100%;}
+div.title {
+  margin-top: 0;
+  margin-bottom: -10px;
+  margin-right: 2px;
+  margin-left: 10px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.grid-container {
+  display: grid;
+  grid: auto / auto auto auto;
+  grid-gap: 5px;
+  background-color: white;
+  padding: 5px;
+}
+
+.grid-container > div {
+  background-color: white;
+  padding: 15px;
+  font-size: 15px;
+}
+ul.a {font-family:courier;
+	font-size: 15px;
+    list-style-type:none;
+     margin: 0;
+  padding: 0;}
 </style>
 </head>
 <body>
@@ -44,132 +103,23 @@ ul.topnav li.right {float: right;}
   <li><a href="/blog/index.html" >blog</a></li>
   <li class="right" target="_blank"><a href="#about">about</a></li>
 </ul>
-
-
 </div>
 
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1" target="_blank">
-<style>
-body {
-  background-color: white;}
-  
-*{
-  box-sizing: border-box;
-}
-
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-  height: 300px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-</style>
-<style TYPE="text/css">
-
-  a:link, a:visited, a:hover, a:active { color: #000000;
-      text-decoration: none;
-
-    }
-    
-   </style>
-
-</head>
-
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  background-color: white;}
-  
-*{
-  box-sizing: border-box;
-}
-
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-  padding-bottom: 25px
-  height: 300px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-</style>
-<style TYPE="text/css" target="_blank">
-
-  a:link, a:visited, a:hover, a:active { color: #000000;
-      text-decoration: none;
-
-    }
-h1 {color: 000000;
-	font-family: monospace
-	font-size: 300%} 
- h2 {color: 000000;
-	font-family: monospace
-	font-size: 300%} 
- h3 {color: 000000;
-	font-family: monospace
-	font-size: 250%} 
-h4 {color: 000000;
-	font-family: monospace
-		font-size: 75%}
-s1{ color: green;
-	font-family: monospace
-		font-size: 100%}
-p { color: 000000;
-	font-family : monospace
-		font-size: 100%}
-div.title {
-  margin-top: 0;
-  margin-bottom: -10px;
-  margin-right: 2px;
-  margin-left: 10px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-div.footer {
-  right:0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 0;
-  box-sizing: border-box;
-  text-align: center;
-  .footer 
-
-} 
-   </style>
-
-</head>
-<body>
 <div class="title">
 <h1> playlists </h1>
 <h2>1.13.2020</h2>
 <h4> each playlist is a link for youtube (one soundcloud). <br> spotify link also available. </h4>
 </div>
 
-<div class="row" target="_blank">
+<div class="grid-container">
 
-<div class="column" style="" target="_blank">
+<div>
  
 <a href="https://www.youtube.com/watch?v=zxrPnmeqt7E&list=PLc7djJmlhNtjgt7VZr0u4R3LHwhLxWfsP" target="_blank">   
 
 <h3>alejandro.</h3>
 
-<ul style="list-style-type:square" >
+<ul class="a">
 
 <li> Climbing the Walls <b> Brack Cantrell </b> </li>
 <li> Violet Fields <b> Modesta </b> </li>
@@ -183,10 +133,12 @@ div.footer {
  <li> Potato Salad <b> Tyler, The Creator & A$AP Rocky </b></li>
 </ul>
 </a>
+</br>
 <a href="https://open.spotify.com/playlist/65Iha1kF6gpCxIgmg872E9?si=DOUDzBqBSbKADjur3lubuw" target="_blank"><s1> spotify.</s1></a>
-	  
+</div>
+<div>
 <a href="https://www.youtube.com/watch?v=4zvDLW5Klo8&list=PLc7djJmlhNthuqsCKD-W9BA6yK9h022qi" target="_blank"><h3>isabel.</h3>
-<ul style="list-style-type:square;" target="_blank">
+<ul class="a">
    <li> Omo <b> Burna Boy </b> </li>
    <li> Warm (feat. HAIM) <b> Charli XCX </b> </li>
    <li> The Cleaner <b> Squid </b> </li>
@@ -199,9 +151,13 @@ div.footer {
    <li> Woo <b> Rihanna </b> </li>
 </ul>
 </a>
-<a href="https://open.spotify.com/playlist/3iJrqyKs2LicRHpeqlPLA3?si=0of27yVjTtC1cPcWpE5Xmg" target="_blank"><s1> spotify.</s1></a>
-<a href="https://www.youtube.com/watch?v=1G1S5XKMmVo&list=PLc7djJmlhNth3epD8GPWegkmpdSn_57WM&" target="_blank"> <h3>josh.</h3>
-<ul style="list-style-type:square;" target="_blank">
+</br> <a href="https://open.spotify.com/playlist/3iJrqyKs2LicRHpeqlPLA3?si=0of27yVjTtC1cPcWpE5Xmg" target="_blank"><s1> spotify.</s1></a>
+</div>
+<div>
+<a href="https://www.youtube.com/watch?v=1G1S5XKMmVo&list=PLc7djJmlhNth3epD8GPWegkmpdSn_57WM&" target="_blank"> 
+
+<h3>josh.</h3>
+<ul class="a">
    <li> Ill Advised <b> Boldly James </b> </li>
    <li> Flows pt 2 <b> Sheff G </b> </li>
    <li> Self Love <b> Mavi </b> </li>
@@ -214,14 +170,13 @@ div.footer {
    <li> Tiff Freestyle <b> Goldlink </b> </li>
 </ul>
 </a>
-<a href="https://open.spotify.com/playlist/6fBl9Sq7eLh5LusVNL5WiB?si=r1KXXR6zQGWWKUBuTDoioA" target="_blank"><s1> spotify.</s1></a>
-  </div>
-
-  <div class="column" style="" target="_blank">
-  
+</br> <a href="https://open.spotify.com/playlist/6fBl9Sq7eLh5LusVNL5WiB?si=r1KXXR6zQGWWKUBuTDoioA" target="_blank"><s1> spotify.</s1></a>
+</div>
+<div>
 <a href="https://soundcloud.com/dosbox909/sets/dj-house-m-d-1-9-20" target="_blank"> 
+
 <h3>gabe.</h3>
-<ul style="list-style-type:square;" >
+<ul class="a">
   <li> Control <b> Monolithic </b></li>
   <li> Du Son Pour Les Gars Sûrs <b> Mézigue </b></li>
   <li>Here I'll Stay <b> JVXTA (Hardmatter) </b></li>
@@ -234,11 +189,14 @@ div.footer {
   <li> The Girl You Love <b> gutinstinct </b></li>
 </a>
 </ul>
-<font color=orange> no other links.</font>
-	  
+</br> 
+<s1> no other links.</s1>
+</div>
+<div>
 <a href="https://www.youtube.com/watch?v=aX-cPHlLVT8&list=PLc7djJmlhNtj3zRr12z9qAuRJUuqDyreH" target="_blank"> 
+
 <h3>tom.</h3>
-<ul style="list-style-type:square;">
+<ul class="a">
 <li>Steve Reid <b>Lions of Juda</b></li>
 <li>Chitin Flight <b>Sarah Louise</b></li>
 <li>Life's Gone Down Low <b>Lijadu Sisters</b></li>
@@ -251,10 +209,11 @@ div.footer {
 <li>Lily <b>Itasca</b></li>
 </ul>
 </a>
-<a href="https://open.spotify.com/playlist/5EiclbUJb0bD0ZRoTiTZAh?si=7gaVW_5CT0yYhZBDUDAr0w" target="_blank"><s1> spotify.</s1></a>
-
+</br> <a href="https://open.spotify.com/playlist/5EiclbUJb0bD0ZRoTiTZAh?si=7gaVW_5CT0yYhZBDUDAr0w" target="_blank"><s1> spotify.</s1></a>
+</div>
+<div>
 <a href="https://www.youtube.com/watch?v=JpGKWUdRnXE&list=PLc7djJmlhNth8t9EPmCF-ixat_jZKUosa" target="_blank"> <h3>ab.</h3>
-<ul style="list-style-type:square;" target="_blank">
+<ul class="a">
    <li> Location <b> Dave ft. Burna Boy </b> </li>
    <li> Roxanne <b> Arizona Zervas </b> </li>
    <li> Coco <b> Gabzy </b> </li>
@@ -267,13 +226,12 @@ div.footer {
    <li> Gang Over Luv <b> Brent Faiyaz</b> </li>
 </ul>
 </a>
-<a href="https://open.spotify.com/playlist/5H22vXwcvIjyCSnJ0tRN0a?si=J0iGT7MOTqmGR5fmr1tmcA" target="_blank"><s1> spotify.</s1></a>
-  </div>
-  
-<div class="column" style="" target="_blank">
+</br> <a href="https://open.spotify.com/playlist/5H22vXwcvIjyCSnJ0tRN0a?si=J0iGT7MOTqmGR5fmr1tmcA" target="_blank"><s1> spotify.</s1></a>
+</div>
+<div>
 <a href="https://www.youtube.com/watch?v=QrE_cDvcgJg&list=PLc7djJmlhNtihYCUnpWLwaaUYpA28ERla" target="_blank"> 
 <h3>miranda.</h3>
-<ul style="list-style-type:square;" target="_blank">
+<ul class="a">
    <li> Dirty Work <b> Steely Dan </b> </li>
    <li> Yo Sigo Iual <b> Bad Gyal </b> </li>
    <li> This Will Be Our Year <b> The Zombies </b> </li>
@@ -286,11 +244,11 @@ div.footer {
    <li> Where'd All The Time Go <b> Dr. Dog </b> </li>
 </ul>
 </a>
-<a href="https://open.spotify.com/playlist/2z9umiO3NRQ8zYVgiZIYAJ?si=RBYuAvVaRKi5vXiF8h3gyQ" target="_blank"><s1> spotify.</s1></a>
-
-	  
+</br> <a href="https://open.spotify.com/playlist/2z9umiO3NRQ8zYVgiZIYAJ?si=RBYuAvVaRKi5vXiF8h3gyQ" target="_blank"><s1> spotify.</s1></a>
+</div>
+<div>  
 <a href="https://www.youtube.com/watch?v=0pw6ZOXaHm4&list=PLc7djJmlhNtik2b5IUs-FrluAKg7RbZnw" target="_blank"> <h3>ashwini.</h3>
-<ul style="list-style-type:square;" target="_blank">
+<ul class="a">
    <li> Cowboys <b> Portishead </b> </li>
    <li> New Romantic <b> Andy Stott </b> </li>
    <li> Rival Dealer <b> Burial </b> </li>
@@ -303,10 +261,11 @@ div.footer {
    <li> 2 The Music <b> KAYTRANADA </b> </li>
 </ul>
 </a>
-<a href="https://open.spotify.com/playlist/2MhD4PBZHYFbtwRsVpskyA?si=Tobyw8WkSF2idPAC5ey-tA" target="_blank"><s1> spotify.</s1></a>
-
+</br> <a href="https://open.spotify.com/playlist/2MhD4PBZHYFbtwRsVpskyA?si=Tobyw8WkSF2idPAC5ey-tA" target="_blank"><s1> spotify.</s1></a>
+</div>
+<div>
 <a href="" target="_blank"> <h3>sandy.</h3>
-<ul style="list-style-type:square;" target="_blank">
+<ul class="a">
    <li> Song1 <b> Artist1 </b> </li>
    <li> Song2 <b> Artist2 </b> </li>
    <li> Song3 <b> Artist3 </b> </li>
@@ -319,9 +278,12 @@ div.footer {
    <li> Song10 <b> Artist10 </b> </li>
 </ul>
 </a>
+</br>
 <a href="" target="_blank"><s1> spotify.</s1></a>
 
-  </div>
+</div>
+</div>
 </body>
-
 </html>
+
+
