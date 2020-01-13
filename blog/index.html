@@ -1,16 +1,16 @@
-	  
-<html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" target="_blank">
 <style>
-body {margin: 0;}
+body {margin: 0;background-color:white }
 
 ul.topnav {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: white;
+  background-color: #FFEBEE;
+  font-family:courier;
+  font-size: 125%;
 }
 
 ul.topnav li {float: left;}
@@ -21,11 +21,15 @@ ul.topnav li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-family:courier;
+  font-size: 100%;
+   font-style: oblique;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #da9100;}
+ul.topnav li a:hover:not(.active) {background-color: #FCE964;}
 
-	ul.topnav li a.active {background-color: #da9100;}
+ul.topnav li a.active {background-color: #1EDFC0;
+	font-size: 100%;}
 
 ul.topnav li.right {float: right;}
 
@@ -33,107 +37,74 @@ ul.topnav li.right {float: right;}
   ul.topnav li.right, 
   ul.topnav li {float: none;}
 }
-</style>
-</head>
-<body>
 
-<ul class="topnav">
+a:link,a:active,a:visited{ color: blue;
+      text-decoration: none;}
+      
+a:hover {color:#1E90FF;}
+
+h1 {color: #000000;
+	font-family:courier;
+	font-size: 150%;
+    padding: 0px;} 
+ h2 {color: #1EDFC0;
+	font-family:courier;
+    font-style: oblique;
+	font-size: 125%;
+    padding:0px;} 
+ h3 {color: blue;
+    font-family:courier;
+	font-size: 125%;
+    padding: 0px;} 
+h4 {color: #000000;
+	font-family:courier;
+		font-size: 100%;}
+s1{ color: #1EDFC0;
+	font-family:courier;
+		font-size: 100%;}
+p { color: #1E90FF;
+	font-family:courier
+		font-size: 100%;}
+div.title {
+  margin-top: 0;
+  margin-bottom: -10px;
+  margin-right: 2px;
+  margin-left: 10px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+
+div.dates {
+  padding: 15px;
+}
+.grid-container {
+  display: grid;
+  grid: auto / auto auto auto;
+  grid-gap: 5px;
+  background-color: white;
+  padding: 5px;
+}
+
+.grid-container > div {
+  background-color: white;
+  padding: 15px;
+  font-size: 15px;
+}
+ul.a {font-family:courier;
+	font-size: 15px;
+    list-style-type:none;
+     margin: 0;
+  padding: 0;}
+</style>
+<head>
+<body><ul class="topnav" >
   <li><a class="active" href="/blog/index.html">blog</a></li>
-  <li><a href="/archives/index.html">archives</a></li>
-  <li><a href="/index.html">home</a></li>
-  <li class="right"><a href="#about">about</a></li>
+  <li><a href="/index.html" >home</a></li>
+  <li><a href="/archives/index.html" >archives</a></li>
+  <li class="right" target="_blank"><a href="#about">about</a></li>
 </ul>
 
-
-</div>
-
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1" >
-<style>
-body {
-  background-color: white;}
-  
-*{
-  box-sizing: border-box;
-}
-
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-  height: 300px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-</style>
-<style TYPE="text/css" >
-
-  a:link, a:visited, a:hover, a:active { color: #000000;
-      text-decoration: none;
-
-    }
-h1 {color: 000000;
-	font-family: palatino
-	font-size: 300%} 
- h2 {color: 000000;
-	font-family: palatino
-	font-size: 300%} 
- h3 {color: 000000;
-	font-family: palatino
-	font-size: 250%} 
-    
-   </style>
-
-</head>
-
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1" >
-<style>
-body {
-  background-color: white;}
-  
-*{
-  box-sizing: border-box;
-}
-
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-  height: 300px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-</style>
-<style TYPE="text/css" >
-
-  a:link, a:visited, a:hover, a:active { color: #000000;
-      text-decoration: none;
-
-    }
-h1 {color: 000000;
-	font-family: palatino
-	font-size: 300%} 
- h2 {color: 000000;
-	font-family: palatino
-	font-size: 300%} 
- h3 {color: 000000;
-	font-family: palatino
-	font-size: 250%} 
-    
-   </style>
-
-</head>
 <body>
 <h1> recent blog posts. </h1>	
 <div class="row" >
@@ -143,7 +114,7 @@ h1 {color: 000000;
 <a href="/blog/january/gabe_09.html" >   
 <h2> Techno </h2>
 <p> Here is some text etc etc. Here is some text etc etc. Here is some text etc etc "
-	</a>
+	</p>
 	
    
 </div>	
