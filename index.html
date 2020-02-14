@@ -1,6 +1,183 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+// <![CDATA[
+var colours=new Array('#f00', '#f06', '#f0f', '#f6f', '#f39', '#f9c'); // colours of the hearts
+var minisize=16; // smallest size of hearts in pixels
+var maxisize=30; // biggest size of hearts in pixels
+var hearts=69; // maximum number of hearts on screen
+var over_or_under="over"; // set to "over" for hearts to always be on top, or "under" to allow them to float behind other objects
+
+/*****************************
+*JavaScript Love Heart Cursor*
+*  (c)2013+ mf2fm web-design *
+*   http://www.mf2fm.com/rv  *
+*  DON'T EDIT BELOW THIS BOX *
+*****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var herz=new Array();
+var herzx=new Array();
+var herzy=new Array();
+var herzs=new Array();
+var kiss=false;
+
+if (typeof('addRVLoadEvent')!='function') function addRVLoadEvent(funky) {
+  var oldonload=window.onload;
+  if (typeof(oldonload)!='function') window.onload=funky;
+  else window.onload=function() {
+    if (oldonload) oldonload();
+    funky();
+  }
+}
+
+addRVLoadEvent(mwah);
+
+function mwah() { if (document.getElementById) {
+  var i, heart;
+  for (i=0; i<hearts; i++) {
+    heart=createDiv("auto", "auto");
+    heart.style.visibility="hidden";
+	heart.style.zIndex=(over_or_under=="over")?"1001":"0";
+    heart.style.color=colours[i%colours.length];
+	heart.style.pointerEvents="none";
+    if (navigator.appName=="Microsoft Internet Explorer") heart.style.filter="alpha(opacity=75)";
+    else heart.style.opacity=0.75;
+    heart.appendChild(document.createTextNode(String.fromCharCode(9829)));
+    document.body.appendChild(heart);
+    herz[i]=heart;
+	herzy[i]=false;
+  }
+  set_scroll();
+  set_width();
+  herzle();
+}}
+
+function herzle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<hearts; c++) if (herzy[c]===false) {
+	  herz[c].firstChild.nodeValue=String.fromCharCode(9829);
+      herz[c].style.left=(herzx[c]=x-minisize/2)+"px";
+      herz[c].style.top=(herzy[c]=y-minisize)+"px";
+      herz[c].style.fontSize=minisize+"px";
+	  herz[c].style.fontWeight='normal';
+      herz[c].style.visibility='visible';
+      herzs[c]=minisize;
+      break;
+    }
+  }
+  for (c=0; c<hearts; c++) if (herzy[c]!==false) blow_me_a_kiss(c);
+  setTimeout("herzle()", 40);
+}
+
+document.onmousedown=pucker;
+document.onmouseup=function(){clearTimeout(kiss);};
+
+function pucker() {
+  ox=-1;
+  oy=-1;
+  kiss=setTimeout('pucker()', 100);
+}
+
+function blow_me_a_kiss(i) {
+  herzy[i]-=herzs[i]/minisize+i%2;
+  herzx[i]+=(i%5-2)/5;
+  if (herzy[i]<sdown-herzs[i] || herzx[i]<sleft-herzs[i] || herzx[i]>sleft+swide-herzs[i]) {
+    herz[i].style.visibility="hidden";
+    herzy[i]=false;
+  }
+  else if (herzs[i]>minisize+2 && Math.random()<.5/hearts) break_my_heart(i);
+  else {
+    if (Math.random()<maxisize/herzy[i] && herzs[i]<maxisize) herz[i].style.fontSize=(++herzs[i])+"px";
+    herz[i].style.top=herzy[i]+"px";
+    herz[i].style.left=herzx[i]+"px";
+  }
+}
+
+function break_my_heart(i) {
+  var t;
+  herz[i].firstChild.nodeValue=String.fromCharCode(9676);
+  herz[i].style.fontWeight='bold';
+  herzy[i]=false;
+  for (t=herzs[i]; t<=maxisize; t++) setTimeout('herz['+i+'].style.fontSize="'+t+'px"', 60*(t-herzs[i]));
+  setTimeout('herz['+i+'].style.visibility="hidden";', 60*(t-herzs[i]));
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height;
+  div.style.width=width;
+  div.style.overflow="hidden";
+  div.style.backgroundColor="transparent";
+  return (div);
+}
+// ]]>
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156185134-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -37,9 +214,9 @@ ul.topnav li a {
    font-style: oblique;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #FCE964;}
+ul.topnav li a:hover:not(.active) {background-color: #ff6699;}
 
-ul.topnav li a.active {background-color: #1EDFC0;
+ul.topnav li a.active {background-color: #800000;
 	font-size: 100%;}
 
 ul.topnav li.right {float: right;}
@@ -49,28 +226,28 @@ ul.topnav li.right {float: right;}
   ul.topnav li {float: none;}
 }
 
-a:link,a:active,a:visited{ color: blue;
+a:link,a:active,a:visited{ color:  #800000;
       text-decoration: none;}
       
-a:hover {color:#1E90FF;}
+a:hover {color:#ff6699;}
 
-h1 {color: #000000;
+h1 {color: #ff6699;
 	font-family:courier;
 	font-size: 150%;
     padding: 0px;} 
- h2 {color: #1EDFC0;
+ h2 {color: #800000;
 	font-family:courier;
     font-style: oblique;
 	font-size: 125%;
     padding:0px;} 
- h3 {color: blue;
+ h3 {color: #800000;
     font-family:courier;
 	font-size: 125%;
     padding: 0px;} 
-h4 {color: #000000;
+h4 {color: #ff6699;
 	font-family:courier;
 		font-size: 100%;}
-s1{ color: #1EDFC0;
+s1{ color: #ff6699;
 	font-family:courier;
 		font-size: 100%;}
 p { color: #1E90FF;
@@ -110,13 +287,14 @@ ul.a {font-family:courier;
 <ul class="topnav" >
   <li><a class="active" href="/index.html">worldwideplaylist.club</a></li>
   <li><a href="/archives/index.html" >archives</a></li>
+  <li><a href="/submissions.html" >submissions</a></li>
   <li class="right" target="_blank"><a href="#about">about</a></li>
 </ul>
 </div>
 
 <div class="title">
-<h1> playlists </h1>
-<h2>1.27.2020</h2>
+<h1> v-day playlists </h1>
+<h2>2.14.2020</h2>
 <h4> each playlist is a link for youtube. <br> spotify link also available. </h4>
 </div>
 
@@ -124,213 +302,139 @@ ul.a {font-family:courier;
 
 <div>
  
-<a href="https://www.youtube.com/watch?v=AjGOxo0KDMs&list=PLc7djJmlhNtgNVWIVevCLOqqVo9IjJcyE&index=2&t=0s" target="_blank">   
+<a href="https://www.youtube.com/watch?v=olNfWDRuBNY&list=PLc7djJmlhNtirQsiZyQuS0lvHIsCVYRbi" target="_blank">   
 
 <h3>paulina.</h3>
 
 <ul class="a">
 
-<li> I'll Be Here in the Morning <b> Townes Van Zandt </b> </li>
-<li> Keep Your Faith to the Sky <b> Willie Scott & The Birmingham Spirituals </b> </li>
-<li> Slow Hand <b> The Pointer Sisters </b></li>
-<li> Avalyn II <b> Slowdive </b></li>
-<li> Cactus Tree <b> Joni Mitchell </b></li>
-<li> Punks In The Beerlight <b> Silver Jews </b></li>
-<li> Instant Dissassembly<b> Parquet Courts </b></li>
-<li> Plainsong <b> The Cure </b></li>
+<li> Broken Heart <b> Spiritualized </b> </li>
+<li> With My Hands Out <b> Mount Eerie, Julie Doiron </b> </li>
+<li> All Apologies and Smiles Yours Truely, Ugly Valentine <b> Carissa’s Wierd </b></li>
+<li> Watching It Unfold <b> Lawrence English </b></li>
+<li> You’ve Been a Friend <b> The Jesus and Mary Chain </b></li>
+<li> How Did The Feeling Feel To You <b> Karen Dalton </b></li>
+<li> Beautiful Child<b> Fleetwood Mac </b></li>
+<li> 24-5 <b> Kings of Convenience </b></li>
 <li> The City Limit <b> The Radio Dept. </b></li>
-<li> Watching As She Reels <b> Rafael Anton Irisarri </b></li>
+<li> It’s Only Love That Gets You Through <b> Sade </b></li>
 </ul>
 </a>
-</br>
-<a href="https://open.spotify.com/playlist/2cW3r6Kh98aQn5XYIK1mSl?si=_aOPbdh-TmKj9L7O5lmmcQ" target="_blank"><s1> spotify.</s1></a>
+<br>
+<a href="https://open.spotify.com/playlist/295M01zTJvnJl01XzjSK3A?si=pIZHBpdsSUSbuxaDZ1xcpQ” target=_blank"><s1> spotify.</s1></a>
 </div>
-<div>
-<a href="https://www.youtube.com/watch?v=REM2-t8i2JQ&list=PLc7djJmlhNtii3_Z3n--lVUTz7eMkfTDy" target="_blank"> 
 
-<h3> evan.</h3>
+<div>
+<a href="https://www.youtube.com/watch?v=Nj6SO_yKMe8&list=PLc7djJmlhNth9RgwDSyQumWuzbz93ww2U"target="_blank"> 
+
+<h3> miranda.</h3>
 <ul class="a">
-  <li> Mind On A Milli ft. HoodRich Pablo Juan <b> Gunna </b></li>
-  <li> Now <b> Lil Gotit </b></li>
-  <li> Yes Man <b> Hook </b></li>
-  <li> Lift Him Up That's All <b> Washington Phillips </b></li>
-  <li> On A Mountain <b> Gunna </b></li>
-  <li> Life's a Bitch- Remix #1 <b> Nas & AZ </b></li>
-  <li> Flex <b> Mad Cobra </b></li>
-  <li> Place Called Love <b> The Techniques </b></li>
-  <li> Build a Nest ft. Ruby Parker <b> Jeff Parker </b></li>
-  <li> CardoGotWIngs <b> Baby Smoove </b></li>
-
-</a>
+  <li> You! Me! Dancing! <b> Los Campesinos </b></li>
+  <li> Como La Flor <b> Selena </b></li>
+  <li> Guava Jelly <b> Johnny Nash </b></li>
+  <li> Late To The Party <b> Kacey Musgraves </b></li>
+  <li> Can't Stop Your Lovin' ft Panama <b> Poolside </b></li>
+  <li> Only Love Can Break Your Heart<b> Neil Young</b></li>
+  <li> Lady, You Shot Me <b> Har Mar Superstar </b></li>
+  <li> Chiquititia <b> ABBA </b></li>
+  <li> All In Love Is Fair <b> Stevie Wonder </b></li>
+  <li> Lost In The World <b> Kanye West </b></li>
 </ul>
-</br> 
-<a href="https://open.spotify.com/playlist/6yVHA3MpolOVBO3a0lOPvP?si=hnUD4i2tRwqCEuy7Tp_jkA" target="_blank"><s1> spotify.</s1></a>
+</a>
+<br> 
+<a href="https://open.spotify.com/playlist/58T9L29AKYjkEPPnV2DUq1?si=rx1lTbt_Q4-weyfdWFF67A" target="_blank"><s1> spotify.</s1></a>
 </div>
+
 <div>
-<a href="https://www.youtube.com/watch?v=KK4a_Lj5XGw&list=PLc7djJmlhNthFXgXmL5Gwfps7Y9coWbJn" target="_blank"> 
+<a href="https://www.youtube.com/watch?v=rRDUyxmx4sM&list=PLc7djJmlhNthMLnEEhJ2a9f0zhnkdkNCh" target="_blank"> 
+<h3>grace.</h3>
+<ul class="a">
+   <li> Pretty Ugly <b> Tierra Whack </b> </li>
+   <li> The Louvre <b> Lorde </b> </li>
+   <li> 7 rings <b> Ariana Grande </b> </li>
+   <li> Shut Up Kiss Me <b> Angel Olsen </b> </li>
+   <li> Never Lonely <b> Space Mountain </b> </li>
+   <li> when the party's over <b> Billie Eilish </b> </li>
+   <li> Bike Dream <b> Rostam </b> </li>
+   <li> I Care (Homecoming Live) <b> Beyonce </b> </li>
+   <li> First Love / Late Spring <b> Mitski </b> </li>
+   <li> Jerome <b> Lizzo </b> </li>
+</ul>
+</a>
+<br> 
+<a href="https://open.spotify.com/playlist/6XtEjh8WHuF4b8VsD51N0O?si=NRmBFJFOQyynyCp8LAq1cg" target="_blank"><s1> spotify.</s1></a>
+</div>
+
+<div>
+<a href="https://www.youtube.com/watch?v=FCCQcgUJo2o&list=PLc7djJmlhNtgnUouEOTRiPwUOzbzgs0TO" target="_blank"><h3>buggy.</h3>
+<ul class="a">
+   <li> About Her Eyes <b> Jerry Jeff Walker </b> </li>
+   <li>I Couldn't Say It To Your Face <b> Arthur Russell </b> </li>
+   <li> Call Me (Come Back Home) <b> Al Green </b> </li>
+   <li> Dear Boy ft. Linda McCartney <b> Paul McCartney </b> </li>
+   <li> Seeds <b> Melanie </b> </li>
+   <li> She's A Lover <b> The Pretty Things </b> </li>
+   <li> She Came and She Touched Me <b> Townes Van Zandt </b> </li>
+   <li> Famous Blue Raincoat <b> Leonard Cohen </b> </li>
+   <li> Your House <b> Steel Pulse </b> </li>
+   <li> Tops ft Bob Clearmountain <b> The Rolling Stones </b> </li>
+
+</ul>
+</a>
+<br>
+<a href="https://open.spotify.com/playlist/7rmAiQuIs4L47I0ahI0sg2?si=peIXVvU7TNi8gZcwTiXO0w" target="_blank"> <s1> spotify.</s1></a>
+
+</div>
+
+<div>
+<a href="https://www.youtube.com/watch?v=x3y617i54YQ&list=PLc7djJmlhNthG5cJRO7-Fyi0YI7AbNJQY" target="_blank"> <h3>alejandro.</h3>
+<ul class="a">
+   <li> It Must Be Love <b> Labi Siffre </b> </li>
+   <li> Just the Two of Us <b> Bill Withers </b> </li>
+   <li> Lovin' You <b> Minnie Riperton </b> </li>
+   <li> How Deep Is Your Love <b> Bee Gees</b> </li>
+   <li> Ivy <b> Frank Ocean </b> </li>
+   <li> Amor Prohibido <b> Selena </b> </li>
+   <li> LOVE. FEAT. ZACARI. <b> Kendrick Lamar </b> </li>
+   <li> Like Glue <b> Sean Paul </b> </li>
+   <li> oui <b> Jeremih </b> </li>
+   <li> Adorn <b> Miguel </b> </li>
+
+</ul>
+</a>
+<br> 
+<a href="https://open.spotify.com/playlist/6LSZVNpYRwf9CbC4YUjXZH?si=cZ4oPteZSfWJKyrQwlgQgw" target="_blank"><s1> spotify.</s1></a>
+</div>
+
+<div>
+<a href="https://www.youtube.com/watch?v=hov6JQrdpkU&list=PLc7djJmlhNtj_lKq-Ni45qKoFx9qpbOtH" target="_blank"> 
+
 <h3>gabe.</h3>
 <ul class="a">
-   <li> Dancing (Roger Thornhill Edit) <b> Tru Tones </b> </li>
-   <li> A.E.I.O.U. (Dimitri From Paris Remix) <b> Cotonete & Di Melo </b> </li>
-   <li> Parribean Disco <b> Cotonete & Dimitri From Paris </b> </li>
-   <li> Just A Player <b> Andrés </b> </li>
-   <li> Street Music <b> Smokin Beats </b> </li>
-   <li> I Need Your Love (Vocal Dub) <b> Smokin Beats </b> </li>
-   <li> Gentle Touch (The Smokin Beats Reconstruction) <b> Da Players </b> </li>
-   <li> Second To None  <b> Al Zanders </b> </li>
-   <li> Best Thing (Smokin Beats Club Mix) <b> Smokin Beats </b> </li>
-   <li> WHIPLAST (NBASTWAX009) <b> HDSN </b> </li>
-</ul>
-</a>
-</br> <s1> no other links.</s1></a>
-</div>
-<div>
-<a href="https://www.youtube.com/watch?v=osaEK-cd5gk&list=PLc7djJmlhNtgl1RTOtaDGrfatSRFE8C8g" target="_blank"><h3>adam.</h3>
-<ul class="a">
-   <li> Hennessy <b> GOA & Fish Narc </b> </li>
-   <li>i be high<b> Nascar Aloe </b> </li>
-   <li> Check Hit <b> Belis </b> </li>
-   <li> I GOT ///ÐЄPRЄ$$ЄÐ+ĦØЄ$/// ft. PLAYBOI CARTI <b> Slug † Christ </b> </li>
-   <li> Friends <b> Flexinfab </b> </li>
-   <li> wakeuptothis! feat. Zellyocho<b> ppgcasper </b> </li>
-   <li> 100 bars of death <b> stunny </b> </li>
-   <li> Bite Down (ft. Lil Narnia & Local Zero) <b> Belle Delphine </b> </li>
-   <li> PILE UP <b> BLNTSMK </b> </li>
-   <li> l34v1ng <b> David Shawty</b> </li>
-</ul>
-<s1><i> <b> note <br> </b> <a href="https://soundcloud.com/stunnymane/100-bars-of-death" target="_blank">   100 bars of death is only available on soundcloud.</i></s1></a>
-</div>
-<div>
-<a href="https://www.youtube.com/watch?v=KgFHN-GdQeI&list=PLc7djJmlhNtg4w0GwkFnUf21FYMgSptHV" target="_blank"> 
-
-<h3>sandy.</h3>
-<ul class="a">
-   <li> I Thought That I could Get Away with It <b> Joseph Shabason </b> </li>
-   <li> Alone <b> John F.M. & Omar S </b> </li>
-   <li> Turned Out I Was Everyone <b> SASAMI </b> </li>
-   <li> Hollywood Dream Trip <b> Syrinx</b> </li>
-   <li> Instead I Left You <b> Bvdub </b> </li>
-   <li> Música Esporádica <b> Música Esporádica </b> </li>
-   <li> 24 ways of Looking at a Piano: No. 14. Grace. <b> Eric Schqartz </b> </li>
-   <li> PUSHER <b> Joanne Robertson </b> </li>
-   <li> Beautiful Child <b> Fleetwood Mac </b> </li>
-
-</ul>
-</a>
-</br> <a href="https://open.spotify.com/playlist/0mQua1Qkt6p2z7ADkZGFW5?si=i-aA-0AdTuSl15v7ktqUhA" target="_blank"><s1> spotify.</s1></a>
-</div>
-
-<div>
-<a href="https://www.youtube.com/watch?v=EtYre1GABao&list=PLc7djJmlhNtg5USTj-Xvk0hYS96lHKXXo" target="_blank"> 
-
-<h3>alan.</h3>
-<ul class="a">
-<li>Secret <b>Orchestral Manoeuvres In The Dark</b></li>
-<li>Fresh <b>Evil Needle</b></li>
-<li>Bob- Edu K remix <b>Otto</b></li>
-<li>Instant Street  <b>dEUS</b></li>
-<li>Law Of Fives <b>Clarence Clarity</b></li>
-<li>800db cloud <b>100 gecs</b></li>
-<li>Work Out  <b>J. Cole</b></li>
-<li>Passed You By <b>Chicano Batman</b></li>
-<li>The Oogum Boogum Song <b>Brenton Wood F</b></li>
-<li>Free The Frail ft. Helena Deland <b>JPEGMAFIA</b></li>
-</a>
-</ul>
-</br> <a href="https://open.spotify.com/playlist/76MdrhzkprshSsxZlXtkfq?si=ZYvyjtP7TxKXaezO_U0k4Q" target="_blank"><s1> spotify.</s1></a>
-</div>
-<div>
-<a href="https://www.youtube.com/watch?v=1nhFyh-vF6c&list=PLc7djJmlhNti9Fv4mG6P7y4pimAWDQcvh" target="_blank">
- <h3>david.</h3>
-<ul class="a">
-   <li> Boezem Ballet<b> Hessel Veldman </b> </li>
-   <li> Splendida giornata <b> Vasco Rossi </b> </li>
-   <li> Tommy's Congo <b> Steve Gunn </b> </li>
-   <li> And You My Love<b> Chris Rea </b> </li>
-   <li> Agymosás <b> East </b> </li>
-   <li> Unga Pfula A Chi Pfalo <b> Kabasa </b> </li>
-   <li> Safari Boys <b> Sharp Ties </b> </li>
-   <li> Corra Linn <b> The Jeremy Spencer Band </b> </li>
-   <li> Curse of the Traveller <b> Chris Rea </b> </li>
-   <li> Healing Feeling <b> Laid Back </b> </li>
-</ul>
-</a>
-</br>
-<a href="https://open.spotify.com/playlist/0rOCPMbFK9QSEnLCl1LnlC?si=UiPKeVTARmeBJUGuG2_qJg" target="_blank"><s1> spotify.</s1></a>
-</div>
-<div>  
-<a href="https://www.youtube.com/watch?v=0wSXTN2EfRo&list=PLc7djJmlhNtic-hPZlruv_z95_mAuMPPz" target="_blank"> <h3>dylan.</h3>
-<ul class="a">
-   <li> (Poor Mi) Israelites <b> Desmond Dekker & The Aces </b> </li>
-   <li> Nunca Es Sufciente <b> Los Angeles Azules </b> </li>
-   <li> Sister Golden Hair <b> America </b> </li>
-   <li> Big Iron <b> Marty Robbins </b> </li>
-   <li> The Man in Me <b> Bob Dylan </b> </li>
-   <li> I Don't Like The Man I Am <b> Pete Molinari </b> </li>
-   <li> Hello It's Me <b> Todd Rundgren </b> </li>
-   <li> We Gotta Get You a Woman <b> Todd Rundgren </b> </li>
-   <li> Here She Comes<b> The Beach Boys </b> </li>
-   <li> I Know There's An Answer <b> The Beach Boys </b> </li>
-   <li> Brandy (You're a Fine Girl)<b> Looking Glass </b> </li>
-   <li> Cloudbusting <b> Volver Volver </b> Vincente Fernández </li>
-   <li> Life on Mars? <b> David Bowie </b> </li>
-   <li> Everything Happens To Me <b> Chet Baker </b> </li>
-  
-</ul>
-</a>
-</br> <a href="https://open.spotify.com/playlist/50Xoqd0QexVDj4TRIXKp5n?si=Uu8ovT4zTMKUP87OM2gr0Q" target="_blank"><s1> spotify.</s1></a>
-</div>
-<div>  
-<a href="https://www.youtube.com/watch?v=u_uDgWpYqcU&list=PLc7djJmlhNtj7avAk_hEhMPn8oNZXZbf2" target="_blank"> <h3>alejandro.</h3>
-<ul class="a">
-   <li> Homicide (ft. BandGang Lonnie Bands) <b> Shoreline Mafia </b> </li>
-   <li> Elastic <b> Joey Purp </b> </li>
-   <li> Wild Irish Roses <b> Smino </b> </li>
-   <li> Rock Co.Kane Flow (ft. MF Doom) <b> De La Soul </b> </li>
-   <li> Money In The Way <b> 2 Chainz </b> </li>
-   <li> The Skin of My Yellow Country Teeth <b> Clap Your Hands Say Yeah </b> </li>
-   <li> Jezebel <b> Two Hours Traffic </b> </li>
-   <li> Autumn Sweater<b> Yo La Tengo </b> </li>
-   <li> Round And Round <b> Ariel Pink </b> </li>
-   <li> Baby <b> Donnie & Joe Emerson </b> </li>
-</ul>
-</a>
-</br> <a href="https://open.spotify.com/playlist/17L4H5vKSWRvyoGOq1c97u?si=H1ijkTSHSI2yggOW4Zd1Zg" target="_blank"><s1> spotify.</s1></a>
-</div>
-
-<div>
-<a href="" target="_blank"> <h3>you.</h3>
-<ul class="a">
-   <li> This <b> could </b> </li>
-   <li> be <b> you. </b> </li>
-   <li> if  <b> you  </b> </li>
-   <li> want <b> to </b> </li>
-   <li> send <b> a </b> </li>
-   <li> playlist <b> email </b> </li>
-   <li> yours <b><a href="mailto:worldwideplaylistclub@gmail.com?Subject=Playlist" target="_top"> here </b> </a> </li>
+<li>The Semimodular Bird of Jazz <b>Orchestral Manoeuvres In The Dark</b></li>
+<li>Do Know About Love <b>Smokin Beats</b></li>
+<li>Dilemma  <b>DJ Sonikku</b></li>
+<li>L.O.V.E. Got A Hold Of Me <b>Demis Roussos</b></li>
+<li>Dreamin <b>Just Baker</b></li>
+<li>Need Somebody <b>Roger Thornhill</b></li>
+<li> Maria's Piano  <b>Felipe Gordon</b></li>
+<li>Look Who's Lovin Me <b>Smokin Beats/b></li>
+<li>Illusion (Maurice's Destiny Club Mix) <b>Destiny's Child</b></li>
+<li>Best Thing (Smokin Beats Club Mix) <b>Smokin Beats</b></li>
+<li> Apparel Wax <b> 005B1 </b></li>
+<li> Loves Got Me Swining (Mentalinstrum Club Dub) <b> 3rd Degree </b></li>
 </ul>
 </a>
 
+<br> 
+<s1> no spotify playlist.</s1>
 </div>
-<div>
 </div>
-<div>
-<a href="" target="_blank"> <h3>you.</h3>
-<ul class="a">
-   <li> This <b> could </b> </li>
-   <li> be <b> you. </b> </li>
-   <li> if  <b> you  </b> </li>
-   <li> want <b> to </b> </li>
-   <li> send <b> a </b> </li>
-   <li> playlist <b> email </b> </li>
-   <li> yours <b><a href="mailto:worldwideplaylistclub@gmail.com?Subject=Playlist" target="_top"> here </b> </a> </li>
-</ul>
-</a>
 
-</div>
-</div>
 <meta property="og:title" content="worldwideplaylist.club" />
 <meta property="og:image" content="/logo.jpg" />
 
 </body>
 </html>
+
+
