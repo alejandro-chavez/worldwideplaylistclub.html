@@ -1,51 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-156185134-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-156185134-1');
-</script>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" target="_blank">
 <style>
-body {margin: 0;background-color:white }
-body {font-family: Arial, Helvetica, sans-serif;}
 
-form {
-  border: 3px solid #f1f1f1;
-  font-family: Arial;
-}
-.container {
-  padding: 20px;
-  background-color: #f1f1f1;
-}
-
-input[type=text], input[type=submit] {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-input[type=checkbox] {
-  margin-top: 16px;
-}
-
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-}
-
-input[type=submit]:hover {
-  opacity: 0.8;
-}
 ul.topnav {
   list-style-type: none;
   margin: 0;
@@ -277,28 +235,11 @@ ul.a {font-family:courier;
 <meta property="og:title" content="worldwideplaylist.club" />
 <meta property="og:image" content="/logo.jpg" />
 
-<h2>CSS Newsletter</h2>
-
-<form action="/action_page.php">
-  <div class="container">
-    <h2>Subscribe to the Newsletter</h2>
-    <p>Get each week's playlists directly to your inbox.</p>
-  </div>
-
-  <div class="container" style="background-color:white">
-    <input type="text" placeholder="Name" name="name" required>
-    <input type="text" placeholder="Email address" name="mail" required>
-    <label>
-      <input type="checkbox" checked="checked" name="subscribe"> Daily Newsletter
-    </label>
-  </div>
-
-  <div class="container">
-    <input type="submit" value="Subscribe">
-  </div>
+<form action="subs.php" method="post">
+Name: <input type="text" name="name"><br>
+E-mail: <input type="text" name="email"><br>
+<input type="submit">
 </form>
-</body>
-
 
 </body>
 </html>
