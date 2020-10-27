@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>  
+<body>
+
+<form action="playlist.php" method="post">
+Song 1: <input type="text" name="song1"><br>
+Artist 1: <input type="text" name="artist1"><br>
+Song 2: <input type="text" name="song2"><br>
+Artist 2: <input type="text" name="artist2"><br>
+Song 3: <input type="text" name="song3"><br>
+Artist 3: <input type="text" name="artist3"><br>
+Song 4: <input type="text" name="song4"><br>
+Artist 4: <input type="text" name="artist4"><br>
+Song 5: <input type="text" name="song5"><br>
+Artist 5: <input type="text" name="artist5"><br>
+Song 6: <input type="text" name="song6"><br>
+Artist 6: <input type="text" name="artist6"><br>
+Song 7: <input type="text" name="song7"><br>
+Artist 7: <input type="text" name="artist7"><br>
+Song 8: <input type="text" name="song8"><br>
+Artist 8: <input type="text" name="artist8"><br>
+Song 9: <input type="text" name="song9"><br>
+Artist 9: <input type="text" name="artist9"><br>
+Song 10: <input type="text" name="song10"><br>
+Artist 10: <input type="text" name="artist10"><br>
+
+
+<input type="submit">
+</form>
+
+</body>
+</html>
