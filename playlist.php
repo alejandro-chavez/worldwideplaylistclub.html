@@ -22,8 +22,7 @@ if(isset($_POST['submit'])) {
     $a9   = $_POST['artist9'] ;
 		$s10 = $_POST['song10'];
     $a10 = $_POST['artist10'];
-
-}
+} 
 
     $playlist = array(
 		array("$s1,$a1"),
@@ -37,5 +36,8 @@ if(isset($_POST['submit'])) {
 		array("$s9,$a9"),
 		array("$s10,$a10"),
 	  );
-		
-?>
+
+	 echo $playlist; ?>
+
+		</body>
+		</html>
