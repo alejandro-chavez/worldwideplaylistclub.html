@@ -38,7 +38,9 @@ if(isset($_POST['submit'])) {
 	  );
 ?>
 >?php
-	 echo $playlist; ?>
+	 echo $playlist;
+	echo $a1
+	echo $s2?>
 
 		</body>
 		</html>
