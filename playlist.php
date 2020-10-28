@@ -36,7 +36,8 @@ if(isset($_POST['submit'])) {
 		array("$s9,$a9"),
 		array("$s10,$a10"),
 	  );
-
+?>
+>?php
 	 echo $playlist; ?>
 
 		</body>
