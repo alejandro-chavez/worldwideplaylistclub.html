@@ -1,3 +1,5 @@
+<html>
+<body>
 <?php
 
 if(isset($_POST['submit'])) {
@@ -36,11 +38,15 @@ if(isset($_POST['submit'])) {
 		array("$s9,$a9"),
 		array("$s10,$a10"),
 	  );
-?>
->?php
-	 echo $playlist;
-	echo $a1
-	echo $s2?>
+		?>
+		
+		<?php
+
+	 echo $playlist; 
+	 echo $s1;
+	 echo $a3;
+	 
+	 ?>
 
 		</body>
 		</html>
