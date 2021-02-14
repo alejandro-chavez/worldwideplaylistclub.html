@@ -49,19 +49,24 @@ a:hover {color:#1E90FF;}
 h1 {color: #000000;
 	font-family:courier;
 	font-size: 150%;
-    padding: 0px;} 
+       padding: 10px;
+	   padding-left: 10px;} 
  h2 {color: #1EDFC0;
 	font-family:courier;
     font-style: oblique;
 	font-size: 125%;
-    padding:0px;} 
+      padding: 10px;
+	   padding-left: 10px;} 
  h3 {color: blue;
     font-family:courier;
 	font-size: 125%;
-    padding: 0px;} 
+    padding: 10px;
+	   padding-left: 10px;} 
 h4 {color: #000000;
 	font-family:courier;
-		font-size: 100%;}
+		font-size: 100%;
+	   padding: 10px;
+	   padding-left: 10px;}
 s1{ color: #1EDFC0;
 	font-family:courier;
 		font-size: 100%;}
@@ -105,9 +110,13 @@ body {
   width: 100%;
 }
 
-.intro {
-	padding-left: 15px;
-	}
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .column {
