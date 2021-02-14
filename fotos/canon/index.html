@@ -69,32 +69,58 @@ p { color: #1E90FF;
 	font-family:courier
 		font-size: 100%;}
 	i.a {visibility:hidden;}
-div.title {
-  margin-top: 0;
-  margin-bottom: -10px;
-  margin-right: 2px;
-  margin-left: 10px;
-  padding: 0px;
+* {
   box-sizing: border-box;
 }
-.grid-container {
-  display: grid;
-  grid: auto / auto auto auto;
-  grid-gap: 5px;
-  background-color: white;
-  padding: 5px;
+
+body {
+  margin: 0;
+  font-family: Arial;
 }
 
-.grid-container > div {
-  background-color: white;
-  padding: 15px;
-  font-size: 15px;
+.header {
+  text-align: center;
+  padding: 32px;
 }
-ul.a {font-family:courier;
-	font-size: 15px;
-    list-style-type:none;
-     margin: 0;
-  padding: 0;}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
 </style>
 </head>
 <body>
@@ -109,19 +135,48 @@ ul.a {font-family:courier;
 </head>
 <body>
 
-<h1> archives. </h1>
-<h4>all the old posts<h4>
-<h2>2020</h2>	
-  
- <ul class="a">
-<li> <img src="/fotos/canon/index/IMG_1.JPG" width="100%" height="100%"> </li>
-<li> <img src="/fotos/canon/index/IMG_2.JPG" width="100%" height="100%"> </li>
-<li> <img src="/fotos/canon/index/IMG_3.JPG" width="100%" height="100%"> </li>
-<li> <img src="/fotos/canon/index/IMG_4.JPG" width="100%" height="100%"> </li>
-<li> <img src="/fotos/canon/index/IMG_5.JPG" width="100%" height="100%"> </li>
-<li> <img src="/fotos/canon/index/IMG_6.JPG" width="100%" height="100%"> </li>    
-<li> <img src="/fotos/canon/index/IMG_7.JPG" width="100%" height="100%"> </li> 
-</ul>
+<h1> canon powershot g2. </h1>
+<h4>digicam archive<h4>
+<h2>2020-</h2>	
+
+	<div class="row"> 
+  <div class="column">
+ <img src="/fotos/canon/index/IMG_1.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_2.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_3.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_4.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_5.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_6.JPG" width="100%">     
+ <img src="/fotos/canon/index/IMG_7.JPG" width="100%">  
+  </div>
+  <div class="column">
+ <img src="/fotos/canon/index/IMG_8.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_9.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_10.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_11.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_12.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_13.JPG" width="100%">     
+ <img src="/fotos/canon/index/IMG_14.JPG" width="100%">  
+  </div>  
+  <div class="column">
+ <img src="/fotos/canon/index/IMG_15.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_16.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_17.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_18.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_19.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_20.JPG" width="100%">     
+ <img src="/fotos/canon/index/IMG_21.JPG" width="100%">  
+  </div>
+  <div class="column">
+ <img src="/fotos/canon/index/IMG_22.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_23.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_24.JPG" width="100%">  
+ <img src="/fotos/canon/index/IMG_25.JPG" width="100%"> 
+ <img src="/fotos/canon/index/IMG_26.JPG" width="100%">     
+ <img src="/fotos/canon/index/IMG_27.JPG" width="100%">  
+<img src="/fotos/canon/index/IMG_28.JPG" width="100%">
+  </div>
+
 
 </body>
 	</html>
