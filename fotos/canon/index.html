@@ -83,26 +83,34 @@ body {
   padding: 32px;
 }
 
-.row {
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-
-/* Create four equal columns that sits next to each other */
+/* The grid: Four equal columns that floats next to each other */
 .column {
-  -ms-flex: 25%; /* IE10 */
-  flex: 25%;
-  max-width: 25%;
-  padding: 0 4px;
+  float: left;
+  width: 25%;
+  padding: 10px;
 }
 
+/* Style the images inside the grid */
 .column img {
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 100%;
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
 }
 
 @media screen and (max-width: 800px) {
@@ -120,6 +128,31 @@ body {
     flex: 100%;
     max-width: 100%;
   }
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
 }
 </style>
 </head>
