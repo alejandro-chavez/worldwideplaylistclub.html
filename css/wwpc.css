@@ -81,7 +81,7 @@ h4 {color: #000000;
     grid-gap: 0em 10em;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 	 background: white;
-  background-image: linear-gradient(blue .1em, transparent .1em), linear-gradient(90deg, blue .1em, transparent .1em);
+  background-image: linear-gradient(blue opacity: 0.3; .1em, transparent .1em), linear-gradient(90deg, blue opacity: 0.3; .1em, transparent .1em);
 	background-size: 2em 2em;
 }
 .playlist{
