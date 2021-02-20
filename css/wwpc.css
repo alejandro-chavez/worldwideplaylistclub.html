@@ -76,28 +76,25 @@ h4 {color: #000000;
 
 .basic-grid {
     padding-left: 10px;
-	margin: 0 59px 10px 20px;
+	margin: 0;
     display: grid;
     grid-gap: 0em 10em;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 	 background: white;
-  background-image: linear-gradient(blue opacity: 0.3; .1em, transparent .1em), linear-gradient(90deg, blue opacity: 0.3; .1em, transparent .1em);
-	background-size: 2em 2em;
 }
 .playlist{
 	border-style: outset;
 	box-shadow: 0 0 0 8px #E0E0E0;
-	background-color: #7afcff;
 	margin-top: 100;
 	margin-bottom: 100;
 	margin-left: 50;
 	margin-right: 50;
-  }
 }
 .name {
     font-family:courier;
 	font-size: 15px;
     margin: 0;
+	background-color: #7afcff;
 	border-bottom: solid black 2px;
     padding: 15px 15px 10px 8px;
 	background-color:#1EDFC0;
@@ -107,7 +104,7 @@ ul.a {font-family:courier;
 	font-size: 15px;
     list-style-type:none;
      margin: 0;
-  background-color:lightpink;  
+  background-color: rgba(255, 182, 193, 0.7);
   padding: 10px 15px 10px 10px;
 }
 .spotify{
