@@ -63,8 +63,8 @@ body {margin: 0;
 	background-color: white;} 
 p {color: blue;
     font-family:courier;
-	font-size: 125%;
-    padding: 10px;} 
+	font-size: 100%;
+    padding-left: 10px;} 
 s1 {color: black;
    font-family: courier;
   font-size:150%;
