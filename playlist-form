@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>  
 <body>
+ <script defer src="/css/script.js"> </script>
 
 <form action="playlist.php" method="post">
 Song 1: <input type="text" name="song1"><br>

@@ -1,6 +1,16 @@
 @charset "UTF-8";
 <meta name="viewport" content="width=device-width, initial-scale=1.0" target="_blank">
-
+<script>
+function dropdownMenu() {
+    var x = document.getElementById("dropdownClick");
+    if (x.className === "topnav"){
+        x.className += " responsive";
+        /* change topnav to topnav.responsive */
+    } else{
+    x.className = "topnav"
+}
+}
+</script>
 body {margin: 0; 
 	background-color:white;
 }
