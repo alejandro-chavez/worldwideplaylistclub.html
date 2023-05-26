@@ -1,0 +1,185 @@
+@charset "UTF-8";
+<meta name="viewport" content="width=device-width, initial-scale=1.0" target="_blank">
+
+
+.header {
+  text-align: center;
+  padding: 32px;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+ cursor: pointer;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+	  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+
+body {margin: 0; 
+	background-color:gray;
+}
+
+ul.topnav {
+  list-style-type: none;
+  margin:0;
+  margin-top: -10;
+  margin-left:-10;
+  margin-bottom:10;
+  padding: 0;
+  overflow: hidden;
+font-family: 'M PLUS 1 Code', sans-serif;
+  font-size: 125%;
+   background: linear-gradient(90deg, 
+     rgba(228, 88, 202,  0) 0%, 
+     rgba(228, 88, 202,  0.25) 25%, 
+     rgba(228, 88, 202,  0.25) 75%, 
+     rgba(228, 88, 202,  0) 100%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .4),
+     inset 0 0 1px rgba(30, 223, 192, 0.6);
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  margin:0;
+  display: block;
+  color: black;  
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+font-family: 'M PLUS 1 Code', sans-serif;
+  font-size: 100%;
+   font-style: oblique;
+   background-color: rgba(88, 228, 95,.23);
+}
+
+ul.topnav li a:hover:not(.active) {background-color: rgba(88, 228, 95,.6);}
+
+ul.topnav li a.active {background-color: rgba(88, 228, 95,.43);
+	font-size: 100%;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+
+a:link,a:active,a:visited{ color: white;
+      text-decoration: none;}
+      
+a:hover {color:#5F5F5F;}
+
+
+body {margin: 0;
+  padding: 10px;
+  width: 100%;
+  height: 100vh;
+	background-image: url("blob-images/clouds.jpg");
+	background-repeat: repeat;
+	background-size: 45% auto;}
+
+.title { color:  rgba(228, 88, 202,  .6);
+	font-family: 'M PLUS 1 Code', sans-serif;
+	font-size: 150%;
+    padding-left: 10px;
+    text-shadow: 0px 0px 9px rgba(255,255,255,.3), 0 0 25px orange, 0 0 5px darkblue;} 
+.date {color:  rgba(108, 122, 137, 1);
+font-family: 'M PLUS 1 Code', sans-serif;
+    font-style: oblique;
+	font-size: 125%;
+    padding-left: 10px;
+    padding-top:10px;
+    text-shadow: 0px 0px 9px rgba(255,255,255,.3), 0 0 25px rgba(228, 88, 202,  0.9), 0 0 5px darkblue;
+} 
+p {color: rgba(255, 255, 255, .4);
+    font-family: 'M PLUS 1 Code', sans-serif;
+	font-size: 175%;
+    padding-left: 10px;
+    margin:0;
+    padding-top:10px;
+    text-shadow: 0px 0px 9px rgba(255,255,255,.3), 0 0 25px red, 0 0 5px darkblue;} 
+
+s1 {color: white;
+   font-family: 'M PLUS 1 Code', sans-serif;
+  font-size:150%;
+  padding:3px 3px 3px 3px;
+
+}
+h4 {color: #000000;
+	font-family: 'M PLUS 1 Code', sans-serif;
+		font-size: 100%;}
+.cards {
+	margin: 0;
+  display: grid;
+  grid-gap: 5em 5em;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	
+}
+
+
+.playlist {
+	margin: 0;
+	font-family:courier;
+	height:auto;
+	width: 400px;
+	justify-content: center;
+}
+img.playlist{
+  width: 250px;
+   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:25px;
+  margin-bottom:25px;
+  }
+
+img.playlist:hover {
+  width: 300px;
+   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:25px;
+  margin-bottom:25px;
+  }
+ul.a { font-family: 'Trebuchet MS', sans-serif;
+	font-size: 15px;
+    list-style-type:none;
+     margin: 0;
+
+  padding: 10px 15px 10px 10px;
+}
+

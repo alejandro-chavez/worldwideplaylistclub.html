@@ -1,0 +1,145 @@
+.header {
+  text-align: center;
+  padding: 32px;
+}
+
+ul.topnav {
+  list-style-type: none;
+  margin:0;
+  margin-top: -10;
+  margin-left:-10;
+  margin-bottom:10;
+  padding: 0;
+  overflow: hidden;
+font-family: 'M PLUS 1 Code', sans-serif;
+  font-size: 125%;
+   background: linear-gradient(90deg, 
+     rgba(228, 88, 202,  0) 0%, 
+     rgba(228, 88, 202,  0.25) 25%, 
+     rgba(228, 88, 202,  0.25) 75%, 
+     rgba(228, 88, 202,  0) 100%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .4),
+     inset 0 0 1px rgba(30, 223, 192, 0.6);
+}
+
+
+ul.topnav li {float: left;}
+
+
+ul.topnav li a {
+  margin:0;
+  display: block;
+  color: black;  
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+font-family: 'M PLUS 1 Code', sans-serif;
+  font-size: 100%;
+   font-style: oblique;
+   background-color: rgba(88, 228, 95,.23);
+}
+
+ul.topnav li a:hover:not(.active) {background-color: rgba(88, 228, 95,.6);}
+
+ul.topnav li a.active {background-color: rgba(88, 228, 95,.43);
+	font-size: 100%;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+
+a:link,a:active,a:visited{ color: white;
+      text-decoration: none;}
+      
+a:hover {color:#5F5F5F;}
+
+
+
+
+body {margin: 0;
+  padding: 10px;
+  width: 100%;
+  height: 100vh;
+	background-image: url(../assets/clouds2.jpg);
+	background-repeat: repeat-y;
+	background-size: auto;}
+
+
+.title { color:  rgba(228, 88, 202,  .6);
+	font-family: 'M PLUS 1 Code', sans-serif;
+	font-size: 150%;
+    padding-left: 10px;
+    text-shadow: 0px 0px 9px rgba(255,255,255,.3), 0 0 25px orange, 0 0 5px darkblue;} 
+.date {color:  rgba(108, 122, 137, 1);
+
+
+font-family: 'M PLUS 1 Code', sans-serif;
+    font-style: oblique;
+	font-size: 125%;
+    padding-left: 10px;
+    padding-top:10px;
+    text-shadow: 0px 0px 9px rgba(255,255,255,.3), 0 0 25px rgba(228, 88, 202,  0.9), 0 0 5px darkblue;
+} 
+
+
+p {color: rgba(255, 255, 255, .4);
+    font-family: 'M PLUS 1 Code', sans-serif;
+	font-size: 175%;
+    padding-left: 10px;
+    margin:0;
+    padding-top:10px;
+    text-shadow: 0px 0px 9px rgba(255,255,255,.3), 0 0 25px red, 0 0 5px darkblue;} 
+
+
+
+
+		
+.cards {
+	margin: 0;
+  display: grid;
+  grid-gap: 5em 5em;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	
+}
+
+
+
+
+.playlist {
+	margin: 0;
+	font-family:courier;
+	height:auto;
+	width: 400px;
+	justify-content: center;
+}
+img.playlist{
+  width: 250px;
+   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:25px;
+  margin-bottom:25px;
+  }
+
+
+img.playlist:hover {
+  width: 300px;
+   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:25px;
+  margin-bottom:25px;
+  }
+
+
+ul.a { font-family: 'Trebuchet MS', sans-serif;
+	font-size: 15px;
+    list-style-type:none;
+     margin: 0;
+
+
+  padding: 10px 15px 10px 10px;
+}
