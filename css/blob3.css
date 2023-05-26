@@ -72,7 +72,7 @@ a:hover {color:#5F5F5F;}
 body {margin: 0;
   padding: 10px;
   width: 100%;
-background-image: url("https://worldwideplaylistclub.neocities.org/Untitled2-Recovered.gif");
+background-image: url("../assets/cones.gif");
   background-repeat: repeat;
   background-width: 100%;}
 
@@ -124,7 +124,7 @@ h4 {color: #000000;
 	margin-left: 50;
 	margin-right: 50;
 	font-family:courier;
-	background-image:url("https://worldwideplaylistclub.neocities.org/KIF_0311.jpg");
+	background-image:url("../assets/KIF_0311.jpeg");
 	background-size:cover;
 	align-self: safe center;
 	border-radius:  100% 69% 70% 48% / 60% 100% 42% 85%;
@@ -134,24 +134,7 @@ h4 {color: #000000;
   box-shadow: 0px 0px 5px white, 0px 0px 25px rgb(27, 209, 20), 0px 0px 5px grey;
 
 }
-.playlist_a {
-	box-shadow: 0 0 1px .2px grey;
-	margin-top: 50;
-	margin-bottom: 50;
-	margin-left: 50;
-	margin-right: 50;
-	font-family:courier;
-/*	background-image:url("https://worldwideplaylistclub.neocities.org/DSC05522_mobile.jpg");*/
-	background-color:rgba(74,110,145,0.80);
-	background-size:cover;
-	align-self: safe center;
-	border-radius:  100% 69% 70% 48% / 60% 100% 42% 85%;
-	height:auto;
-	padding-top:40px;
-	padding-bottom: 40px;
-  box-shadow: 0px 0px 5px white, 0px 0px 25px rgb(27, 209, 20), 0px 0px 5px grey;
 
-}
 .playlist_b {
 	box-shadow: 0 0 1px .2px grey;
 	margin-top: 50;
@@ -159,7 +142,7 @@ h4 {color: #000000;
 	margin-left: 50;
 	margin-right: 50;
 	font-family:courier;
-	background-image:url("https://worldwideplaylistclub.neocities.org/P1013517.jpg");
+	background-image:url("../assets/P1013517.jpeg");
 	background-size:cover;
 	align-self: safe center;
 	border-radius:  100% 69% 70% 48% / 60% 100% 42% 85%;
@@ -176,7 +159,7 @@ h4 {color: #000000;
 	margin-left: 50;
 	margin-right: 50;
 	font-family:courier;
-	background-image:url("https://worldwideplaylistclub.neocities.org/purple_clouds.jpg");
+	background-image:url("../assets/purple_clouds.jpeg");
 	background-size:cover;
 	align-self: safe center;
 	border-radius:  100% 69% 70% 48% / 60% 100% 42% 85%;
@@ -220,7 +203,7 @@ ul.a { font-family: 'Trebuchet MS', sans-serif;
 	color: #ffffff;
 	text-align: center;
 	text-shadow: 1px 1px 2px black, 0 0 25px green, 0 0 5px rgb(27, 209, 20);
-	}}
+	}
 
 @media screen and (max-width : 1878px ){}
   ul.topnav li.right, 
