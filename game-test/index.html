@@ -4,7 +4,7 @@
     <!DOCTYPE html>
     <html>
       <head>
-        <title>Guess The Link</title>
+        <title class="title"></title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -213,6 +213,7 @@
                 "The game is simple. You call " +
                 randomGameName +
                 " once you've found a link between three cards and then your friends ask 8 or fewer questions to try and guess the three people and the connection between them.";
+              document.querySelector(".title").innerHTML = randomGameName;
             }
             // Call the function to generate a game name
             generateGameName();
