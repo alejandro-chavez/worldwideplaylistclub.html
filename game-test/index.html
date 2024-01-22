@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Guess The Link</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cardo:ital@0;1&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@800&display=swap"
+          rel="stylesheet"
+        />
+
+        <style>
+          .header {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            text-align: center;
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+          }
+
+          .bottom {
+            padding: 10px;
+          }
+          .top {
+            padding: 10px;
+          }
+          body {
+            background-color: #c099d0;
+            background-image: radial-gradient(#40264a 0.25px, #c099d0 0.5px);
+            background-size: 10px 10px;
+          }
+          h1 {
+            font-family: "League Spartan", sans-serif;
+            color: #40264a;
+            /* text-shadow: 0px 0px 19px rgba(105, 73, 118, 1); */
+          }
+          h2 {
+            font-family: "Cardo", serif;
+            color: whitesmoke;
+            text-shadow: 0px 0px 19px rgba(105, 73, 118, 1);
+          }
+          p {
+            font-family: "Cardo", serif;
+            color: whitesmoke;
+            text-shadow: 0px 0px 19px rgba(105, 73, 118, 1);
+          }
+          .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+            width: 900px;
+            margin: 0 auto; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center vertically */
+          }
+          button {
+            margin: 5px auto; /* Center horizontally */
+            display: block; /* Make it a block element */
+            font-family: "League Spartan", sans-serif;
+            background-color: #40264a;
+            color: #c099d0;
+            border-radius: 15px;
+            width: 120px;
+            height: 30px;
+            box-shadow: 0px 0px 8px rgba(105, 73, 118, 1);
+          }
+          .card {
+            width: 200px;
+            height: 120px;
+            background-color: rgba(137, 207, 240, 1);
+            perspective: 1000px;
+            border-radius: 15px;
+            border-color: 40264a;
+            box-shadow: 3px 3px 2px;
+          }
+
+          .card-inner {
+            width: 200px;
+            height: 120px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 3px 3px 2px;
+            transform-style: preserve-3d;
+            transition: var(--time) transform;
+            backface-visibility: hidden;
+            font-family: "League Spartan", sans-serif;
+          }
+
+          .card.flipped .card-inner {
+            transform: rotateY(180deg);
+            border-radius: 15px;
+          }
+
+          .card-front,
+          .card-back {
+            width: 200px;
+            height: 120px;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 3px 3px 2px;
+          }
+
+          .card-front {
+            background-color: rgba(137, 207, 240, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            box-shadow: 3px 3px 2px;
+            color: #40264a;
+          }
+
+          .card-back {
+            background-color: rgba(137, 207, 240, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: line-through;
+            text-decoration-color: whitesmoke;
+            font-family: "Cardo", serif;
+            transform: rotateY(180deg);
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            color: #694976;
+          }
+
+          /* Media queries for responsive design */
+          @media (max-width: 768px) {
+            .grid-container {
+              width: 100%;
+              grid-template-columns: repeat(2, 1fr);
+            }
+
+            .card {
+              width: 100%;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .grid-container {
+              grid-template-columns: repeat(1, 1fr);
+            }
+          }
+        </style>
+
+        <script>
+          function mainFunction() {
+            function myFunction(names, index) {
+              // Base case: when all 16 cards have been assigned a name
+              if (index > 16) {
+                return;
+              }
+
+              // Select a random name
+              var randomName = names[Math.floor(Math.random() * names.length)];
+
+              // Check if the random name has already been assigned to a card
+              var isDuplicate = false;
+              for (var i = 1; i < index; i++) {
+                if (
+                  document.getElementById("card-" + i).innerHTML === randomName
+                ) {
+                  isDuplicate = true;
+                  break;
+                }
+              }
+
+              // If the random name is a duplicate, recursively call the function again
+              if (isDuplicate) {
+                myFunction(names, index);
+              } else {
+                // Assign the random name to the current card
+                document.getElementById("card-" + index).innerHTML = randomName;
+                document.getElementById("card-back-" + index).innerHTML =
+                  randomName;
+                // Recursively call the function for the next card
+                myFunction(names, index + 1);
+              }
+            }
+
+            function generateGameName() {
+              // Array of Game Names
+              var gameName = [
+                "Infer the Relationship",
+                "Decipher the Bond",
+                "Determine the Connectivity",
+                "Postulate the Connection",
+                "Hypothesize the Similarity",
+                "Conject the Association",
+              ];
+
+              // Select a random game name
+              var randomGameName =
+                gameName[Math.floor(Math.random() * gameName.length)];
+
+              // Assign the random game name to the h1 element
+              document.querySelector(".game-title").innerHTML = randomGameName;
+              document.querySelector(".game-text").innerHTML =
+                "The game is simple. You call " +
+                randomGameName +
+                " once you've found a link between three cards and then your friends ask 8 or fewer questions to try and guess the three people and the connection between them.";
+            }
+            // Call the function to generate a game name
+            generateGameName();
+            // Array of names
+            var names = [
+              "Dr Phil",
+              "Damian Lillard",
+              "Lindsay Lohan",
+              "The Grim Reaper",
+              "Quinta Brunson",
+              "Willy Wonka",
+              "Elon Musk",
+              "Dame Emma Thompson",
+              "John Hamm",
+              "Wendy Williams",
+              "Charli D'Amelio",
+              "Addison Rae",
+              "Mr. Beast",
+              "Dr. Disrespect",
+              "Dr. Dre",
+              "Dr. Seuss",
+              "Dr. Phil",
+              "Dr. Fauci",
+              "Dr. Oz",
+              "Michelin Man",
+              "Kool Aid Man",
+              "Mr. Clean",
+              "Mr. Peanut",
+              "Mr. Potato Head",
+              "Mr. Rogers",
+              "Mr. T",
+              "Mr. Monopoly",
+              "Mr. Krabs",
+              "Patrick Star",
+              "Spongebob Squarepants",
+              "Jennifer Coolidge",
+              "Christopher Columbus",
+              "Karl Marx",
+              "Anthony Bourdain",
+              "Amy Winehouse",
+              "George W Bush",
+              "Hugh Hefner",
+              "Ariana Grande",
+              "Lana Del Rey",
+              "Harry Styles",
+              "Pete Davidson",
+              "Spongebob",
+              "Tucker Carlson",
+              "Prince Harry",
+              "Regina George",
+              "Carrie Bradshaw",
+              "Ms. Frizzle",
+              "Whoopi Goldberg",
+              "Paris Hilton",
+              "Miss Piggy",
+              "Joan of Arc",
+              "Bruce Springsteen",
+              "Damian Lillard",
+              "Bhad Bhabie",
+              "John Kroger",
+              "Ellen Millender",
+              "Pancho Savery",
+              "Terry Gross",
+              "Lana Del Rey",
+              "Bella Hadid",
+              "Kanye West",
+              "Joe Biden",
+              "Barack Obama",
+              "Michelle Obama",
+              "DJ Khaled",
+              "Rihanna",
+              "Pancho Villa",
+              "Che Guevara",
+              "Fidel Castro",
+              "Fleabag",
+              "Shiv Roy",
+              "Logan Roy",
+              "Kendall Roy",
+              "Macaulay Culkin",
+              "Metta World Peace",
+              "Elena Ferrante",
+              "Jan Mieszkowski",
+              "Ben Lazier",
+              "Bernie Sanders",
+              "Pele",
+              "Kamala Harris",
+              "Richarlison",
+              "Tracy Chapman",
+              "Sean Evans (Hot Ones)",
+              "Shaquille O'Neal",
+              "Alex G",
+              "Donna Summer",
+              "Arthur Russell",
+              "The Weekend",
+              "Joshua Safdie",
+              "Benjamin Safdie",
+              "James Gandolfini",
+              "Tony Soprano",
+              "Carmela Soprano",
+              "Robert Pattinson",
+              "El Chapo",
+              "Brace Belden",
+              "Adam Friedland",
+              "Adam Sandler",
+              "Joe Rogan",
+              "Kurt Cobain",
+              "Courtney Love",
+              "Patti Smith",
+              "Avicii",
+              "Martha Stewart",
+              "Drake",
+              "Grimes",
+              "Elon Musk",
+              "Azealia Banks",
+              "Ted Bundy",
+              "Jesus",
+              "William Shakespeare",
+              "Walter White",
+              "Jesse Pinkman",
+              "Buffy the Vampire Slayer",
+              "Ryan Gosling",
+              "Steve Jobs",
+              "Patrice Lumumba",
+              "Thomas Sankara",
+              "Charles Dickens",
+              "Salvador Dali",
+              "Malcolm X",
+              "Michelangelo",
+              "Maya Angelou",
+              "Martin Luther",
+              "Mao Zedong",
+              "Winston Churchill",
+              "Margaret Thatcher",
+              "Charlie Chaplin",
+              "Oprah",
+              "Dick Cheney",
+              "Jackie Chan",
+              "Beyoncé",
+              "Barney",
+              "Taco Bell Chihuaha",
+              "Jay Z",
+              "Kim Kardashian",
+              "Kris Jenner",
+              "Gandhi",
+              "Mitch Hedberg",
+              "Aziz Ansari",
+              "Dave Chapelle",
+              "Chris Rock",
+              "Jeffrey Epstein",
+              "Ghislaine Maxwell",
+              "Larry David",
+              "Joe Rogan",
+              "Dracula",
+              "Laura Dern",
+              "Pete Buttigieg",
+              "Dua Lipa",
+              "Werner Herzog",
+              "Lil Uzi Vert",
+              "Ted Wheeler",
+              "Ronald McDonald",
+              "Caroline Polacheck",
+              "Clippy",
+              "Henry Kissinger",
+              "Dillon Pickle",
+              "Deepthroat",
+              "Robert Moses",
+              "Barack Obama",
+              "Homer",
+              "Clarence Thomas",
+              "Lisa Simpson",
+              "the Predator",
+              "Barron Trump",
+              "Squidward",
+              "Rahm Emanuel",
+              "Tim Cook",
+              "the Soup Nazi",
+              "Serena Williams",
+              "Dianne Feinstein",
+              "Selena Gomez",
+              "Freddy Krueger",
+              "The Joker",
+              "Selena",
+              "Heath Ledger",
+              "Ice Spice",
+              "Nacho Libre",
+              "Britney Spears",
+              "John Lennon",
+              "Freddie Mercury",
+              "Bruce Lee",
+              "Elvis Presley",
+              "Brad Pitt",
+              "Arnold Schwarzenegger",
+              "Bill Gates",
+              "Kurt Cobain",
+              "Bjork",
+              "Natalie Portman",
+              "Osama bin Laden",
+              "Quentin Tarantino",
+              "Jimi Hendrix",
+              "Whitney Houston",
+              "Pope John Paul II",
+              "Charles Manson",
+              "Salvador Dali",
+              "Margaret Thatcher",
+              "David Beckham",
+              "Mariah Carey",
+              "Andy Warhol",
+              "Sandra Bullock",
+              "Kaley Cuoco",
+              "David Bowie",
+              "Tom Hanks",
+              "Mike Tyson",
+              "Robert De Niro",
+              "Bill Clinton",
+              "Pope Benedict XVI",
+              "Elizabeth Taylor",
+              "Matt Damon",
+              "Keanu Reeves",
+              "Tim Burton",
+              "Stephen King",
+              "Dr. Dre",
+              "Steven Spielberg",
+              "Martin Luther King, Jr.",
+              "Fidel Castro",
+              "Morgan Freeman",
+              "Neil Armstrong",
+              "Julia Roberts",
+              "Charlize Theron",
+              "Frank Sinatra",
+              "Saddam Hussein",
+              "Malcolm X",
+              "Nicole Kidman",
+              "George Harrison",
+              "Denzel Washington",
+              "Marlon Brando",
+              "Ben Affleck",
+              "Sacha Baron Cohen",
+              "Sean Connery",
+              "Penelope Cruz",
+              "Pele",
+              "Eric Clapton",
+              "Harrison Ford",
+              "Vladimir Putin",
+              "Alfred Hitchcock",
+              "Salma Hayek",
+              "Hayao Miyazaki",
+              "Robin Williams",
+              "Jet Li",
+              "Diego Maradona",
+              "Drew Barrymore",
+              "J. K. Rowling",
+              "Janis Joplin",
+              "Jimmy Carter",
+              "Hugh Hefner",
+              "Halle Berry",
+              "Edward Norton",
+              "John McCain",
+              "Silvio Berlusconi",
+              "James Cameron",
+              "Hugo Chavez",
+              "Tiger Woods",
+              "Alyson Hannigan",
+              "Ringo Starr",
+              "Kirsten Dunst",
+              "Pamela Anderson",
+              "John Wayne",
+              "Russell Crowe",
+              "Jean-Paul Sartre",
+              "Winona Ryder",
+              "Kylie Minogue",
+              "Michael Schumacher",
+              "Dave Grohl",
+              "Jorge Luis Borges",
+              "Ludacris",
+              "Robbie Williams",
+              "Albert Camus",
+              "Jeffrey Dahmer",
+              "Alan Turing",
+              "Grace Kelly",
+              "Rosa Parks",
+              "Ian McKellen",
+              "Paul Newman",
+              "Magic Johnson",
+              "Howard Hughes",
+              "Mikhail Gorbachev",
+              "Uma Thurman",
+              "Sean Combs",
+              "John Dillinger",
+              "Alec Baldwin",
+              "George Orwell",
+              "Jennifer Connelly",
+              "Anthony Hopkins",
+              "Louis Armstrong",
+              "Noam Chomsky",
+              "Alyssa Milano",
+              "Brigitte Bardot",
+              "Alan Rickman",
+              "Jesse McCartney",
+              "Yoko Ono",
+              "Kevin Bacon",
+              "Yuri Gagarin",
+              "Sharon Stone",
+              "Frank Zappa",
+              "Michel Foucault",
+              "John Wayne Gacy",
+              "David Lynch",
+              "Brenda Song",
+              "Ian McKellen",
+              "Kirk Douglas",
+            ];
+
+            // Call the function to start assigning random names to the cards
+            myFunction(names, 1);
+            const cards = document.querySelectorAll(".card");
+
+            cards.forEach((card) => {
+              card.addEventListener("click", () => {
+                card.classList.toggle("flipped");
+              });
+            });
+          }
+          function unflipAllCards() {
+            // Get all the card elements
+            const cards = document.querySelectorAll(".card");
+
+            // Loop through each card and remove the 'flipped' class
+            cards.forEach((card) => {
+              card.classList.remove("flipped");
+            });
+          }
+          function increaseCounter() {
+            var counterButton = document.getElementById("counter-button");
+            var currentCount = parseInt(counterButton.innerText.split(":")[1]);
+            counterButton.innerText = "Question Counter: " + (currentCount + 1);
+          }
+          function resetCounter() {
+            var counterButton = document.getElementById("counter-button");
+            counterButton.innerText = "Question Counter: 0";
+          }
+
+          function resetGame() {
+            // Add code to reset the game here
+            mainFunction();
+            unflipAllCards();
+            resetCounter();
+          }
+        </script>
+      </head>
+
+      <body onload="mainFunction()">
+        <div class="top">
+          <h1 class="game-title header"></h1>
+          <h2 class="header">
+            Find something in common about 3 people while your friends guess.
+          </h2>
+        </div>
+
+        <div class="grid-container">
+          <!-- Repeat the card element to create a 4x4 grid -->
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-1"></span></div>
+              <div class="card-back"><span id="card-back-1"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-2"></span></div>
+              <div class="card-back"><span id="card-back-2"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-3"></span></div>
+              <div class="card-back"><span id="card-back-3"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-4"></span></div>
+              <div class="card-back"><span id="card-back-4"></span></div>
+            </div>
+          </div>
+          <!-- Repeat the card element to create a 4x4 grid -->
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-5"></span></div>
+              <div class="card-back"><span id="card-back-5"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-6"></span></div>
+              <div class="card-back"><span id="card-back-6"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-7"></span></div>
+              <div class="card-back"><span id="card-back-7"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-8"></span></div>
+              <div class="card-back"><span id="card-back-8"></span></div>
+            </div>
+          </div>
+          <!-- Repeat the card element to create a 4x4 grid -->
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-9"></span></div>
+              <div class="card-back"><span id="card-back-9"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-10"></span></div>
+              <div class="card-back"><span id="card-back-10"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-11"></span></div>
+              <div class="card-back"><span id="card-back-11"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-12"></span></div>
+              <div class="card-back"><span id="card-back-12"></span></div>
+            </div>
+          </div>
+          <!-- Repeat the card element to create a 4x4 grid -->
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-13"></span></div>
+              <div class="card-back"><span id="card-back-13"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-14"></span></div>
+              <div class="card-back"><span id="card-back-14"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-15"></span></div>
+              <div class="card-back"><span id="card-back-15"></span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-front"><span id="card-16"></span></div>
+              <div class="card-back"><span id="card-back-16"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <p class="header game-text"></p>
+        </div>
+        <button onclick="resetGame()">Reset Game</button>
+        <button onclick="increaseCounter()" id="counter-button">
+          Question Counter: 0
+        </button>
+      </body>
+    </html>
+  </head>
+</html>
