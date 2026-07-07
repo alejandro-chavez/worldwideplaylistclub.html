@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to Neighborhoods JSON Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: #000;
+            background: #f9f9f9;
+        }
+
+        .upload-area.drag-over {
+            border-color: #000;
+            background: #f0f0f0;
+        }
+
+        .upload-area input {
+            display: none;
+        }
+
+        .upload-text {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .column-mapping {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mapping-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .mapping-label {
+            min-width: 100px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        select {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .preview-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .json-output {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #333;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-convert {
+            background: #000;
+            color: #fff;
+            flex: 1;
+        }
+
+        .btn-convert:hover:not(:disabled) {
+            background: #333;
+        }
+
+        .btn-convert:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-download {
+            background: #4CAF50;
+            color: #fff;
+        }
+
+        .btn-download:hover {
+            background: #45a049;
+        }
+
+        .btn-copy {
+            background: #2196F3;
+            color: #fff;
+        }
+
+        .btn-copy:hover {
+            background: #0b7dda;
+        }
+
+        .message {
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .preview-count {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background: #f0f0f0;
+            font-weight: 600;
+        }
+
+        .table-preview {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSV to Neighborhoods JSON</h1>
+        <p class="description">Convert your CSV file (name, challenge, WKT POINT) to neighborhoods.json format</p>
+
+        <!-- Upload Section -->
+        <div class="section">
+            <div class="section-title">Step 1: Upload CSV</div>
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="csvFile" accept=".csv">
+                <div class="upload-text">Click to upload or drag and drop</div>
+                <div class="upload-hint">CSV with columns: name, challenge, WKT</div>
+            </div>
+        </div>
+
+        <!-- Column Mapping Section -->
+        <div class="section hidden" id="mappingSection">
+            <div class="section-title">Step 2: Map Columns</div>
+            <div class="column-mapping" id="columnMapping"></div>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="section hidden" id="previewSection">
+            <div class="section-title">Step 3: Preview</div>
+            <div id="previewMessage"></div>
+            <div class="preview-count" id="previewCount"></div>
+            <div class="table-preview">
+                <table class="table" id="previewTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Challenge</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody id="previewTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Conversion Section -->
+        <div class="section hidden" id="conversionSection">
+            <div class="section-title">Step 4: Convert & Download</div>
+            <div class="button-group">
+                <button class="btn-convert" id="convertBtn">Generate JSON</button>
+            </div>
+        </div>
+
+        <!-- Output Section -->
+        <div class="section hidden" id="outputSection">
+            <div class="section-title">JSON Output</div>
+            <div id="outputMessage"></div>
+            <div class="json-output" id="jsonOutput"></div>
+            <div class="button-group">
+                <button class="btn-download" id="downloadBtn">Download neighborhoods.json</button>
+                <button class="btn-copy" id="copyBtn">Copy to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let csvData = [];
+        let columnHeaders = [];
+        let mapping = {};
+        let generatedJSON = null;
+
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const csvFile = document.getElementById('csvFile');
+        const mappingSection = document.getElementById('mappingSection');
+        const previewSection = document.getElementById('previewSection');
+        const conversionSection = document.getElementById('conversionSection');
+        const outputSection = document.getElementById('outputSection');
+
+        // ============================================
+        // FILE UPLOAD
+        // ============================================
+
+        uploadArea.addEventListener('click', () => csvFile.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            if (e.dataTransfer.files.length) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        csvFile.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    parseCSV(e.target.result);
+                } catch (error) {
+                    showMessage('error', 'Error parsing CSV: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // ============================================
+        // CSV PARSING
+        // ============================================
+
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length < 2) {
+                showMessage('error', 'CSV must have header row and at least one data row');
+                return;
+            }
+
+            // Parse header
+            columnHeaders = parseCSVLine(lines[0]);
+
+            // Parse data rows
+            csvData = [];
+            for (let i = 1; i < lines.length; i++) {
+                const row = parseCSVLine(lines[i]);
+                if (row.length > 0) {
+                    const rowObj = {};
+                    columnHeaders.forEach((header, index) => {
+                        rowObj[header] = row[index] || '';
+                    });
+                    csvData.push(rowObj);
+                }
+            }
+
+            if (csvData.length === 0) {
+                showMessage('error', 'No data rows found in CSV');
+                return;
+            }
+
+            showMessage('success', `Loaded ${csvData.length} rows`);
+            showColumnMapping();
+        }
+
+        // Simple CSV parser that handles quoted fields
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let insideQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                const nextChar = line[i + 1];
+
+                if (char === '"') {
+                    if (insideQuotes && nextChar === '"') {
+                        current += '"';
+                        i++;
+                    } else {
+                        insideQuotes = !insideQuotes;
+                    }
+                } else if (char === ',' && !insideQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+
+            result.push(current.trim());
+            return result;
+        }
+
+        // ============================================
+        // COLUMN MAPPING
+        // ============================================
+
+        function showColumnMapping() {
+            const container = document.getElementById('columnMapping');
+            container.innerHTML = '';
+
+            const requiredFields = ['name', 'challenge', 'WKT'];
+
+            requiredFields.forEach((field) => {
+                const row = document.createElement('div');
+                row.className = 'mapping-row';
+
+                const label = document.createElement('div');
+                label.className = 'mapping-label';
+                label.textContent = field;
+
+                const select = document.createElement('select');
+                select.id = `map-${field}`;
+
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '-- Select column --';
+                select.appendChild(defaultOption);
+
+                columnHeaders.forEach((header) => {
+                    const option = document.createElement('option');
+                    option.value = header;
+                    option.textContent = header;
+                    // Auto-detect matching columns
+                    if (header.toLowerCase().includes(field.toLowerCase())) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+
+                select.addEventListener('change', (e) => {
+                    mapping[field] = e.target.value;
+                    updatePreview();
+                });
+
+                // Set initial mapping if auto-detected
+                if (select.value) {
+                    mapping[field] = select.value;
+                }
+
+                row.appendChild(label);
+                row.appendChild(select);
+                container.appendChild(row);
+            });
+
+            mappingSection.classList.remove('hidden');
+            updatePreview();
+        }
+
+        // ============================================
+        // PREVIEW
+        // ============================================
+
+        function updatePreview() {
+            const allMapped = mapping['name'] && mapping['challenge'] && mapping['WKT'];
+
+            if (!allMapped) {
+                previewSection.classList.add('hidden');
+                conversionSection.classList.add('hidden');
+                return;
+            }
+
+            const tbody = document.getElementById('previewTableBody');
+            tbody.innerHTML = '';
+
+            csvData.forEach((row) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row[mapping['name']]}</td>
+                    <td>${row[mapping['challenge']]}</td>
+                    <td>${row[mapping['WKT']]}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('previewCount').textContent = `Total: ${csvData.length} neighborhoods`;
+            previewSection.classList.remove('hidden');
+            conversionSection.classList.remove('hidden');
+        }
+
+        // ============================================
+        // JSON GENERATION
+        // ============================================
+
+        document.getElementById('convertBtn').addEventListener('click', () => {
+            try {
+                generatedJSON = csvData.map((row, index) => ({
+                    id: index + 1,
+                    name: row[mapping['name']].trim(),
+                    location: row[mapping['WKT']].trim(),
+                    challenge: row[mapping['challenge']].trim()
+                }));
+
+                displayJSON();
+            } catch (error) {
+                showMessage('error', 'Error generating JSON: ' + error.message);
+            }
+        });
+
+        function displayJSON() {
+            const jsonString = JSON.stringify(generatedJSON, null, 4);
+            document.getElementById('jsonOutput').textContent = jsonString;
+            outputSection.classList.remove('hidden');
+            showMessage('success', 'JSON generated successfully!');
+        }
+
+        // ============================================
+        // DOWNLOAD & COPY
+        // ============================================
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            if (!generatedJSON) return;
+
+            const dataStr = JSON.stringify(generatedJSON, null, 4);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'neighborhoods.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            if (!generatedJSON) return;
+
+            const jsonString = JSON.stringify(generatedJSON, null, 4);
+            navigator.clipboard.writeText(jsonString).then(() => {
+                showMessage('success', 'Copied to clipboard!');
+            });
+        });
+
+        // ============================================
+        // UTILITIES
+        // ============================================
+
+        function showMessage(type, text) {
+            const container = document.querySelector('.section');
+            const message = document.createElement('div');
+            message.className = `message ${type}`;
+            message.textContent = text;
+
+            const existing = document.querySelector('.message');
+            if (existing) {
+                existing.remove();
+            }
+
+            container.parentNode.insertBefore(message, container);
+
+            // Auto-remove success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => message.remove(), 5000);
+            }
+        }
+    </script>
+</body>
+</html>

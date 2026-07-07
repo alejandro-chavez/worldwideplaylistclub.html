@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neighborhood Challenges</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Neighborhood Challenges</h1>
+        <div class="neighborhoods-list" id="neighborhoodsList"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalTitle"></div>
+            
+            <div class="modal-body">
+                <button class="check-location-btn" id="checkLocationBtn">Check My Location</button>
+                
+                <!-- Challenge (shown within 200 ft) -->
+                <div class="challenge-content" id="challengeContent">
+                    <div class="challenge-text" id="challengeText"></div>
+                </div>
+
+                <!-- Out of Range (shown beyond 200 ft) -->
+                <div class="out-of-range-content" id="outOfRangeContent">
+                    <img class="out-of-range-image" id="outOfRangeImage" src="" alt="Out of range">
+                    <div class="out-of-range-message" id="outOfRangeMessage"></div>
+                    <div class="distance-info" id="distanceInfo"></div>
+                </div>
+
+                <!-- Loading state -->
+                <div class="loading" id="loadingState" style="display: none;">Getting your location...</div>
+
+                <!-- Error state -->
+                <div class="error" id="errorState" style="display: none;"></div>
+            </div>
+
+            <button class="close-btn" id="closeBtn">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // DATA
+        // ============================================
+        
+        let neighborhoods = [];
+
+        // ============================================
+        // CONSTANTS
+        // ============================================
+
+        const THRESHOLD_NEARBY = 200; // feet
+        const THRESHOLD_FAR = 2640; // feet (half mile)
+        const FEET_PER_METER = 3.28084;
+        const LOCATION_CHECK_ENABLED = true; // Toggle: set to false to skip location check
+
+        // ============================================
+        // STATE
+        // ============================================
+
+        let currentNeighborhood = null;
+        let userLocation = null;
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        /**
+         * Parse POINT (lon lat) format and return {lon, lat}
+         */
+        function parsePoint(pointString) {
+            // Extract numbers from "POINT (lon lat)"
+            const match = pointString.match(/POINT\s*\(\s*([-\d.]+)\s+([-\d.]+)\s*\)/);
+            if (!match) {
+                throw new Error('Invalid POINT format');
+            }
+            return {
+                lon: parseFloat(match[1]),
+                lat: parseFloat(match[2])
+            };
+        }
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Earth's radius in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            
+            const a = 
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distanceKm = R * c;
+            
+            return distanceKm * 1000; // Convert to meters
+        }
+
+        /**
+         * Convert meters to feet
+         */
+        function metersToFeet(meters) {
+            return Math.round(meters * FEET_PER_METER);
+        }
+
+        /**
+         * Format distance - shows feet if under 1000, otherwise shows miles
+         */
+        function formatDistance(distanceFeet) {
+            if (distanceFeet < 1000) {
+                return `${distanceFeet} feet`;
+            } else {
+                const miles = (distanceFeet / 5280).toFixed(1);
+                return `${miles} miles`;
+            }
+        }
+
+        /**
+         * Get user's current location via geolocation API
+         */
+        function getLocation() {
+            return new Promise((resolve, reject) => {
+                if (!navigator.geolocation) {
+                    reject('Geolocation not supported');
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        userLocation = { lat: latitude, lon: longitude };
+                        resolve(userLocation);
+                    },
+                    (error) => {
+                        reject(error.message);
+                    },
+                    // maximumAge: 0 forces a fresh fix each check instead of a cached position
+                    { enableHighAccuracy: true, maximumAge: 0, timeout: 15000 }
+                );
+            });
+        }
+
+        /**
+         * Show loading state in modal
+         */
+        function showLoading(show = true) {
+            const loading = document.getElementById('loadingState');
+            const challenge = document.getElementById('challengeContent');
+            const outOfRange = document.getElementById('outOfRangeContent');
+            const btn = document.getElementById('checkLocationBtn');
+
+            if (show) {
+                loading.style.display = 'block';
+                document.getElementById('errorState').style.display = 'none';
+                challenge.classList.remove('visible');
+                outOfRange.classList.remove('visible');
+                btn.disabled = true;
+            } else {
+                loading.style.display = 'none';
+                btn.disabled = false;
+            }
+        }
+
+        /**
+         * Show error state in modal
+         */
+        function showError(message) {
+            const errorEl = document.getElementById('errorState');
+            const loading = document.getElementById('loadingState');
+            const challenge = document.getElementById('challengeContent');
+            const outOfRange = document.getElementById('outOfRangeContent');
+
+            loading.style.display = 'none';
+            challenge.classList.remove('visible');
+            outOfRange.classList.remove('visible');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+        }
+
+        /**
+         * Show challenge content (user is within 200 ft)
+         */
+        function showChallenge() {
+            const challenge = document.getElementById('challengeContent');
+            const outOfRange = document.getElementById('outOfRangeContent');
+            const errorEl = document.getElementById('errorState');
+            const loading = document.getElementById('loadingState');
+
+            loading.style.display = 'none';
+            errorEl.style.display = 'none';
+            outOfRange.classList.remove('visible');
+            challenge.classList.add('visible');
+        }
+
+        /**
+         * Show out-of-range content (user is beyond 200 ft)
+         */
+        function showOutOfRange(distanceFeet) {
+            const challenge = document.getElementById('challengeContent');
+            const outOfRange = document.getElementById('outOfRangeContent');
+            const errorEl = document.getElementById('errorState');
+            const loading = document.getElementById('loadingState');
+            const distanceInfo = document.getElementById('distanceInfo');
+            const image = document.getElementById('outOfRangeImage');
+            const message = document.getElementById('outOfRangeMessage');
+
+            loading.style.display = 'none';
+            errorEl.style.display = 'none';
+            challenge.classList.remove('visible');
+            outOfRange.classList.add('visible');
+
+            // Choose image based on distance
+            if (distanceFeet <= THRESHOLD_FAR) {
+                // 500-2640 feet away
+                image.src = 'close.gif';
+                message.textContent = 'You\'re getting closer...';
+            } else {
+                // Beyond 2640 feet
+                image.src = 'nonono-sports.gif';
+                message.textContent = 'You\'re not in the area yet.';
+            }
+
+            distanceInfo.textContent = `You are ${formatDistance(distanceFeet)} away.`;
+        }
+
+        /**
+         * Handle "Check My Location" button click
+         */
+        async function handleCheckLocation() {
+            if (!currentNeighborhood) return;
+
+            // If location check disabled, just show challenge
+            if (!LOCATION_CHECK_ENABLED) {
+                showChallenge();
+                return;
+            }
+
+            showLoading(true);
+
+            try {
+                const location = await getLocation();
+                const targetPoint = parsePoint(currentNeighborhood.location);
+                const distanceMeters = calculateDistance(
+                    location.lat,
+                    location.lon,
+                    targetPoint.lat,
+                    targetPoint.lon
+                );
+                const distanceFeet = metersToFeet(distanceMeters);
+
+                // Determine what to show based on distance
+                if (distanceFeet <= THRESHOLD_NEARBY) {
+                    showChallenge();
+                } else {
+                    showOutOfRange(distanceFeet);
+                }
+            } catch (error) {
+                showError('Could not get your location: ' + error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        /**
+         * Open modal for a neighborhood
+         */
+        function openModal(neighborhood) {
+            currentNeighborhood = neighborhood;
+            const modal = document.getElementById('modal');
+            const title = document.getElementById('modalTitle');
+            const challengeText = document.getElementById('challengeText');
+
+            title.textContent = neighborhood.name;
+            // Render challenge as HTML so formatting tags in the JSON work; convert newlines to <br>
+            challengeText.innerHTML = neighborhood.challenge.replace(/\r?\n/g, '<br>');
+
+            // Reset modal state
+            document.getElementById('errorState').style.display = 'none';
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('challengeContent').classList.remove('visible');
+            document.getElementById('outOfRangeContent').classList.remove('visible');
+
+            modal.classList.add('active');
+        }
+
+        /**
+         * Close modal
+         */
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            currentNeighborhood = null;
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        function renderNeighborhoods() {
+            const list = document.getElementById('neighborhoodsList');
+
+            // Render neighborhood list
+            neighborhoods.forEach((neighborhood) => {
+                const item = document.createElement('div');
+                item.className = 'neighborhood-item';
+                item.innerHTML = `<div class="neighborhood-name">${neighborhood.name}</div>`;
+                item.addEventListener('click', () => openModal(neighborhood));
+                list.appendChild(item);
+            });
+
+            // Event listeners
+            document.getElementById('checkLocationBtn').addEventListener('click', handleCheckLocation);
+            document.getElementById('closeBtn').addEventListener('click', closeModal);
+
+            // Close modal when clicking outside
+            document.getElementById('modal').addEventListener('click', (e) => {
+                if (e.target.id === 'modal') {
+                    closeModal();
+                }
+            });
+        }
+
+        async function init() {
+            try {
+                const response = await fetch('neighborhoods.json');
+                neighborhoods = await response.json();
+                renderNeighborhoods();
+            } catch (error) {
+                console.error('Failed to load neighborhoods:', error);
+                document.getElementById('neighborhoodsList').innerHTML = '<p>Error loading neighborhoods</p>';
+            }
+        }
+
+        // Start when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

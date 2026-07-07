@@ -1,0 +1,158 @@
+[
+    {
+        "id": 1,
+        "name": "Northgate/Waverly",
+        "location": "POINT (-122.2649515 37.8129322)",
+        "challenge": "Welcome to Northgate\/Waverly. The former location of Piedmont Grounds. This was where the Oakland Colonels baseball team played for the 1892 and 1893 seasons. Before the Athletics, Oakland had several teams in their history with the Pacific Coast League. Here are the teams that have represented Oakland from 1879-1915: \r\nOakland Pioneers (1879)\r\nOakland Greenhood & Morans (1886\u20131888)\r\nOakland Tribunes (1888)\r\nOakland Clevelands (1888)\r\nOakland Morans (1892)\r\nOakland Reliance (1898)\r\nOakland Colonels (1889\u20131893)\r\nOakland Commuters (1901, 1906-1910, 1915)\r\nOakland Clamdiggers (1902)\r\nOakland Heeseman (1903)\r\nOakland Reliance (1903)\r\nOakland Invaders\/Merced Fig Growers (1910)\r\nThe Challenge: Choose a graphic designer and the rest of you will be the judges. Read through both directions as a team, and then decide who will be who. \r\nGraphic Designer: Step away from the rest of the team and set a 5 minute timer. During this time, draw 3 imagined logos for any of the teams. You can only draw images, no text. \r\nJudges: Once the drawer presents to you the logos, you have 2 minutes to deliberate what teams those logos belong to. \r\nEveryone: You win this challenge if you can guess all of them correctly. If you guess incorrectly then you can try again in 10 minutes. "
+    },
+    {
+        "id": 2,
+        "name": "Piedmont Ave",
+        "location": "POINT (-122.2519392 37.8341454)",
+        "challenge": "Welcome to the Piedmont Ave Neighborhood (technically, I just didn't want to make y'all go up the hill too much). We are at the Broadway Pet Hospital Mural. This mural depicts various pets enjoying themselves at Lake Merrit.\r\nThe challenge: Pick a photographer and a namer and the rest of you will be the judges. Read through both directions as a team, and then decide who will be who. \r\nPhotographer & Namer: Ask the rest of your team to go around the corner and set a  5 minute timer. During this time, find and name 5 of the pets in the mural. \r\nNamer: Write the names of the pets down on a piece of notebook paper in the order the photographer takes their pictures. The names cannot contain the same words in the type of animal or breed of animal, nor any abbreviationsof it. For example: the weiner dog can't be named weenie, but if you wanted to name it Mustard or Glizzy, that is fine. Except, now you can't use those names since the judges have read that.\r\nJudges: The Namer will hand you a the paper list of names and you will have to go to the mural and find the animal that was named that. \r\nEveryone: You win this challenge if you can guess 3 of the 5 animals. If you guess incorrectly, then you can try again in 5 minutes. You cannot change roles on retry, but you can photograph new animals."
+    },
+    {
+        "id": 3,
+        "name": "North Berkeley",
+        "location": "POINT (-122.2834648 37.8739502)",
+        "challenge": ""
+    },
+    {
+        "id": 4,
+        "name": "Bushrod",
+        "location": "POINT (-122.260951 37.8473753)",
+        "challenge": "Welcome to Bushrod. This is the Telegraph Avenue Windmill. It is not 100% clear what this building originally was. According to Gail Lombardi of Oakland's Cultural Heritage Survey:\r\n\u2003(a) it was not part of Idora Park\r\n\u2003(b) it was not part of a miniature golf course\r\n\u2003(c) it was a lemonade or hamburger stand.\r\nIt is also known that it was the home of Butch's Record Mill for some time in the 1960s. Attached is an advertisment for this. Because of this we will be looking at some Oakland records.\r\n\r\nThe Challenge: When you're ready text me and I will send you a list of three buildings that were at one point the tallest building in Oakland, alongside a list of dates. You will need to match the dates to the buildings. Set a 5 minute timer, and deliberate and then text me your answers. If you guess correctly you win this challenge, if you guess incorrectly then you can try again in 5 minutes.  Text me when you are ready."
+    },
+    {
+        "id": 5,
+        "name": "Rockridge/Shafter",
+        "location": "POINT (-122.2510469 37.8447609)",
+        "challenge": "Welcome to Rockridge. This neighborhood used to be known as the Chimes District. There are still remnants of that around the neighborhood. For example, look at the corner store sign above Cactus. This was the location of Chimes Market. Also on this block were the Chimes Inn Confectionary and the Chimes Floral Shop. \r\nThe reason for this? There used to be a theatre here called The Chimes Theatre after which everything else was named. The theatre building was torn down as a part of the Grove\/Shafter Highway construction. But from mine and others approximations it was around where Market Hall is today. \r\nThe challenge:  I've collected an assortment of Movie advertisements from the Oakland Tribune. Your task is to film at least a 45 second trailer for one movie on the advertisement. Everyone should be in the trailer, and it does not have to be accurate with regard to the movie selected. Text me the video when you're done and you win the challenge. There's no real way to fail this unless you don't do it."
+    },
+    {
+        "id": 6,
+        "name": "Uptown",
+        "location": "POINT (-122.268105 37.8095887)",
+        "challenge": ""
+    },
+    {
+        "id": 7,
+        "name": "Fairview Park",
+        "location": "POINT (-122.2556345 37.8509557)",
+        "challenge": "6.0"
+    },
+    {
+        "id": 8,
+        "name": "Elmwood Theatre",
+        "location": "POINT (-122.253174 37.8567271)",
+        "challenge": "7.0"
+    },
+    {
+        "id": 9,
+        "name": "Temescal",
+        "location": "POINT (-122.2639599 37.8303737)",
+        "challenge": "8.0"
+    },
+    {
+        "id": 10,
+        "name": "Mosswood",
+        "location": "POINT (-122.2647117 37.8277403)",
+        "challenge": "9.0"
+    },
+    {
+        "id": 11,
+        "name": "San Pablo Gateway",
+        "location": "POINT (-122.2724657 37.8074978)",
+        "challenge": "10.0"
+    },
+    {
+        "id": 12,
+        "name": "Acorn",
+        "location": "POINT (-122.2900811 37.8073072)",
+        "challenge": ""
+    },
+    {
+        "id": 13,
+        "name": "Prescott",
+        "location": "POINT (-122.2929721 37.806903)",
+        "challenge": "Welcome to Prescott and the Huey P Newton statue. Newton was a co-founder of the Black Panther Party and help craft its 10 point manifesto. He was assasinated in 1989 at 1456 9th street, just one block west of here. \r\nThe Challenge: This is a two part challenge, so once you've completed it, text me and I'll send you the next instructions. Set a 3 minute timer. Once it has started name as many Black Panthers as you can, and as many of their 10 point program demands as you can. After the time has passed, checked how many you got correct and text me the number of members and demands you got."
+    },
+    {
+        "id": 14,
+        "name": "Chinatown",
+        "location": "POINT (-122.2689449 37.8002048)",
+        "challenge": "Welcome to Chinatown. Chinatown is one of Oakland's oldest neighborhoods and one of the oldest Chinatowns in the US, from it's beginning in 1850. You are at Lincoln Square Park, one of a few public parks in Chinatown. This park features a playstructure in the shape of a boat. Specifically, in the shape of a Junk Boat. Click here for a picture of the placard which explains the history of this. \r\nThe English word of Junk supposedly is derived from the names of these boats. The Portuguse called these boats Junco, and that came from the Malay word jong, which came from the Javanese Djong. The chinese has chu\u00E1n boats, which were then all called Junk boats. \r\nThe challenge: Go to a nearby store and buy one item of Chinese \"junk food\" and have everyone try it. That's it, the only way to fail is to not do this. Text me a picture of you all with the food and you've won the neighborhood."
+    },
+    {
+        "id": 15,
+        "name": "Old Oakland",
+        "location": "POINT (-122.2763658 37.8033348)",
+        "challenge": "Welcome to Old Oakland, specifically to Lafayette Square Park. In the 1880s Oakland Public Schools Superintendent Jewett Gilson, got the idea to build an observatory here, but he needed the money. Anthony Chabot decided to offer up the money to do so, with the stipulation that the telescope be available for public use at no cost. The observatory was built in 1883, but in 1915 due to light pollution it was moved into the hills, and then once more in 1975 to its current location. However, despite those moves, the telescope used at the Observatory is still the same one that Anthony Chabot donated in 1883. It is still free for public viewing, although for only 6 hours during the whole week. \r\nThe challenge: We are going to pretend that a part of the solar system is on the streets of Oakland, specifically 11th street. If you can imagine that the westernmost edge of the park is the Sun and the OMCA on 11th and Oak is Jupiter, then I need you to guess where on 11th street would the earth be? Text me when you've made your guess and if you are right you win the neighborhood. If you are wrong, you will have to wait 5 minutes for your next guess. Good luck!\r\n(Note: The margin of error here is a city block.) "
+    },
+    {
+        "id": 16,
+        "name": "Adam's Point",
+        "location": "POINT (-122.2598244 37.809263)",
+        "challenge": "Welcome to Adam's Point! You are standing in front of Children's Fairyland, a children's amusement park built in 1950. Fairyland inspired many other cities to build similar parks, and allegedly inspired Walt Disney for Disneyland. \r\nThe Challenge: Select an artist (they do not have to be particularly good), and the rest of you will be copywriters. \r\nArtist: Set a timer for 5 minutes, and draw a 5 panel comic with no text. However, please make occasional speech bubbles.\r\nCopywriters: Pass the drawing and one by one have the rest of the team write the accompanying caption and speech text.\r\nWhen you're done, text me the comic. \r\nThere is no way to fail this except by not doing it. "
+    },
+    {
+        "id": 17,
+        "name": "Downtown Berkeley",
+        "location": "POINT (-122.2684666 37.8681885)",
+        "challenge": "17.0"
+    },
+    {
+        "id": 18,
+        "name": "Greater Cal Area",
+        "location": "POINT (-122.2593626 37.8695392)",
+        "challenge": "18.0"
+    },
+    {
+        "id": 19,
+        "name": "Harmon/Lorin",
+        "location": "POINT (-122.2705711 37.8515793)",
+        "challenge": "Welcome to the Harmon-Lorin neighborhood. In the early 20th century this neighborhood had a lot of Japanese immigrants, who were shamefully forcibly removed during WWII. After WWII, this neighborhood saw a lot of migration of Black southerners. In the 1960s during the building of the BART system, there was the possibility of putting elevated rail in the neighborhood as was done in other areas. It was not until a community activist, Mable Howard an 63 year old black woman, filed a lawsuit which forced the BART line and its accompanying station to go underground. In her words she did not want a Berlin Wall in Berkeley, as it would have divided and degraded the neighborhood. The sculpture you are in front of was made by Mable's daughter and artist, Mildred Howard.  The sculpture is inspired by the traditional West African metal work that existed as both currency and jewelry. The currency aspect is important, as it pays tribute to the wealth that was created by the African Americans in the region and what Mable sought to keep intact.\r\nThe challenge: Text me when you are ready and I will reply with a list of 10 West African countries and a list of 10 currencies. You will have to match the country to the currency. You can do this with a piece of paper and then text me your answers. You have 5 minutes to do this. You will need to get at least 6\/10 correct to win the neighborhood. If you get them incorrect wait 5 minutes and try again. Good luck!"
+    },
+    {
+        "id": 20,
+        "name": "Pill Hill",
+        "location": "POINT (-122.266449 37.8226379)",
+        "challenge": "Welcome to A Taste of Denmark Bakery in the Pill Hill neighborhood, originally known as Neldam's Danish Bakery. First opened in 1929, it closed in 2010 and was reopened by employees as a co-op. This challenge will require you to walk to Sana Market on 37th and Telegraph. There you will need to pick a taster, a coordinator, and the rest of you will be buyers. Read through the entirety of the instructions before picking who is who. Also, you just need to buy the cookies at the store, you can walk to nearby Mosswood park to do the tasting, if you'd like. \r\nThe challenge: Little Debbie blind tasting. \r\nBuyers: Go to the market and pick 3 Little Debbie baked goods that you think the taster will be able to guess. So the taster can't see what you got, get a bag from the store or put it in someone's bag and give it to the coordinator.\r\nCoordinator: While the buyers are shopping, text me for a picture of all the possible Little Debbie baked goods. Then when you are at the tasting location, blindfold the taster, with the bandana provided, grab the cookies from the team, and pick the order in which you'd like the taster to try them. \r\nTaster: Try the baked goods and guess which one's they are. You have to get 2 of the 3 cookies correctly to win the Pill Hill neighborhood. If you are wrong, wait 10 minutes and try again. "
+    },
+    {
+        "id": 21,
+        "name": "Jack London Square",
+        "location": "POINT (-122.268261 37.7930363)",
+        "challenge": "22.0"
+    },
+    {
+        "id": 22,
+        "name": "Downtown",
+        "location": "POINT (-122.2683181 37.8051423)",
+        "challenge": ""
+    },
+    {
+        "id": 23,
+        "name": "Lakeside",
+        "location": "POINT (-122.2620525 37.8041929)",
+        "challenge": ""
+    },
+    {
+        "id": 24,
+        "name": "Harrison St Oakland Ave",
+        "location": "POINT (-122.262149 37.8186702)",
+        "challenge": ""
+    },
+    {
+        "id": 25,
+        "name": "City Center",
+        "location": "POINT (-122.2741414 37.8043595)",
+        "challenge": ""
+    },
+    {
+        "id": 26,
+        "name": "Laney College",
+        "location": "POINT (-122.2633697 37.7970605)",
+        "challenge": ""
+    }
+]
