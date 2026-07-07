@@ -37,10 +37,159 @@ body::before {
     background: url('oakland_background.jpg') center / cover no-repeat;
 }
 
+/* Nav bar */
+.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 10px;
+    background: rgba(0, 41, 31, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(239, 178, 30, 0.35);
+    font-family: 'DotGothic16', monospace;
+}
+
+/* CRT scanlines, same treatment as the neighborhood tiles */
+.site-nav::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.28) 0px,
+            rgba(0, 0, 0, 0.28) 1px,
+            transparent 1px,
+            transparent 3px
+        ),
+        radial-gradient(ellipse at center, rgba(0, 98, 65, 0.12) 0%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Hamburger button, hidden on desktop */
+.nav-toggle {
+    display: none;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    color: var(--as-gold);
+    text-shadow: 0 0 6px rgba(239, 178, 30, 0.5);
+    border: 1px solid rgba(239, 178, 30, 0.55);
+    font-size: 18px;
+    line-height: 1;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.site-nav a {
+    position: relative;
+    z-index: 1;
+    color: var(--as-text-light);
+    text-shadow: 0 0 6px rgba(239, 178, 30, 0.5);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.site-nav a:hover {
+    background: rgba(239, 178, 30, 0.15);
+    border-color: rgba(239, 178, 30, 0.55);
+}
+
+.site-nav a.active {
+    color: var(--as-gold);
+    border-color: var(--as-gold);
+}
+
+@media (max-width: 640px) {
+    .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 6px;
+        margin-top: 10px;
+    }
+
+    .site-nav.open .nav-links {
+        display: flex;
+    }
+
+    .site-nav a {
+        display: block;
+        text-align: center;
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .site-nav a.active {
+        border-color: var(--as-gold);
+    }
+}
+
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+}
+
+.placeholder-note {
+    margin: 60px auto;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+    font-family: 'Roboto Mono', 'SF Mono', Menlo, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Map page */
+.map-frame {
+    height: calc(100vh - 140px);
+    margin: 20px;
+    border: 1px solid rgba(239, 178, 30, 0.55);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.map-frame iframe,
+.map-frame #map {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #00291f;
+}
+
+.map-frame .leaflet-container {
+    font-family: 'Roboto Mono', 'SF Mono', Menlo, monospace;
 }
 
 h1 {

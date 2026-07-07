@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neighborhood Challenges</title>
     <script>
+        const FORCE_HTTPS = false; // Toggle: set to false for local testing over http
         // Geolocation requires a secure context on iOS; force https before anything loads
-        if (location.protocol === 'http:' && location.hostname !== 'localhost') {
+        if (FORCE_HTTPS && location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             location.replace('https://' + location.host + location.pathname + location.search + location.hash);
         }
     </script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <nav class="site-nav">
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+        <div class="nav-links">
+<a href="index.html" class="active">Neighborhood Challenges</a>
+            <a href="extra-challenges.html">Extra Challenges</a>
+            <a href="map.html">Leaderboard & Progress Map</a>
+            <a href="map-leaflet.html">Map for Navigation</a>
+        </div>
+    </nav>
+    <script src="nav.js"></script>
+
     <div class="container">
         <h1>Neighborhood Challenges</h1>
         <div class="neighborhoods-list" id="neighborhoodsList"></div>

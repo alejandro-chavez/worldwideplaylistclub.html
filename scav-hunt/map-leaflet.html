@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map (Leaflet)</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="site-nav">
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+        <div class="nav-links">
+            <a href="index.html" class="active">Neighborhood Challenges</a>
+            <a href="extra-challenges.html">Extra Challenges</a>
+            <a href="map.html">Leaderboard & Progress Map</a>
+            <a href="map-leaflet.html">Map for Navigation</a>
+        </div>
+    </nav>
+    <script src="nav.js"></script>
+
+    <div class="map-frame">
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map');
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            maxZoom: 19
+        }).addTo(map);
+
+        function parsePoint(pointString) {
+            const match = pointString.match(/POINT\s*\(\s*([-\d.]+)\s+([-\d.]+)\s*\)/);
+            if (!match) {
+                throw new Error('Invalid POINT format');
+            }
+            return {
+                lon: parseFloat(match[1]),
+                lat: parseFloat(match[2])
+            };
+        }
+
+        async function init() {
+            try {
+                const response = await fetch('neighborhoods.json');
+                const neighborhoods = await response.json();
+
+                const markers = neighborhoods.map((neighborhood) => {
+                    const point = parsePoint(neighborhood.location);
+                    return L.marker([point.lat, point.lon])
+                        .addTo(map)
+                        .bindPopup(`<b>${neighborhood.id}. ${neighborhood.name}</b>`);
+                });
+
+                const group = L.featureGroup(markers);
+                // pad() adds margin around the pins: smaller = more zoomed in.
+                // For a fixed view instead, replace with: map.setView([37.8335, -122.2720], 14);
+                map.fitBounds(group.getBounds().pad(0.02));
+            } catch (error) {
+                console.error('Failed to load neighborhoods:', error);
+                map.setView([37.8272, -122.2661], 12); // fallback: Oakland
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
