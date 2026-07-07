@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neighborhood Challenges</title>
+    <script>
+        // Geolocation requires a secure context on iOS; force https before anything loads
+        if (location.protocol === 'http:' && location.hostname !== 'localhost') {
+            location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+        }
+    </script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -124,8 +130,14 @@
          */
         function getLocation() {
             return new Promise((resolve, reject) => {
+                // iOS disables geolocation entirely on non-https pages, with no permission prompt
+                if (!window.isSecureContext) {
+                    reject('This page must be loaded over https:// for location to work. Check the address bar.');
+                    return;
+                }
+
                 if (!navigator.geolocation) {
-                    reject('Geolocation not supported');
+                    reject('Geolocation not supported by this browser.');
                     return;
                 }
 
@@ -136,7 +148,15 @@
                         resolve(userLocation);
                     },
                     (error) => {
-                        reject(error.message);
+                        if (error.code === error.PERMISSION_DENIED) {
+                            reject('Location permission denied. On iPhone: tap the "AA" (or puzzle) icon in the address bar > Website Settings > Location > Ask/Allow. Also check Settings > Privacy & Security > Location Services > Safari Websites.');
+                        } else if (error.code === error.POSITION_UNAVAILABLE) {
+                            reject('Location unavailable. Make sure Location Services is on in Settings > Privacy & Security > Location Services.');
+                        } else if (error.code === error.TIMEOUT) {
+                            reject('Location request timed out. Try again with a clearer view of the sky.');
+                        } else {
+                            reject(error.message);
+                        }
                     },
                     // maximumAge: 0 forces a fresh fix each check instead of a cached position
                     { enableHighAccuracy: true, maximumAge: 0, timeout: 15000 }
