@@ -52,7 +52,7 @@
                     const point = parsePoint(neighborhood.location);
                     return L.marker([point.lat, point.lon])
                         .addTo(map)
-                        .bindPopup(`<b>${neighborhood.id}. ${neighborhood.name}</b>`);
+                        .bindPopup(`<b>${neighborhood.name} Challenge Location</b>`);
                 });
 
                 const group = L.featureGroup(markers);
@@ -66,6 +66,38 @@
         }
 
         init();
+
+        // Live "you are here" marker, updates as the user moves
+        if ('geolocation' in navigator && window.isSecureContext) {
+            const youIcon = L.divIcon({ className: 'you-marker', iconSize: [16, 16] });
+            let youMarker = null;
+            let accuracyCircle = null;
+
+            navigator.geolocation.watchPosition(
+                (position) => {
+                    const { latitude, longitude, accuracy } = position.coords;
+                    if (!youMarker) {
+                        youMarker = L.marker([latitude, longitude], { icon: youIcon, zIndexOffset: 1000 })
+                            .addTo(map)
+                            .bindPopup('<b>You are here</b>');
+                        accuracyCircle = L.circle([latitude, longitude], {
+                            radius: accuracy,
+                            color: '#EFB21E',
+                            weight: 1,
+                            fillColor: '#EFB21E',
+                            fillOpacity: 0.08
+                        }).addTo(map);
+                    } else {
+                        youMarker.setLatLng([latitude, longitude]);
+                        accuracyCircle.setLatLng([latitude, longitude]).setRadius(accuracy);
+                    }
+                },
+                (error) => {
+                    console.warn('Live location unavailable:', error.message);
+                },
+                { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 }
+            );
+        }
     </script>
 </body>
 </html>

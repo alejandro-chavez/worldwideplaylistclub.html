@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "Sample Challenge",
+        "challenge": "Replace this with your first extra challenge. Add more by copying this block and bumping the id."
+    },
+    {
+        "id": 2,
+        "name": "Another Sample",
+        "challenge": "Line breaks work too.\r\nJust like in neighborhoods.json."
+    }
+]

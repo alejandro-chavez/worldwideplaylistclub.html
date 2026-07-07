@@ -41,6 +41,7 @@
                 <!-- Challenge (shown within 200 ft) -->
                 <div class="challenge-content" id="challengeContent">
                     <div class="challenge-text" id="challengeText"></div>
+                    <div class="challenge-box" id="challengeBox" style="display: none;"></div>
                 </div>
 
                 <!-- Out of Range (shown beyond 200 ft) -->
@@ -282,7 +283,19 @@
                     targetPoint.lat,
                     targetPoint.lon
                 );
-                const distanceFeet = metersToFeet(distanceMeters);
+                let distanceFeet = metersToFeet(distanceMeters);
+
+                // Optional second location (e.g. a nearby train station): pass if close to either
+                if (currentNeighborhood.location2) {
+                    const secondPoint = parsePoint(currentNeighborhood.location2);
+                    const secondFeet = metersToFeet(calculateDistance(
+                        location.lat,
+                        location.lon,
+                        secondPoint.lat,
+                        secondPoint.lon
+                    ));
+                    distanceFeet = Math.min(distanceFeet, secondFeet);
+                }
 
                 // Determine what to show based on distance
                 if (distanceFeet <= THRESHOLD_NEARBY) {
@@ -307,8 +320,17 @@
             const challengeText = document.getElementById('challengeText');
 
             title.textContent = neighborhood.name;
-            // Render challenge as HTML so formatting tags in the JSON work; convert newlines to <br>
-            challengeText.innerHTML = neighborhood.challenge.replace(/\r?\n/g, '<br>');
+            // Render as HTML so formatting tags in the JSON work; convert newlines to <br>
+            challengeText.innerHTML = (neighborhood.challenge_context || '').replace(/\r?\n/g, '<br>');
+
+            // Challenge instructions go in the grey box; hidden if empty
+            const challengeBox = document.getElementById('challengeBox');
+            if (neighborhood.challenge) {
+                challengeBox.innerHTML = neighborhood.challenge.replace(/\r?\n/g, '<br>');
+                challengeBox.style.display = 'block';
+            } else {
+                challengeBox.style.display = 'none';
+            }
 
             // Reset modal state
             document.getElementById('errorState').style.display = 'none';
