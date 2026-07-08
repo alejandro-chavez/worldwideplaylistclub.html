@@ -14,7 +14,7 @@
     {
         "name": "Downtown Berkeley",
         "location": "POINT (-122.2684666 37.8681885)",
-        "location2": "POINT (-122.26812, 37.87009)",
+        "location2": "POINT (-122.26812 37.87009)",
         "challenge_context": "",
         "challenge": ""
     },
@@ -27,7 +27,7 @@
     {
         "name": "Harmon/Lorin",
         "location": "POINT (-122.2705711 37.8515793)",
-        "location2": "POINT (-122.26995, 37.85305)",
+        "location2": "POINT (-122.26995 37.85305)",
         "challenge_context": "",
         "challenge": ""
     },
