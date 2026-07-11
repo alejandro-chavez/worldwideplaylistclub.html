@@ -1,10 +1,119 @@
 [
     {
+<<<<<<< HEAD
+=======
+        "name": "North Berkeley",
+        "location": "POINT (-122.2834648 37.8739502)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Greater Cal Area",
+        "location": "POINT (-122.2593626 37.8695392)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Downtown Berkeley",
+        "location": "POINT (-122.2684666 37.8681885)",
+        "location2": "POINT (-122.26812 37.87009)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Elmwood Theatre",
+        "location": "POINT (-122.253174 37.8567271)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Harmon/Lorin",
+        "location": "POINT (-122.2705711 37.8515793)",
+        "location2": "POINT (-122.26995 37.85305)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Fairview Park",
+        "location": "POINT (-122.2556345 37.8509557)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Bushrod",
+        "location": "POINT (-122.260951 37.8473753)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Rockridge/Shafter",
+        "location": "POINT (-122.25126 37.84473)",
+        "location2": "POINT (-122.25183 37.8439)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Piedmont Ave",
+        "location": "POINT (-122.2519392 37.8341454)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Temescal",
+        "location": "POINT (-122.2639599 37.8303737)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Mosswood",
+        "location": "POINT (-122.26072, 37.82396)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Pill Hill",
+        "location": "POINT (-122.266449 37.8226379)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Harrison St Oakland Ave",
+        "location": "POINT (-122.262149 37.8186702)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Northgate/Waverly",
+        "location": "POINT (-122.2649515 37.8129322)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Uptown",
+        "location": "POINT (-122.268105 37.8095887)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Adam's Point",
+        "location": "POINT (-122.2598244 37.809263)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "San Pablo Gateway",
+        "location": "POINT (-122.2724657 37.8074978)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+>>>>>>> 7e95d2650a1c091b2cbc88701ceab89fe4f2b45e
         "name": "Acorn",
         "location": "POINT (-122.2900811 37.8073072)",
         "stationable": false
     },
     {
+<<<<<<< HEAD
         "name": "Adam's Point",
         "location": "POINT (-122.2598244 37.809263)",
         "stationable": false
@@ -60,6 +169,48 @@
         "name": "Lakeside",
         "location": "POINT (-122.2616208 37.8022227)",
         "stationable": false
+=======
+        "name": "Prescott",
+        "location": "POINT (-122.2929721 37.806903)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Downtown",
+        "location": "POINT (-122.2683181 37.8051423)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "City Center",
+        "location": "POINT (-122.2741414 37.8043595)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Lakeside",
+        "location": "POINT (-122.2620525 37.8041929)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Old Oakland",
+        "location": "POINT (-122.2763658 37.8033348)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Civic Center",
+        "location": "POINT (-122.26358 37.80121)",
+        "challenge_context": "",
+        "challenge": ""
+    },
+    {
+        "name": "Chinatown",
+        "location": "POINT (-122.2689449 37.8002048)",
+        "challenge_context": "",
+        "challenge": ""
+>>>>>>> 7e95d2650a1c091b2cbc88701ceab89fe4f2b45e
     },
     {
         "name": "Laney College",
@@ -67,6 +218,7 @@
         "stationable": false
     },
     {
+<<<<<<< HEAD
         "name": "Longfellow",
         "location": "POINT (-122.268548 37.829196)",
         "stationable": false
@@ -136,5 +288,11 @@
         "name": "Uptown",
         "location": "POINT (-122.268105 37.8095887)",
         "stationable": false
+=======
+        "name": "Jack London Square",
+        "location": "POINT (-122.268261 37.7930363)",
+        "challenge_context": "",
+        "challenge": ""
+>>>>>>> 7e95d2650a1c091b2cbc88701ceab89fe4f2b45e
     }
 ]
