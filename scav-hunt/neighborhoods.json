@@ -1,7 +1,5 @@
 [
     {
-<<<<<<< HEAD
-=======
         "name": "North Berkeley",
         "location": "POINT (-122.2834648 37.8739502)",
         "challenge_context": "",
@@ -107,13 +105,11 @@
         "challenge": ""
     },
     {
->>>>>>> 7e95d2650a1c091b2cbc88701ceab89fe4f2b45e
         "name": "Acorn",
         "location": "POINT (-122.2900811 37.8073072)",
         "stationable": false
     },
     {
-<<<<<<< HEAD
         "name": "Adam's Point",
         "location": "POINT (-122.2598244 37.809263)",
         "stationable": false
@@ -169,7 +165,6 @@
         "name": "Lakeside",
         "location": "POINT (-122.2616208 37.8022227)",
         "stationable": false
-=======
         "name": "Prescott",
         "location": "POINT (-122.2929721 37.806903)",
         "challenge_context": "",
@@ -210,7 +205,6 @@
         "location": "POINT (-122.2689449 37.8002048)",
         "challenge_context": "",
         "challenge": ""
->>>>>>> 7e95d2650a1c091b2cbc88701ceab89fe4f2b45e
     },
     {
         "name": "Laney College",
@@ -218,7 +212,6 @@
         "stationable": false
     },
     {
-<<<<<<< HEAD
         "name": "Longfellow",
         "location": "POINT (-122.268548 37.829196)",
         "stationable": false
@@ -288,11 +281,9 @@
         "name": "Uptown",
         "location": "POINT (-122.268105 37.8095887)",
         "stationable": false
-=======
         "name": "Jack London Square",
         "location": "POINT (-122.268261 37.7930363)",
         "challenge_context": "",
         "challenge": ""
->>>>>>> 7e95d2650a1c091b2cbc88701ceab89fe4f2b45e
     }
 ]
