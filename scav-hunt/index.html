@@ -76,7 +76,7 @@
         const THRESHOLD_NEARBY = 200; // feet
         const THRESHOLD_FAR = 2640; // feet (half mile)
         const FEET_PER_METER = 3.28084;
-        const LOCATION_CHECK_ENABLED = true; // Toggle: set to false to skip location check
+        const LOCATION_CHECK_ENABLED = false; // Toggle: set to false to skip location check
 
         // ============================================
         // STATE
@@ -93,8 +93,8 @@
          * Parse POINT (lon lat) format and return {lon, lat}
          */
         function parsePoint(pointString) {
-            // Extract numbers from "POINT (lon lat)"
-            const match = pointString.match(/POINT\s*\(\s*([-\d.]+)\s+([-\d.]+)\s*\)/);
+            // Extract numbers from "POINT (lon lat)"; comma between them also accepted
+            const match = pointString.match(/POINT\s*\(\s*([-\d.]+)[\s,]+([-\d.]+)\s*\)/);
             if (!match) {
                 throw new Error('Invalid POINT format');
             }
@@ -250,11 +250,11 @@
             if (distanceFeet <= THRESHOLD_FAR) {
                 // 500-2640 feet away
                 image.src = 'close.gif';
-                message.textContent = 'You\'re getting closer...';
+                message.textContent = 'You\'re in the nearby area, but you need to go to the specific point on the map.';
             } else {
                 // Beyond 2640 feet
                 image.src = 'nonono-sports.gif';
-                message.textContent = 'You\'re not in the area yet.';
+                message.textContent = 'Nice try! But you\'re not even in the area yet.';
             }
 
             distanceInfo.textContent = `You are ${formatDistance(distanceFeet)} away.`;

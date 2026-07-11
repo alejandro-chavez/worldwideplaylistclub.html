@@ -6,15 +6,52 @@
     <title>Map (Leaflet)</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* blue "you are here" on this page (styles.css default is gold) */
+        .you-marker {
+            background: #339af0;
+            animation-name: you-pulse-blue;
+        }
+        @keyframes you-pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(51, 154, 240, 0.6); }
+            100% { box-shadow: 0 0 0 16px rgba(51, 154, 240, 0); }
+        }
+        /* BART station name labels */
+        .station-label {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 8px;
+            text-shadow:
+                -1px -1px 0 #000, 1px -1px 0 #000,
+                -1px 1px 0 #000, 1px 1px 0 #000,
+                -1px 0 0 #000, 1px 0 0 #000,
+                0 -1px 0 #000, 0 1px 0 #000;
+            padding: 0;
+        }
+        .station-label::before {
+            display: none; /* hide the tooltip arrow */
+        }
+        /* neighborhood names only appear when zoomed in (see zoomend handler) */
+        .neighborhood-label {
+            display: none;
+            font-size: 12px;
+        }
+        .show-labels .neighborhood-label {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <nav class="site-nav">
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
         <div class="nav-links">
-            <a href="index.html" class="active">Neighborhood Challenges</a>
+            <a href="index.html" >Neighborhood Challenges</a>
             <a href="extra-challenges.html">Extra Challenges</a>
             <a href="map.html">Leaderboard & Progress Map</a>
-            <a href="map-leaflet.html">Map for Navigation</a>
+            <a href="map-leaflet.html" class="active">Map for Navigation</a>
         </div>
     </nav>
     <script src="nav.js"></script>
@@ -25,15 +62,47 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        const map = L.map('map');
+        // Initial view must be set before layers are added — adding layers to a
+        // view-less map defers them and they crash inside the later fitBounds.
+        // fitBounds in init() still re-frames the map once neighborhoods load.
+        const map = L.map('map').setView([37.8272, -122.2661], 12);
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
             maxZoom: 19
         }).addTo(map);
 
+        // BART tracks + stations overlay (official BART geodata, converted to GeoJSON)
+        fetch('bart.geojson')
+            .then((response) => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.json();
+            })
+            .then((geojson) => {
+                const bartLayer = L.geoJSON(geojson, {
+                    style: () => ({ color: '#40c057', weight: 2.5, opacity: 0.7 }),
+                    pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
+                        radius: 5,
+                        color: '#ffffff',
+                        weight: 2,
+                        fillColor: '#EFB21E',
+                        fillOpacity: 1
+                    }).bindTooltip(feature.properties.name || 'BART station', {
+                        permanent: true,
+                        direction: 'right',
+                        offset: [7, 0],
+                        className: 'station-label'
+                    })
+                }).addTo(map);
+                L.control.layers(null, { 'BART tracks & stations': bartLayer }).addTo(map);
+            })
+            .catch((error) => {
+                console.warn('BART overlay unavailable:', error.message);
+            });
+
         function parsePoint(pointString) {
-            const match = pointString.match(/POINT\s*\(\s*([-\d.]+)\s+([-\d.]+)\s*\)/);
+            // Comma between the numbers also accepted
+            const match = pointString.match(/POINT\s*\(\s*([-\d.]+)[\s,]+([-\d.]+)\s*\)/);
             if (!match) {
                 throw new Error('Invalid POINT format');
             }
@@ -50,9 +119,21 @@
 
                 const markers = neighborhoods.map((neighborhood) => {
                     const point = parsePoint(neighborhood.location);
-                    return L.marker([point.lat, point.lon])
+                    return L.circleMarker([point.lat, point.lon], {
+                        radius: 7,
+                        color: '#1c1e21',
+                        weight: 1.5,
+                        fillColor: '#ffffff',
+                        fillOpacity: 1
+                    })
                         .addTo(map)
-                        .bindPopup(`<b>${neighborhood.name} Challenge Location</b>`);
+                        .bindPopup(`<b>${neighborhood.name} Challenge Location</b>`)
+                        .bindTooltip(neighborhood.name, {
+                            permanent: true,
+                            direction: 'right',
+                            offset: [9, 0],
+                            className: 'station-label neighborhood-label'
+                        });
                 });
 
                 const group = L.featureGroup(markers);
@@ -66,6 +147,11 @@
         }
 
         init();
+
+        // show neighborhood name labels only when zoomed in
+        map.on('zoomend', () => {
+            document.getElementById('map').classList.toggle('show-labels', map.getZoom() >= 15);
+        });
 
         // Live "you are here" marker, updates as the user moves
         if ('geolocation' in navigator && window.isSecureContext) {
@@ -82,9 +168,9 @@
                             .bindPopup('<b>You are here</b>');
                         accuracyCircle = L.circle([latitude, longitude], {
                             radius: accuracy,
-                            color: '#EFB21E',
+                            color: '#339af0',
                             weight: 1,
-                            fillColor: '#EFB21E',
+                            fillColor: '#339af0',
                             fillOpacity: 0.08
                         }).addTo(map);
                     } else {

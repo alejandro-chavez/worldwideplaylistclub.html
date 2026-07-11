@@ -10,8 +10,8 @@
     <nav class="site-nav">
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
         <div class="nav-links">
-            <a href="index.html" class="active">Neighborhood Challenges</a>
-            <a href="extra-challenges.html">Extra Challenges</a>
+            <a href="index.html">Neighborhood Challenges</a>
+            <a href="extra-challenges.html" class="active">Extra Challenges</a>
             <a href="map.html">Leaderboard & Progress Map</a>
             <a href="map-leaflet.html">Map for Navigation</a>
         </div>
@@ -20,9 +20,70 @@
 
     <div class="container">
         <h1>Extra Challenges</h1>
-        <div class="placeholder-note">
-            Extra challenges are coming soon. Check back during the hunt!
+        <div class="neighborhoods-list" id="challengesList"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalTitle"></div>
+
+            <div class="modal-body">
+                <div class="challenge-content visible">
+                    <div class="challenge-text" id="challengeText"></div>
+                </div>
+            </div>
+
+            <button class="close-btn" id="closeBtn">Close</button>
         </div>
     </div>
+
+    <script>
+        let challenges = [];
+
+        function openModal(challenge) {
+            document.getElementById('modalTitle').textContent = challenge.name;
+            // Render challenge as HTML so formatting tags in the JSON work; convert newlines to <br>
+            document.getElementById('challengeText').innerHTML = challenge.challenge.replace(/\r?\n/g, '<br>');
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function renderChallenges() {
+            const list = document.getElementById('challengesList');
+
+            challenges.forEach((challenge) => {
+                const item = document.createElement('div');
+                item.className = 'neighborhood-item';
+                item.innerHTML = `<div class="neighborhood-name">${challenge.name}</div>`;
+                item.addEventListener('click', () => openModal(challenge));
+                list.appendChild(item);
+            });
+
+            document.getElementById('closeBtn').addEventListener('click', closeModal);
+
+            document.getElementById('modal').addEventListener('click', (e) => {
+                if (e.target.id === 'modal') {
+                    closeModal();
+                }
+            });
+        }
+
+        async function init() {
+            try {
+                const response = await fetch('extra-challenges.json');
+                challenges = await response.json();
+                renderChallenges();
+            } catch (error) {
+                console.error('Failed to load extra challenges:', error);
+                document.getElementById('challengesList').innerHTML = '<p>Error loading challenges</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>

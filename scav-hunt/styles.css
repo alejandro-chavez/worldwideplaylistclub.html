@@ -328,6 +328,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+.modal-body a {
+    color: #fff;
+}
+
 .check-location-btn {
     padding: 12px 20px;
     background: var(--as-gold);
