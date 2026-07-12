@@ -380,8 +380,10 @@
 
         async function init() {
             try {
-                const response = await fetch('neighorhoods.json');
-                neighborhoods = await response.json();
+                const response = await fetch('neighborhoods.json');
+                neighborhoods = await response.json(
+                    
+                );
                 renderNeighborhoods();
             } catch (error) {
                 console.error('Failed to load neighborhoods:', error);
