@@ -380,7 +380,7 @@
 
         async function init() {
             try {
-                const response = await fetch('neighorhoods_live_339.json');
+                const response = await fetch('neighorhoods.json');
                 neighborhoods = await response.json();
                 renderNeighborhoods();
             } catch (error) {
