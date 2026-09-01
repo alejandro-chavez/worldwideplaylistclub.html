@@ -18,7 +18,7 @@
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
         <div class="nav-links">
 <a href="index.html" class="active">Neighborhood Challenges</a>
-            <a href="extra-challenges.html">Extra Challenges</a>
+         
             <a href="map.html">Leaderboard & Progress Map</a>
             <a href="map-leaflet.html">Map for Navigation</a>
         </div>
@@ -381,7 +381,9 @@
         async function init() {
             try {
                 const response = await fetch('neighborhoods.json');
-                neighborhoods = await response.json();
+                neighborhoods = await response.json(
+                    
+                );
                 renderNeighborhoods();
             } catch (error) {
                 console.error('Failed to load neighborhoods:', error);

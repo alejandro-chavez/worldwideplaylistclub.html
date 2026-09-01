@@ -2,193 +2,194 @@
     {
         "name": "Acorn",
         "location": "POINT (-122.2900811 37.8073072)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to the Acorn Neighborhood. You are currently standing outside of the Oakland Unified School district headquarters. Specifically, you are standing at the part of the property that used to be the location of the <a target='blank' href='https://worldwideplaylistclub.neocities.org/diw6pxfnjztq0yj8.png'>Cole Grammar School.</a> Jack London attended this school from 1887-1891 and it later burned down in 1923. In 1901 it caught some attention from the San Francisco Call for the following story titled \"Pet Rat Poisons Nature Study.\" The story was written as follows: \n\"An untoward accident broke up the class in nature study yesterday in Miss Robina Ferguson's room in the Cole Grammar School. Miss Bertha Chapman, who supervises the department of nature study, instructed the pupils a day or two ago that they should each fetch a household pet to school on Friday in order to make studies of their peculiarities. When Miss Chapman called the class to attention in the afternoon she found her request had been taken literally. There were sufficient animals on hand to stock a Barnum annex.\nIn the midst of the studying something happened to start the girls to the high places and the boys upon a hot pursuit. By some unaccountable means a white rat that belongs to one of the boys got out of its cage. It was detected by a brindle cat, which gave it a run for life. The proprietor of the white rat pursued the cat in an attempt to rescue the rodent. Stirred to fever heat by the excitement, a big Newfoundland dog joined in the race. Soon every boy in the room was doing his best to herd the rat into a corner. Teachers and girl pupils sought safety on the chairs. Not until the cat caught the rat was order restored.\"\n",
+        "challenge": "<b>The Challenge</b>: You will text me for a list of 10 animals and then upon receipt set a 2 minute timer and order the animals from biggest to smallest (on average). Text me back and I will tell you how many you got correct. Anything above 7 correct wins you the challenge. If you get fewer than 7, wait 5 minutes and try again. ",
         "stationable": false
     },
     {
         "name": "Adam's Point",
         "location": "POINT (-122.2598244 37.809263)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Adam's Point! You are standing in front of Children's Fairyland, a children's amusement park built in 1950. Fairyland inspired many other cities to build similar parks, and allegedly inspired Walt Disney for Disneyland.",
+        "challenge": "<b>The Challenge</b>: Select an artist (they do not have to be particularly good), and the rest of you will be copywriters. \r\nArtist: Set a timer for 5 minutes, and draw a 5 panel comic with no text. However, please make occasional speech bubbles.\r\nCopywriters: Pass the drawing and one by one have the rest of the team write the accompanying caption and speech text.\r\nWhen you're done, text me the comic. \r\nThere is no way to fail this except by not doing it.",
         "stationable": false
     },
     {
         "name": "Bushrod",
         "location": "POINT (-122.260951 37.8473753)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Bushrod. This is the Telegraph Avenue Windmill. It is not 100% clear what this building originally was. According to Gail Lombardi of Oakland's Cultural Heritage Survey:\r\n (a) it was not part of Idora Park\r\n (b) it was not part of a miniature golf course\r\n (c) it was a lemonade or hamburger stand.\r\nIt is also known that it was the home of Butch's Record Mill for some time in the 1960s. Attached is an advertisment for this. Because of this we will be looking at some Oakland records.",
+        "challenge": "<b>The Challenge</b>: When you're ready text me and I will send you a list of three buildings that were at one point the tallest building in Oakland, alongside a list of dates. You will need to match the dates to the buildings. Set a 5 minute timer, and deliberate and then text me your answers. If you guess correctly you win this challenge, if you guess incorrectly then you can try again in 5 minutes.  Text me when you are ready. I will also send you pictures of the buildings.",
         "stationable": false
     },
     {
         "name": "Chinatown",
         "location": "POINT (-122.2689449 37.8002048)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Chinatown. Chinatown is one of Oakland's oldest neighborhoods and one of the oldest Chinatowns in the US, from its beginning in 1850. You are at Lincoln Square Park, one of a few public parks in Chinatown. This park features a playstructure in the shape of a boat. Specifically, in the shape of a junk boat. Click <a target='blank' href='http://www.hmdb.org/Photos5/541/Photo541876o.jpeg?105202031000PM'> here </a> for a picture of the placard which explains this history. \nThe English word \"junk\" is supposedly derived from the name of these boats. The Portuguse called these boats <i>junco</i>, and that came from the Malay word <i>jong</i>, which came from the Javanese <i>djong</i>. The Chinese had <i>chuán</i> boats, which were then all called junk boats.",
+        "challenge": "<b>The Challenge</b>: Go to a nearby store and buy one item of Chinese \"junk food\" and have everyone try it. That's it, the only way to fail is to not do this. Text me a picture of you all with the food and you've won the neighborhood.",
         "stationable": false
     },
     {
         "name": "Civic Center",
         "location": "POINT (-122.26358 37.80121)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to the Civic Center neighborhood and to the main branch of the Oakland Public Library system. \r\nThis building was built in 1951. \r\n",
+        "challenge": "<b>The Challenge</b>: Select a librarian and a citizen. The rest of you will be reference desk librarians.\n<b>Librarian:</b> Find a library book that a movie is based on and take a picture of yourself with it. From memory, or from google, identify 3 actors featured in the movie. Tell the reference librarians the 3 actors.\n<b>Reference Librarians:</b> Determine which book this could be and tell the citizen. \n<b>Citizen:</b> Go inside, find the book and take a picture of yourself with it. Text your the librarian the picture and if you are correct they will let you know and text me both pictures. If you are incorrect, go back outside and try again in 5 minutes. ",
         "stationable": false
     },
     {
         "name": "Downtown",
         "location": "POINT (-122.2683181 37.8051423)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Downtown Oakland! You are standing in the area that in 1853 housed the Contra Costa Academy, opened by Rev. Henry Durant. In 1855 it became the College of California. Then after calls for a State University in 1867, Gov. Henry Haight sign an act that established the University of California. This made the College of California into the College of Letter, and then the year after it became a university. It stayed down here in Oakland until 1873, when the Berkeley campus opened with its 3rd president, Daniel Gilman. <a href='https://worldwideplaylistclub.neocities.org/uc-oakland.jpg' target='blank'> Here is an image </a> of College Hall at its 12th and Harrison location.   \n\nNow comes the part of the story that doesn't include men who became street names. About 109 years after the opening of the first building a group of students took a cigar box and started a student run radio station they called Radio KAL. In 1967, it officially became KALX. Since then it has survived Governor Reagan issued lockdowns during protests against troops on the ground in Cambodia during the Vietnam War. Had students interview Charles Manson.  And much more found <a target=blank' href='https://kalx.berkeley.edu/about/full-and-unabridged-history-kalx/'>here</a>. \nAs a part of that history Someone pulled a highlight list of songs that were played at KALX between 1970 and 1977. \nFiresign Theatre – I Think We’re All Bozos on This Bus (1971)\nDick Gregory at Kent State (1971)\nSweathog – Sweathog (1972)\nEmerson, Lake, and Palmer – Pictures at an Exhibition (1972)\nMonty Python – Matching Tie & Handkerchief (1975)\nDisco Tex and His Sex-o-Lettes (1975)\nChuck Mangione – Bellavia (1975)\nJimmy Buffett – Havana Daydream (1976)\nLou Reed – Coney Island Baby (1976)\nPeter Frampton – Frampton Comes Alive (1976)\n\nToday, the show at KALX that is playing should be \"Sunspot\" or \"I Scream Sundaze Tumble Weed\". Stream it <a target='blank' href='https://kalx.berkeley.edu/'>here</a> as you read the challenge.  ",
+        "challenge": "<b>The Challenge</b>: Do you remember calling a radio station to request a song? I guess you can totally still do that. Call KALX at 510-642-5259 and request any of the songs from the above playlist. Or, also, you can just request a song you want to hear or seems on theme with whatever the DJ is playing.",
         "stationable": false
     },
     {
         "name": "Downtown Berkeley",
         "location": "POINT (-122.2668725 37.8686370)",
         "location2": "POINT (-122.26812 37.87009)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Downtown Berkeley, specifically welcome to the old California Theatre. There have been 34 theatres in Berkeley's past. You can see them in a map <a target='blank' href='https://i0.wp.com/newspack-berkeleyside-cityside.s3.amazonaws.com/wp-content/uploads/2024/07/Map-of-Berkeley-Theaters-16x24-v5-rev-031924-scaled.jpg'>here.</a> If you walk around downtown Berkeley, there a few other theatres that you can see in the area that are no longer. ",
+        "challenge": "<b>The Challenge</b>: I've collected an assortment of movie advertisements from the Oakland Tribune. Your task is to film at least a 45 second trailer for one movie on the advertisement. Everyone should be in the trailer, and it does not have to be accurate with regard to the movie selected. Text me that you've seen this and I'll send you the newspaper clipping. When you're done text me the video when you're done and you win the challenge. There's no real way to fail this unless you don't do it.",
         "stationable": false
     },
     {
         "name": "Fairview Park",
         "location": "POINT (-122.2584504 37.8436709)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Fairview Park. There is certainly some amount of history in this neighborhood, but I couldn't really get much out of it. It feels like this neighborhood is a part of a lot of other neighborhoods but doesn't have its own unique particular identity. It's almost like an important piece of the puzzle of this part of North Oakland. Or not really, but this kind of works to explain why you are standing in front of someone's house. As you can see there are some storage boxes here that contain various types of puzzles for this public puzzle library.",
+        "challenge": "<b>The Challenge</b>: Grab a puzzle from the children's puzzle box and walk to nearby Ayala Park and complete it. Once you are done send me a picture and you win the neighborhood.",
         "stationable": false
     },
     {
         "name": "Harmon/Lorin",
         "location": "POINT (-122.2705711 37.8515793)",
         "location2": "POINT (-122.26995 37.85305)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to the Harmon-Lorin neighborhood. In the early 20th century this neighborhood had a lot of Japanese immigrants, who were shamefully forcibly removed during WWII. After WWII, this neighborhood saw a lot of migration of Black southerners. In the 1960s during the building of the BART system, there was the possibility of putting elevated rail in the neighborhood as was done in other areas. It was not until a community activist, Mable Howard, a 63 year old black woman, filed a lawsuit which forced the BART line and its accompanying station to go underground. In her words she did not want a Berlin Wall in Berkeley, as it would have divided and degraded the neighborhood. The sculpture you are in front of was made by Mable's daughter and artist, Mildred Howard.  The sculpture is inspired by the traditional West African metal work that existed as both currency and jewelry. The currency aspect is important, as it pays tribute to the wealth that was created by the African Americans in the region and what Mable sought to keep intact.",
+        "challenge": "<b>The Challenge</b>: Text me when you are ready and I will reply with a list of 10 West African countries and a list of 10 currencies. You will have to match the country to the currency. You can do this with a piece of paper and then text me your answers. You have 5 minutes to do this. You will need to get at least 6/10 correct to win the neighborhood. If you get them incorrect wait 5 minutes and try again. Good luck!",
         "stationable": false
     },
     {
         "name": "Harrison St - Oakland Ave",
         "location": "POINT (-122.2610950 37.8125811)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Hello welcome to the Harrison St/Oakland Ave neighborhood. Probably one of the worst named neighborhoods. You are standing in front of a Whole Foods. That Whole Foods building used to be the a powerhouse and central depot for the Key System. And to the right of that was <a target='blank' href='https://worldwideplaylistclub.neocities.org/pied_baths.jpg'>Piedmont Baths </a>. An imposing brick structure comprising a natatorium with galleries, dressing rooms, hot tubs, massage areas, and a café, it was built to promote interest in the appeal of East Bay living for pre-earthquake citizens of SF who did not have a similar facility at the time.\nUntil 1904, the baths used waste steam heat from the Key System powerhouse to heat the swimming tank. They pumped water from the Lake and Estuary to fill the pools, and had a complex gravity-based filter to ensure the safety of the water, in one of the first implementations of charcoal, sand, and gravel filters of the Hyatt Patent. The baths were open until 1927, when a fire damaged the facility. \nUnfortunately, during the lifespan of the baths, multiple people <a target='blank' href='https://www.sfgate.com/local/article/oakland-whole-foods-bathhouse-site-17486991.php'>died mysteriously </a> at the baths. ",
+        "challenge": "<b>The Challenge</b>:  Make cucumber water! Go into Whole Foods and get the ingredients for a cucumber water. If you have any moral qualms with Amazon/Whole Foods, feel free to walk to the nearby Sprouts/Grocery Outlet and complete the challenge. Text me a picture of your cucumber water and you win the neighborhood!",
         "stationable": false
     },
     {
         "name": "Jack London Square",
         "location": "POINT (-122.2783363 37.7952032)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Jack London Square. A lovely waterfront neighborhood that houses the main Oakland Ferry terminal, the Amtrak terminal, and a weekly farmer's market. \nThis is named after the famous writer Jack London, who grew up in Oakland and spent a lot of his time in the area as a kid. \nTechnically the square only refers to the area south of Embarcadero West, the street the train tracks are on. Now the name refers to the whole area below 880. \nThat other part of the neighborhood has also been referred to as Produce and Waterfront due to the large outdoor produce markets that once stood there, although there is still plenty of produce in the warehouses in the area. \nIn 1905, to get away from San Francisco after having achieved success with the printing of his first book, the Sea-Wolf, London bought some land in Glen Ellen in Sonoma County. After his death, his wife inherited the property and after her death the state of California inherited it. This became Jack London State Historic Park. \nThe park has orchards that consists of apple, pear, apricot, peach, cherry, and plum trees that were planted between 1908-1912. In 2012, efforts were started to stabilize this and in recent years nearly 800 lbs of fruit from the area were gathered and donated to those experiencing food insecurity. ",
+        "challenge": "<b>The Challenge</b>:  There is a farmer's market today in Jack London. Go to the farmer's market and buy one of the fruits listed above that were found in Jack London's orchards and sit at one of the benches facing the water and enjoy the fruit. You just need to buy one piece of fruit and take a picture of it with the water in the background. Text me the picture and you win the neighborhood. ",
         "stationable": false
     },
     {
         "name": "Lakeside",
         "location": "POINT (-122.2616208 37.8022227)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to the Lakeside neighborhood! You are in front of the Lake Chalet. This building was originally built in 1909 as a salt water pumping station for the Oakland Fire Dept to get water from Lake Merritt in case of very serious fires like the ones that were seen after the 1906 earthquake.  \nLake Merritt was designated the first wildlife refuge in the US in 1870 and is home to at least 140 different types of birds. \n",
+        "challenge": "<b>The Challenge</b>:  <a target='blank' href='https://www.lakemerritt.org/birds.html'>This website </a> has 72 of those 140 bird species. Your task is to find and take pictures of as many of these bird species as you can. When you're done, text me the number of bird species that you found and I will give you your next task. ",
         "stationable": false
     },
     {
-        "name": "Laney College",
+        "name": "Laney",
         "location": "POINT (-122.2633697 37.7970605)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to the Laney neighborhood, named after Laney College, which you stand in front of. Laney, originally named Oakland Central Trade School and later Oakland City College, was eventually named for its founder Joseph C. Laney. Laney is the flagship college of the Peralta Community Colleges district, and has about 17,000 students annually. ",
+        "challenge": "<b>The Challenge</b>: Go to the steps in front of Laney Tower, the nine-story building with the iconic neon <i>Laney College</i> sign and take some promotional pictures for the college as if you were students.  Send me the two best pictures from your photoshoot and you win the neighborhood! Be sure to include as many people from your team as you can, and I will award a bonus point if you invite a stranger to be in your picture.",
         "stationable": false
     },
     {
         "name": "Longfellow",
         "location": "POINT (-122.268548 37.829196)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Longfellow! A neighborhood named after the poet and his eponymous elementary school in the neighborhood. David Hilliard and Huey Newton, the Black Panthers, had their childhood homes here and the second Black Panther Party offices were housed in this neighborhood. \nNancy Reagan visited the elementary school as a part of a <i>War on Drugs</i> tour and allegedly coined the phrase \"Just Say No\" here. \nYou are standing in front of Marcus Books, a bookstore founded by Drs. Raye & Julian Richardson, who met at Tuskegee University. Julian started Success Printing Co. in 1946 in the Fillmore and in 1960 they both founded Marcus Books (named after Marcus Garvey). \nMarcus Books boasts itself as the oldest Black-owned independent bookstore in the United States. They have hosted a number of authors, such as: Toni Morrison, Rosa Parks, Muhammad Ali, Maya Angelou, Walter Mosley, Angela Davis, Terry McMillan, Chaka Khan, Michael Eric Dyson, Iyanla Vanzant, Sister Souljah, Nikki Giovanni, Kareem Abdul-Jabbar, and Patti LaBelle. ",
+        "challenge": "<b>The Challenge</b>: The challenge is simple. Buy me a book! Or if you really want it buy it for yourself. Just buy a book. If it is for me, I will reimburse you (try to stay under $25). Do this and you win the neighborhood.",
         "stationable": false
     },
     {
         "name": "Lower Rockridge",
         "location2": "POINT (-122.25126 37.84473)",
         "location": "POINT (-122.25183 37.8439)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Rockridge. This neighborhood used to be known as the Chimes District. There are still remnants of that name around the neighborhood. For example, look at the corner store sign above Cactus. This was the location of Chimes Market. Also on this block were the Chimes Inn Confectionary and the Chimes Floral Shop. \nThe reason for this? There used to be a theatre here called The Chimes Theatre after which everything else was named. The theatre building was torn down as a part of the Grove/Shafter Highway construction. But from my and others approximations it was around where Market Hall is today.",
+        "challenge": "<b>The Challenge</b>: I've collected an assortment of movie advertisements from the Oakland Tribune. Your task is to film at least a 45 second trailer for one movie on the advertisement. Everyone should be in the trailer, and it does not have to be accurate with regard to the movie selected. Text me that you've seen this and I'll send you the newspaper clipping. When you're done text me the video when you're done and you win the challenge. There's no real way to fail this unless you don't do it.",
         "stationable": false
     },
     {
         "name": "Mosswood",
-        "location": "POINT (-122.26072 37.82396)",
-        "challenge_context": "",
-        "challenge": "",
+        "location": "POINT (-122.26072, 37.82396)",
+        "challenge_context": "Welcome to Mosswood. Specifically to the mansion at Mosswood Park. This house is the namesake of this park, as it was the home and estate of J. Mora Moss and Julia Wood (Moss). After they both passed without having had any children, the citizens of Oakland asked the city to buy the land and turn it into a park. \nAfter renaming various streets to form MacArthur Boulevard, 8 1/2-year-old Franklyn Delano Winston had the idea to also rename Mosswood Park in honor of General MacArthur, and the suggestion was quickly adopted and <a target='blank' href='https://worldwideplaylistclub.neocities.org/cgcjlx4ffq80h16x.jpg'>a new sign </a> put up. But H.F. Deaner, age 91, and others protested the name change before the city council because of the history of the Mosswood name, and barely a month later the decision was made to change it back to Mosswood Park.",
+        "challenge": "<b>The Challenge</b>: Go to to the Mosswood Park Amphitheatre behind you and stage a short play of this renaming saga. Film it and text it to me and you win the neighborhood.",
         "stationable": false
     },
     {
         "name": "North Berkeley",
         "location": "POINT (-122.2834648 37.8739502)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to North Berkeley. Specifically, the North Berkeley station. DO NOT LEAVE THE STATION. To save money on train fare, you will be able to complete this challenge in the station. This station was originally an open area across which the Key System constructed its Westbrae streetcar line. The tracks ran diagonally across the property in virtually the same alignment as today's underground BART tracks.\nNote: If you are contesting this neighborhood, just text me a picture of you all at the stop and then get off at your next convenient stop and we will start the face-off there. ",
+        "challenge": "<b>The Challenge</b>: Complete a Key System quiz! You have 5 minutes to complete <a href'https://forms.gle/JmFUtSSBS68hxRJ68'>this quiz </a> where you'll match old Key System photos to their current day locations. After you have taken the quiz for the first time, text me your results and I'll let you know if you passed. The next train back south should be here in 9 minutes, so hurry!",
         "stationable": true
     },
     {
         "name": "Northgate/Waverly",
         "location": "POINT (-122.2649515 37.8129322)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Northgate/Waverly. The former location of Piedmont Grounds. This was where the Oakland Colonels baseball team played for the 1892 and 1893 seasons. Before the Athletics, Oakland had several teams in their history with the Pacific Coast League. Here are the teams that have represented Oakland from 1879-1915: \r\nOakland Pioneers (1879)\r\nOakland Greenhood & Morans (1886–1888)\r\nOakland Tribunes (1888)\r\nOakland Clevelands (1888)\r\nOakland Morans (1892)\r\nOakland Reliance (1898)\r\nOakland Colonels (1889–1893)\r\nOakland Commuters (1901, 1906-1910, 1915)\r\nOakland Clamdiggers (1902)\r\nOakland Heeseman (1903)\r\nOakland Reliance (1903)\r\nOakland Invaders/Merced Fig Growers (1910)",
+        "challenge": "<b>The Challenge</b>: Choose a graphic designer and the rest of you will be the judges. Read through both directions as a team, and then decide who will be who. \nGraphic Designer: Step away from the rest of the team and set a 5 minute timer. During this time, draw 3 imagined logos for any of the teams. You can only draw images, no text. \nJudges: Once the graphic designer presents the logos to you, you have 2 minutes to deliberate what teams those logos belong to. \nEveryone: You win this challenge if you can guess all of them correctly. If you guess incorrectly then you can try again in 10 minutes.",
         "stationable": false
     },
     {
         "name": "Oak Center",
         "location": "POINT (-122.286054 37.812553)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Oak Center. You're in DeFremery Park or Lil Bobby Hutton Park. Like Mosswood Park, there is an old Victorian in the middle of the park. \nIt has seen many things, like one of two Oakland stops in JFK's 1960 election tour. It was a key location for many Black Panther rallies, and activities like the distribution of free groceries. As far as I can tell from my own research in Oakland newspapers, it was likely the location of the first <i>Juneteenth</i> celebration in Oakland in 1967.\nIt also has seen stranger more unique activities that I have only found one or two newspaper stories of. Such as:\n- In 1908, Isabella J Martin, a career criminal, scammer, and murderer was under suspicion of trying to kill Oakland Judge Ogden was snitched on by her son \"Baby John\" Martin, who showed Oakland police where he had hidden explosives and poison at the Park under his mom's instruction. Specifically, the police found \"forty sticks of dynamite, a quart bottle of muriatic acid, and a quantity of fuses and screw-eyes.\" Baby John said \"this is the store from which she expected to draw her materials for bombs with which to exterminate her enemies.\" \n- In 1909, two men took white sand from the park and bagged it and passed it off to housewives as sugar. They were eventually arrested for their trickery. \n-A gunman locked two of the police station's attendants in the restroom, then emptied a cash register of $309 and ran off. He was spotted by a police officer who chased him for two blocks and the two exchanged half a dozen shots. The exchange ended when the officer ran into a tree and knocked himself unconscious. The thief got away and the officer was found after neighbors called police who found the first officer at the foot of a tree in the park. ",
+        "challenge": "<b>The Challenge</b>: Unlike other challenges, please pick roles before reading the whole text. Choose a guesser and the rest of you will be actors. \nGuesser, turn away and cover your ears.\nActors, pick one of the three stories quietly and then do not speak again. Act out one of these three scenes without using any words and have the guesser figure out which one it is.  Remember just decide, no planning or talking about how you'll do the scene. Ready?.... begin.\nOnce you are successful, text me and you win the neighborhood. ",
         "stationable": false
     },
     {
         "name": "Old Oakland",
         "location": "POINT (-122.2771883 37.8041088)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Old Oakland, specifically to Lafayette Square Park. In the 1880s Oakland Public Schools Superintendent Jewett Gilson, got the idea to build an observatory here, but he needed the money. Anthony Chabot decided to offer up the money to do so, with the stipulation that the telescope be available for public use at no cost. The observatory was built in 1883, but in 1915 due to light pollution it was moved into the hills, and then once more in 1975 to its current location. However, despite those moves, the telescope used at the Observatory is still the same one that Anthony Chabot donated in 1883. It is still free for public viewing, although for only 6 hours during the whole week.",
+        "challenge": "<b>The Challenge</b>: We are going to pretend that a part of the solar system is on the streets of Oakland, specifically 11th street. If you can imagine that the westernmost edge of the park is the Sun and the OMCA on 11th and Oak is Jupiter, then I need you to guess where on 11th street would the earth be? Text me when you've made your guess and if you are right you win the neighborhood. If you are wrong, you will have to wait 5 minutes for your next guess. Good luck!\r\n(Note: The margin of error here is a city block.)",
         "stationable": false
     },
     {
         "name": "Piedmont Ave",
         "location": "POINT (-122.2519392 37.8341454)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to the Piedmont Ave Neighborhood (technically, I just didn't want to make y'all go up the hill too much). We are at the Broadway Pet Hospital Mural. This mural depicts various pets enjoying themselves at Lake Merritt.",
+        "challenge": "<b>The Challenge</b>: Pick a photographer and a namer and the rest of you will be the judges. Read through both directions as a team, and then decide who will be who. \nPhotographer & Namer: Ask the rest of your team to go around the corner and set a 5 minute timer. During this time, find and name 5 of the pets in the mural. \nNamer: Write the names of the pets down on a piece of notebook paper in the order the photographer takes their pictures. The names cannot contain the same words in the type of animal or breed of animal, nor any abbreviations of it. For example: the wiener dog can't be named weenie, but if you wanted to name it Mustard or Glizzy, that is fine. Except, now you can't use those names since the judges have read that.\nJudges: The namer will hand you a the paper list of names and you will have to go to the mural and find the animal that was named that. \nEveryone: You win this challenge if you can guess 3 of the 5 animals. If you guess incorrectly, then you can try again in 5 minutes. You cannot change roles on retry, but you can photograph new animals.",
         "stationable": false
     },
     {
         "name": "Pill Hill",
         "location": "POINT (-122.266449 37.8226379)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to A Taste of Denmark Bakery in the Pill Hill neighborhood, originally known as Neldam's Danish Bakery. First opened in 1929, it closed in 2010 and was reopened by employees as a co-op. This challenge will require you to walk to Sana Market on 37th and Telegraph. There you will need to pick a taster, a coordinator, and the rest of you will be buyers. Read through the entirety of the instructions before picking who is who. Also, you just need to buy the cookies at the store, you can walk to nearby Mosswood park to do the tasting, if you'd like.",
+        "challenge": "<b>The Challenge</b>: Little Debbie blind tasting. \nBuyers: Go to the market and pick 3 Little Debbie baked goods that you think the taster will be able to guess. So the taster can't see what you got, get a bag from the store or put it in someone's bag and give it to the coordinator.\nCoordinator: While the buyers are shopping, text me for a picture of all the possible Little Debbie baked goods. Then when you are at the tasting location, blindfold the taster, with the bandana provided, grab the baked goods from the team, and pick the order in which you'd like the taster to try them. \nTaster: Try the baked goods and guess which ones they are. You have to get 2 of the 3 cookies correctly to win the Pill Hill neighborhood. If you are wrong, wait 10 minutes and try again.",
         "stationable": false
     },
     {
         "name": "Prescott",
         "location": "POINT (-122.2929721 37.806903)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Prescott and the Huey P. Newton statue. Newton was a co-founder of the Black Panther Party and help craft its 10 point manifesto. He was assasinated in 1989 at 1456 9th street, just one block west of here. Please read the text under the statue, then begin the challenge.",
+        "challenge": "<b>The Challenge</b>: This is a two part challenge, so once you've completed it, text me and I'll send you the next instructions. Set a 3 minute timer. Once it has started name as many Black Panthers as you can, and as many of their 10 point program demands as you can. After the time has passed, checked how many you got correct and text me the number of members and demands you got.",
         "stationable": false
     },
     {
         "name": "San Pablo Gateway",
         "location": "POINT (-122.2730631 37.8094152)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to San Pablo Gateway! You should be standing in front of 1917 San Pablo, this is the former location of Somps & Chanquet. \nFor those of you that haven't heard of the legendary soft drink parlor run by Jules Somps and Ambroise Chanquet, it is probably because it wasn't around for very long. \nIt was first mentioned in January 1922 because 28 bottles of some alcoholic concoction was found and then turned over to the feds to determine how much alcohol it had. In July of that same year, they were arrested after a raid found 12 barrels containing 750 gallons of wine in their possession.\nThey ended up almost beating these charges in April 1923 after their lawyer successfully argued that the wine appeared there after the sun had randomly fermented some grape juice in their possession. I am not sure how this was successfully argued, as they had already plead guilty and were fined $10. Presumably this business closed around this time as that same month their soft drink license had been removed. \nThis challenge will require you to walk two doors down to 1913 San Pablo, at Fleurets Market and Spirits. There you will need to pick a taster, a coordinator, and the rest of you will be buyers. Read through the entirety of the instructions before picking who is who. Also, you just need to buy the soda at the store, you can walk to nearby Henry J. Kaiser Memorial Park to complete the challenge.",
+        "challenge": "<b>The Challenge</b>: Soft drink blind tasting.\n<b>Buyers: </b> Go to the market and pick 3 sodas that you think the taster will be able to guess. So the taster can't see what you got, get a bag from the store or put it in someone's bag and give it to the coordinator.\n<b>Coordinator: </b>Then when you are at the tasting location, blindfold the taster, with the bandana provided. Grab the drinks from the team, and pick the order in which you'd like the taster to try them.\n<b>Taster:</b> Try the sodas and guess which ones they are. You have to get 2 of the 3 sodas correctly to win the San Pablo Gateway neighborhood. If you are wrong, wait 10 minutes and try again.\n<b>Note: </b>If you do LaCroix, ask for the specific flavor. If you are doing actual sodas, you can do root beer, Cola, Dr. Pepper style, lemon-lime soda, etc instead of the specific brand names.",
         "stationable": false
     },
     {
         "name": "Shafter",
         "location": "POINT (-122.260009 37.838553)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to the Shafter neighborhood. If this were Chicago, it would be called Lower Lower Rockridge. It's almost Temescal, but not really. However, it does have a part of Temescal in it. \nThe Temescal creek runs from Lake Temescal in Upper Rockridge all the way to Emeryville, but the section of it here was culverted in the 70s and 80s, meaning the true stream of the creek went underground. \nYou can still see where it would have cut through in Shafter, because of the Rockridge-Temescal Greenbelt (interesting they left out the Shafter name). \nToday, walking in this Greenbelt, you can still see remnants of the creek through public art and the faux reconstituted creek that sometimes runs through it. ",
+        "challenge": "<b>The Challenge</b>: A faux creek deserves a faux boat running down it. By googling paper boat, learn how to make a paper boat and then float it down the creek. \nIt is entirely possible the creek will not be running. If so, just put it on the grass where the water would be. Take a picture of the boat going down the creek and send it to me to win the Shafter neighborhood. Don't forget to give it a name on the side of the boat. \n\nAlso, if you haven't done the Lower Rockridge, or Fairview Park challenges, I definitely recommend walking up the Greenway. The Farmer's Market is also going to be there, good place to grab a snack.\nOk one last thing. I hardly know her.  ",
         "stationable": false
     },
     {
         "name": "Temescal",
         "location": "POINT (-122.2632757 37.8342913)",
-        "challenge_context": "",
-        "challenge": "",
+        "location2":"POINT (-122.2669273 37.8289022)",
+        "challenge_context": "Welcome to Temescal. This is probably the first challenge that you see in this game, so welcome to the game! Temescal is one of the oldest neighborhoods in Oakland, but before it was a neighborhood it was actually its own town. Before that, it was an unincorporated village built up on the estate of Vincente Peralta. Before that it was an area partially inhabited by the Chochenyo-speaking people, an ethnic subset of the Ohlone people. The name Temescal is an interesting one because it is technically an indigenous name, just not indigenous to here. Temescalli means sweat lodge in Nahuatl, and the story goes that the Spanish colonizers named this area that since they saw similar sweat lodges built along Temescal creek. \nIn 1896 the northernmost boundary of Oakland was 36th street, and in 1897 the citizens of Temescal voted to join Oakland to benefit from the school and police systems of the town. \nBetween 1910 and 1930, Temescal had one of the largest Italian populations in California. And Temescal was largely Italian up until the 1960s. As the children of the families that had lived there for decades started to grow older and move to the suburbs and the older people that owned the homes died, and those houses that had been in the families for years started to become available to other non-Italian families. This is a nicer telling of the story; Sewall Glinternick tells a different one: he basically recounts how a realtor, usually a Black realtor, would offer a white homeowner that wanted to leave more money than their house was worth and that homeowner would have no choice but to sell and he'd help a Black family move in. Once that family moved in the rest of the block would panic, get desparate, and start trying to leave the neighborhood. And as homes sold more and more families would \"panic.\" This was called block busting. \nShortly thereafter Temescal became a primarily Black, working class neighborhood. In recent decades, another shift has happened as the neighborhood has gentrified. \nSome other fun facts about Temescal:\n- The former Walgreens on 51st and Telegraph used to be a horse barn for the horse street cars that led to Berkeley, and then became a car barn when a mechanized street car was put in. \n- The current Whole Foods used to be a park called Humboldt Park, as Telegraph used to be called Humboldt. It also used to be a theatre called the Claremont theatre, which spent its final days as a adult theatre known as the Pussycat Theatre. \nOkay... why did I tell you all of this information about Temescal? Read the challenge below. Honestly, hopefully you skipped this and just went to the challenge and are now reading this part to complete the challenge. ",
+        "challenge": "<b>The Challenge</b>: Go to the East Bay Creative Reuse depot and each team member should find an old postcard from somewhere they have been. Then write a postcard to a friend or family member and tell them something that you've just learned about Temescal. Keep the cards on you and I'll find you during the day to give you a postage stamp and you can drop them in a blue box. Text me a picture of you all with the postcards and you'll win the neighborhood. ",
         "stationable": false
     },
     {
         "name": "Uptown",
         "location": "POINT (-122.268105 37.8095887)",
-        "challenge_context": "",
-        "challenge": "",
+        "challenge_context": "Welcome to Uptown or is it welcome Up-town? Anyway, most people think this neighborhood name is a recent rebranding to assist gentrification. However, that name has been in use for nearly two centuries. \nIn the 1853, the map of Oakland ended at 14th street. And as Oakland grew to the north, the area above that line became \"Up-Town.\" The first mention of this is in 1895, in a mention of the Tribune opening an office space Up-Town. From then on, you can regularly find advertisements and articles that mention the Uptown district. In fact, you can find walking tours from the 1980s that highlight the historic Uptown District. ",
+        "challenge": "<b>The Challenge</b>: Do a walking tour! <a target='blank' href='https://i0.wp.com/abitofhistory.site/wp-content/uploads/2020/04/uptown_00007.jpg'>Use this printed out and marked up Art Deco terra cotta walking tour from 1985</a>. The tour has each destination highlighted in yellow, blue, and pink. You will need to visit at least 2 buildings from each color and pass around the map so you can tell each other about the buildings. Text me which buildings you visited and you win this neighborhood.",
         "stationable": false
     }
 ]
