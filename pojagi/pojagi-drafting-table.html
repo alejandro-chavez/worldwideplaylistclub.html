@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pojagi Drafting Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#CBC4AB;
+  --paper:#FFFFFF;
+  --ink:#32332B;
+  --ink-soft:#6B6A5B;
+  --rule:#B5AE95;
+  --rule-soft:#E4E0D1;
+  --accent:#3F7A52;
+  --accent-deep:#33633F;
+  --accent-soft:#E1EBE3;
+  --warn:#9C5B3C;
+  --focus:#3F7A52;
+  --dot:#C7C7BE;
+  --dot-major:#A9A99E;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:14px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* ---------- shell ---------- */
+.app{display:flex;flex-direction:column;height:100%}
+
+header.bar{
+  display:flex;align-items:baseline;gap:1.25rem;flex-wrap:wrap;
+  padding:.85rem 1.25rem;
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
+}
+h1{
+  font-family:Spectral,Georgia,serif;
+  font-weight:500;font-size:1.35rem;letter-spacing:.005em;
+  margin:0;
+}
+h1 .han{color:var(--accent);font-size:1.15rem;margin-right:.45rem}
+.tagline{color:var(--ink-soft);font-size:.82rem;margin:0}
+.bar .spacer{flex:1}
+
+.histctl{display:flex;gap:.4rem}
+.hbtn{
+  display:flex;align-items:center;gap:.35rem;
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
+  padding:.4rem .7rem;font-size:.85rem;
+}
+.hbtn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.hbtn:disabled{opacity:.4;cursor:default}
+.hbtn svg{flex:none}
+
+main{
+  flex:1;min-height:0;
+  display:grid;
+  grid-template-columns:15.5rem minmax(0,1fr) 20rem;
+}
+
+aside{
+  background:var(--paper);
+  overflow-y:auto;
+  padding:1rem 1rem 3rem;
+}
+aside.rail{border-right:1px solid var(--rule)}
+aside.list{border-left:1px solid var(--rule)}
+
+.stage{
+  min-width:0;display:flex;flex-direction:column;
+  background:var(--ground);
+}
+.canvas-wrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:1.25rem;overflow:auto}
+
+/* ---------- rail bits ---------- */
+.group{margin-bottom:1.4rem}
+.group > h2{
+  font-family:Spectral,Georgia,serif;
+  font-weight:500;font-size:1rem;margin:0 0 .55rem;
+  padding-bottom:.3rem;border-bottom:1px solid var(--rule-soft);
+}
+.hint{color:var(--ink-soft);font-size:.78rem;margin:.4rem 0 0}
+
+.seg{display:flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.seg button{
+  flex:1;background:var(--paper);border:0;padding:.42rem .3rem;
+  font-size:.82rem;color:var(--ink-soft);
+}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.tool{
+  display:flex;align-items:center;gap:.45rem;
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
+  padding:.45rem .5rem;font-size:.82rem;text-align:left;
+}
+.tool[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.tool svg{flex:none}
+.tool.wide{grid-column:1 / -1}
+
+.field{display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem}
+.field label{flex:1;font-size:.82rem;color:var(--ink-soft)}
+.field input{
+  width:5.4rem;padding:.3rem .45rem;
+  border:1px solid var(--rule);border-radius:3px;background:var(--paper);
+  font-variant-numeric:tabular-nums;text-align:right;
+}
+.field input:disabled{background:var(--ground);color:var(--ink-soft)}
+
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:.3rem}
+.sw{
+  aspect-ratio:1;border:1px solid rgba(0,0,0,.18);border-radius:2px;
+  padding:0;position:relative;
+}
+.sw[aria-pressed="true"]::after{
+  content:"";position:absolute;inset:-3px;border:1.5px solid var(--ink);border-radius:4px;
+}
+.custom-row{display:flex;gap:.4rem;margin-top:.5rem;align-items:center}
+.custom-row input[type=color]{width:2rem;height:2rem;padding:0;border:1px solid var(--rule);border-radius:3px;background:none}
+
+.action{
+  display:block;width:100%;margin-bottom:.4rem;
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
+  padding:.5rem;font-size:.85rem;
+}
+.action:hover{border-color:var(--ink-soft)}
+.action.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.action.primary:hover{background:var(--accent-deep)}
+.action:disabled{opacity:.45;cursor:default}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.row2 .action{margin-bottom:.4rem}
+
+/* ---------- canvas ---------- */
+svg.board{background:transparent;touch-action:none;max-width:100%;height:auto}
+.status{
+  border-top:1px solid var(--rule);
+  background:var(--paper);
+  padding:.55rem 1.25rem;
+  font-size:.8rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;
+  min-height:2.4rem;
+}
+.status .ok{color:var(--ink-soft)}
+.status .warn{color:var(--warn)}
+.status .key{display:flex;align-items:center;gap:.35rem;color:var(--ink-soft)}
+.status .key i{display:block;width:16px;height:0;border-top:2px dashed var(--warn)}
+.status .key i.solid{border-top:1px solid var(--ink)}
+
+/* ---------- cut list ---------- */
+table.cuts{width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums}
+table.cuts th{
+  text-align:left;font-weight:500;color:var(--ink-soft);
+  border-bottom:1px solid var(--rule);padding:.35rem .3rem;font-size:.75rem;
+}
+table.cuts td{padding:.35rem .3rem;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+table.cuts tr.sel td{background:var(--accent-soft)}
+table.cuts tbody tr{cursor:pointer}
+.chip{display:inline-block;width:.7rem;height:.7rem;border:1px solid rgba(0,0,0,.2);border-radius:2px;vertical-align:-1px;margin-right:.35rem}
+.lab{font-weight:600}
+.cut{color:var(--accent);font-weight:500}
+.hemnote{color:var(--warn);font-size:.72rem}
+.summary{margin-top:1rem;font-size:.8rem;color:var(--ink-soft)}
+.summary b{color:var(--ink);font-weight:500}
+
+.empty{color:var(--ink-soft);font-size:.82rem}
+
+.proj{
+  display:flex;align-items:center;gap:.3rem;
+  padding:.4rem .25rem;border-bottom:1px solid var(--rule-soft);font-size:.8rem;
+}
+.proj.current{background:var(--accent-soft);border-radius:2px}
+.proj .pmeta{flex:1;min-width:0}
+.proj .pname{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.proj .pdate{color:var(--ink-soft);font-size:.7rem}
+.proj button{
+  background:none;border:0;padding:.2rem .35rem;font-size:.75rem;
+  color:var(--accent);border-radius:2px;flex:none;
+}
+.proj button:hover{background:rgba(63,122,82,.12)}
+.proj button.del{color:var(--warn)}
+.proj button.del:hover{background:rgba(156,91,60,.12)}
+
+/* ---------- print ---------- */
+#print{display:none}
+@media print{
+  body{background:#fff}
+  .app{display:none}
+  #print{display:block;padding:0}
+  @page{margin:14mm}
+  .pr-head{border-bottom:1px solid #444;padding-bottom:.5rem;margin-bottom:1rem}
+  .pr-head h2{font-family:Spectral,Georgia,serif;font-weight:500;margin:0 0 .2rem;font-size:1.5rem}
+  .pr-meta{font-size:.8rem;color:#444}
+  .pr-diagram{text-align:center;margin:0 0 1.2rem;break-inside:avoid}
+  table.pr{width:100%;border-collapse:collapse;font-size:.78rem;font-variant-numeric:tabular-nums}
+  table.pr th{text-align:left;border-bottom:1px solid #444;padding:.3rem;font-weight:600}
+  table.pr td{padding:.3rem;border-bottom:1px solid #ccc}
+  table.pr tr{break-inside:avoid}
+  .pr-note{margin-top:1rem;font-size:.75rem;color:#444;max-width:60ch}
+}
+
+@media (max-width:980px){
+  main{grid-template-columns:1fr;grid-template-rows:auto auto auto;overflow-y:auto}
+  aside{overflow:visible}
+  aside.rail{border-right:0;border-bottom:1px solid var(--rule);order:2}
+  aside.list{border-left:0;border-top:1px solid var(--rule);order:3}
+  .stage{order:1;min-height:60vh}
+  .app{height:auto;min-height:100%}
+  body{overflow-y:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+<header class="bar">
+  <div>
+    <h1><span class="han">보자기</span>Drafting Table</h1>
+    <p class="tagline">Draw the panel, get every piece cut to size with its seam allowance already in.</p>
+  </div>
+  <div class="spacer"></div>
+  <div class="histctl">
+    <button class="hbtn" id="undo-btn" title="Undo (Ctrl/Cmd Z)">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5h6.2a2.8 2.8 0 010 5.6H5"/><path d="M4.6 3.4L1.6 6.5l3 3.1"/></svg>Undo
+    </button>
+    <button class="hbtn" id="redo-btn" title="Redo (Ctrl/Cmd Shift Z)">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6.5H4.8a2.8 2.8 0 000 5.6H8"/><path d="M8.4 3.4l3 3.1-3 3.1"/></svg>Redo
+    </button>
+  </div>
+  <div class="field" style="margin:0">
+    <label for="projname">Project</label>
+    <input id="projname" type="text" style="width:10rem;text-align:left" value="Untitled panel">
+  </div>
+</header>
+
+<main>
+  <aside class="rail">
+    <div class="group">
+      <h2>Panel</h2>
+      <div class="field"><label for="pw">Finished width</label><input id="pw" type="text" value="36"></div>
+      <div class="field"><label for="ph">Finished height</label><input id="ph" type="text" value="36"></div>
+      <p class="hint">Changing these rescales the whole layout proportionally.</p>
+    </div>
+
+    <div class="group">
+      <h2>Tool</h2>
+      <div class="tools" id="toolset">
+        <button class="tool" data-tool="draw" aria-pressed="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="10" height="8" stroke-dasharray="2 1.5"/></svg>Draw
+        </button>
+        <button class="tool" data-tool="select" aria-pressed="false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 1.5l9.5 5-4.2 1.3L5.6 12z"/></svg>Select
+        </button>
+        <button class="tool" data-tool="splitv" aria-pressed="false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="2" width="11" height="10"/><path d="M7 2v10" stroke-dasharray="2 1.5"/></svg>Split ↕
+        </button>
+        <button class="tool" data-tool="splith" aria-pressed="false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="2" width="11" height="10"/><path d="M1.5 7h11" stroke-dasharray="2 1.5"/></svg>Split ↔
+        </button>
+        <button class="tool wide" data-tool="merge" aria-pressed="false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1.5" y="3" width="5" height="8"/><rect x="7.5" y="3" width="5" height="8" stroke-dasharray="2 1.5"/></svg>Merge two pieces
+        </button>
+      </div>
+      <p class="hint" id="toolhint">Drag on the grid to make a new rectangle. Edges snap to neighbours.</p>
+      <div class="field" style="margin-top:.6rem">
+        <label for="magnet">Snap to nearby edges</label>
+        <input type="checkbox" id="magnet" checked style="width:auto">
+      </div>
+    </div>
+
+    <div class="group">
+      <h2>Fabric</h2>
+      <div class="swatches" id="swatches"></div>
+      <div class="custom-row">
+        <input type="color" id="customcolor" value="#8FA98F" aria-label="Custom fabric colour">
+        <button class="action" style="margin:0" id="addcolor">Add to palette</button>
+      </div>
+      <p class="hint">Pick a colour, then click pieces to fill them.</p>
+    </div>
+
+    <div class="group">
+      <h2>Seam allowance</h2>
+      <div class="field"><label for="sai">Interior seams</label><input id="sai" type="text" value="3/8"></div>
+      <div class="field"><label for="sah">Outer hem</label><input id="sah" type="text" value="3/4"></div>
+      <p class="hint">Every edge that meets another piece gets the interior figure. Edges on the outside of the panel get the hem figure instead.</p>
+    </div>
+
+    <div class="group">
+      <h2>Selected piece</h2>
+      <div id="inspector"><p class="empty">Nothing selected.</p></div>
+    </div>
+
+    <div class="group">
+      <h2>Display</h2>
+      <div class="seg" role="group" aria-label="Number format">
+        <button id="n-frac" aria-pressed="true">Fractions</button>
+        <button id="n-dec" aria-pressed="false">Decimals</button>
+      </div>
+      <div class="field" style="margin-top:.5rem"><label for="snapsel">Snap to</label>
+        <select id="snapsel" style="width:5.4rem;padding:.3rem;border:1px solid var(--rule);border-radius:3px;background:var(--paper)">
+          <option value="0.5">1/2"</option>
+          <option value="0.25" selected>1/4"</option>
+          <option value="0.125">1/8"</option>
+          <option value="0.0625">1/16"</option>
+        </select>
+      </div>
+      <div class="field" style="margin-top:.5rem">
+        <label for="piecedims">Sizes on pieces</label>
+        <input type="checkbox" id="piecedims" checked style="width:auto">
+      </div>
+    </div>
+  </aside>
+
+  <section class="stage">
+    <div class="canvas-wrap" id="wrap">
+      <svg class="board" id="board"></svg>
+    </div>
+    <div class="status" id="status"></div>
+  </section>
+
+  <aside class="list">
+    <div class="group">
+      <h2>Cutting list</h2>
+      <div id="cutlist"></div>
+    </div>
+    <div class="group">
+      <h2>Export</h2>
+      <button class="action primary" id="print-btn">Print cutting plan</button>
+      <button class="action" id="copy-btn">Copy list as a table</button>
+      <button class="action" id="reset-btn">Clear the panel</button>
+    </div>
+    <div class="group">
+      <h2>Projects</h2>
+      <button class="action primary" id="saveproj-btn">Save this project</button>
+      <div id="projlist"></div>
+      <div class="row2" style="margin-top:.6rem">
+        <button class="action" id="dlall-btn">Download all</button>
+        <button class="action" id="import-btn">Import .json</button>
+      </div>
+      <button class="action" id="dlone-btn">Download this one only</button>
+      <p class="hint" id="storagehint"></p>
+      <input type="file" id="fileinput" accept=".json,application/json" hidden>
+    </div>
+  </aside>
+</main>
+</div>
+
+<div id="print"></div>
+
+<script>
+"use strict";
+const EPS = 1e-6;
+
+/* ---------------- palette ---------------- */
+const BASE_PALETTE = [
+  "#F4F2EA","#E4DCC8","#D4BE93","#C08A50","#9C5B3C","#9A3B36",
+  "#7A4258","#4C5F7E","#3F7A52","#6E8CA8","#8FA98F","#4A6A52"
+];
+
+/* ---------------- state ---------------- */
+let state = null;
+function blankState(){
+  return {
+    panel:{w:36,h:36},
+    pieces:[],
+    nextId:1,
+    magnet:true,
+    showPieceDims:true,
+    tool:"draw",
+    sel:[],
+    sa:{interior:0.375,hem:0.75},
+    snap:0.25,
+    numbers:"frac",
+    palette:BASE_PALETTE.slice(),
+    activeColor:"#D4BE93",
+    name:"Untitled panel"
+  };
+}
+let history = [], future = [];
+
+function snapshot(){
+  return JSON.stringify({panel:state.panel,pieces:state.pieces,nextId:state.nextId});
+}
+function pushHistory(){
+  history.push(snapshot());
+  if(history.length>80) history.shift();
+  future.length = 0;
+}
+function restore(str){
+  const d = JSON.parse(str);
+  state.panel = d.panel; state.pieces = d.pieces; state.nextId = d.nextId;
+  state.sel = state.sel.filter(id=>state.pieces.some(p=>p.id===id));
+}
+function undo(){
+  if(!history.length) return;
+  future.push(snapshot());
+  restore(history.pop());
+  render();
+}
+function redo(){
+  if(!future.length) return;
+  history.push(snapshot());
+  restore(future.pop());
+  render();
+}
+
+/* ---------------- numbers ---------------- */
+function parseLen(str){
+  if(typeof str === "number") return str;
+  let s = String(str).trim().replace(/["″”]/g,"").replace(/-/g," ").trim();
+  if(!s) return NaN;
+  const m = s.match(/^(?:(\d+(?:\.\d+)?)\s+)?(\d+)\s*\/\s*(\d+)$/);
+  if(m){
+    const den = parseInt(m[3],10);
+    if(!den) return NaN;
+    return (m[1]?parseFloat(m[1]):0) + parseInt(m[2],10)/den;
+  }
+  const v = parseFloat(s);
+  return isNaN(v) ? NaN : v;
+}
+function fmt(v){
+  if(state.numbers === "dec") return (Math.round(v*1000)/1000).toString() + '"';
+  const neg = v < 0; v = Math.abs(v);
+  let six = Math.round(v*16);
+  let whole = Math.floor(six/16), n = six%16, d = 16;
+  while(n > 0 && n%2 === 0){ n/=2; d/=2; }
+  let out = n === 0 ? String(whole) : (whole === 0 ? n+"/"+d : whole+" "+n+"/"+d);
+  return (neg?"−":"") + out + '"';
+}
+function snapv(v){
+  const s = state.snap;
+  return Math.round(v/s)*s;
+}
+
+/* magnetic snapping to panel edges and other piece edges */
+function guides(axis, excludeId){
+  const set = new Set(axis === "x" ? [0, state.panel.w] : [0, state.panel.h]);
+  for(const p of state.pieces){
+    if(p.id === excludeId) continue;
+    if(axis === "x"){ set.add(p.x); set.add(p.x+p.w); }
+    else { set.add(p.y); set.add(p.y+p.h); }
+  }
+  return [...set];
+}
+function magnetTol(){ return state.magnet ? 7/SCALE : 0; }
+
+// snap a single coordinate (an edge being dragged)
+function snapEdge(v, axis, excludeId){
+  const tol = magnetTol();
+  if(tol > 0){
+    let best = null, bd = tol;
+    for(const g of guides(axis, excludeId)){
+      const d = Math.abs(v-g);
+      if(d < bd){ bd = d; best = g; }
+    }
+    if(best !== null) return best;
+  }
+  return snapv(v);
+}
+// snap a whole span (moving a piece) — either leading or trailing edge may catch
+function snapSpan(v, len, axis, excludeId){
+  const tol = magnetTol();
+  if(tol > 0){
+    let best = null, bd = tol;
+    for(const g of guides(axis, excludeId)){
+      if(Math.abs(v-g) < bd){ bd = Math.abs(v-g); best = g; }
+      if(Math.abs(v+len-g) < bd){ bd = Math.abs(v+len-g); best = g-len; }
+    }
+    if(best !== null) return best;
+  }
+  return snapv(v);
+}
+
+/* ---------------- geometry ---------------- */
+function approx(a,b){ return Math.abs(a-b) < 1e-6; }
+
+function readingOrder(pieces){
+  return pieces.slice().sort((a,b)=> (a.y-b.y) || (a.x-b.x) || (a.id-b.id));
+}
+function labelFor(i){
+  let s = "", n = i;
+  do { s = String.fromCharCode(65 + (n%26)) + s; n = Math.floor(n/26) - 1; } while(n >= 0);
+  return s;
+}
+function labels(){
+  const map = new Map();
+  readingOrder(state.pieces).forEach((p,i)=> map.set(p.id, labelFor(i)));
+  return map;
+}
+
+function coverLen(intervals, a, b){
+  const cl = intervals
+    .map(iv => [Math.max(iv[0],a), Math.min(iv[1],b)])
+    .filter(iv => iv[1]-iv[0] > EPS)
+    .sort((u,v)=>u[0]-v[0]);
+  let total = 0, cur = null;
+  for(const iv of cl){
+    if(!cur){ cur = iv.slice(); }
+    else if(iv[0] <= cur[1] + EPS){ cur[1] = Math.max(cur[1], iv[1]); }
+    else { total += cur[1]-cur[0]; cur = iv.slice(); }
+  }
+  if(cur) total += cur[1]-cur[0];
+  return total;
+}
+
+// classify one edge: 'interior' | 'hem' | 'open' | 'mixed'
+function classify(p, side){
+  const ps = state.pieces, W = state.panel.w, H = state.panel.h;
+  let span, cover = [], onBoundary;
+  if(side === "left"){
+    span = [p.y, p.y+p.h]; onBoundary = approx(p.x, 0);
+    ps.forEach(q => { if(q.id!==p.id && approx(q.x+q.w, p.x)) cover.push([q.y, q.y+q.h]); });
+  } else if(side === "right"){
+    span = [p.y, p.y+p.h]; onBoundary = approx(p.x+p.w, W);
+    ps.forEach(q => { if(q.id!==p.id && approx(q.x, p.x+p.w)) cover.push([q.y, q.y+q.h]); });
+  } else if(side === "top"){
+    span = [p.x, p.x+p.w]; onBoundary = approx(p.y, 0);
+    ps.forEach(q => { if(q.id!==p.id && approx(q.y+q.h, p.y)) cover.push([q.x, q.x+q.w]); });
+  } else {
+    span = [p.x, p.x+p.w]; onBoundary = approx(p.y+p.h, H);
+    ps.forEach(q => { if(q.id!==p.id && approx(q.y, p.y+p.h)) cover.push([q.x, q.x+q.w]); });
+  }
+  const len = span[1]-span[0];
+  const c = coverLen(cover, span[0], span[1]);
+  if(c >= len - 1e-4) return "interior";
+  if(c <= 1e-4) return onBoundary ? "hem" : "open";
+  return "mixed";
+}
+function allowanceFor(kind){
+  if(kind === "interior") return state.sa.interior;
+  return state.sa.hem; // hem, open and mixed all get the larger, safer figure
+}
+
+function analyze(){
+  const lab = labels();
+  const rows = readingOrder(state.pieces).map(p=>{
+    const e = {
+      top: classify(p,"top"), right: classify(p,"right"),
+      bottom: classify(p,"bottom"), left: classify(p,"left")
+    };
+    const a = {top:allowanceFor(e.top), right:allowanceFor(e.right),
+               bottom:allowanceFor(e.bottom), left:allowanceFor(e.left)};
+    return {
+      piece:p, label:lab.get(p.id), edges:e, allow:a,
+      cutW: p.w + a.left + a.right,
+      cutH: p.h + a.top + a.bottom
+    };
+  });
+
+  // gaps / overlaps by coordinate compression
+  const xs = new Set([0, state.panel.w]), ys = new Set([0, state.panel.h]);
+  state.pieces.forEach(p=>{ xs.add(p.x); xs.add(p.x+p.w); ys.add(p.y); ys.add(p.y+p.h); });
+  const X = [...xs].sort((a,b)=>a-b), Y = [...ys].sort((a,b)=>a-b);
+  let gap = 0, over = 0;
+  for(let i=0;i<X.length-1;i++){
+    for(let j=0;j<Y.length-1;j++){
+      const cw = X[i+1]-X[i], ch = Y[j+1]-Y[j];
+      if(cw < EPS || ch < EPS) continue;
+      const mx = (X[i]+X[i+1])/2, my = (Y[j]+Y[j+1])/2;
+      if(mx < 0 || my < 0 || mx > state.panel.w || my > state.panel.h) continue;
+      let n = 0;
+      for(const p of state.pieces){
+        if(mx > p.x && mx < p.x+p.w && my > p.y && my < p.y+p.h) n++;
+      }
+      if(n === 0) gap += cw*ch;
+      else if(n > 1) over += cw*ch;
+    }
+  }
+  const outside = state.pieces.filter(p =>
+    p.x < -EPS || p.y < -EPS || p.x+p.w > state.panel.w+EPS || p.y+p.h > state.panel.h+EPS);
+  const mixed = rows.filter(r => Object.values(r.edges).includes("mixed"));
+
+  return {rows, gap, over, outside, mixed, lab};
+}
+
+/* ---------------- rendering ---------------- */
+const board = document.getElementById("board");
+const wrap = document.getElementById("wrap");
+let SCALE = 10, PAD = 40;
+
+function computeScale(){
+  const cw = wrap.clientWidth - 40, chh = wrap.clientHeight - 40;
+  const s = Math.min((cw - PAD*2)/state.panel.w, (chh - PAD*2)/state.panel.h);
+  SCALE = Math.max(3, isFinite(s) && s > 0 ? s : 10);
+}
+function toIn(evt){
+  const r = board.getBoundingClientRect();
+  return {
+    x: (evt.clientX - r.left - PAD)/SCALE,
+    y: (evt.clientY - r.top - PAD)/SCALE
+  };
+}
+function pieceAt(x,y){
+  for(let i=state.pieces.length-1;i>=0;i--){
+    const p = state.pieces[i];
+    if(x >= p.x-EPS && x <= p.x+p.w+EPS && y >= p.y-EPS && y <= p.y+p.h+EPS) return p;
+  }
+  return null;
+}
+
+let ghost = null; // preview line or rect
+
+function diagramSVG(opts){
+  const o = Object.assign({scale:SCALE, grid:true, chrome:true, dims:true,
+    pieceDims:(state.showPieceDims !== false), pad:PAD}, opts||{});
+  const s = o.scale, pad = o.pad;
+  const W = state.panel.w*s + pad*2, H = state.panel.h*s + pad*2;
+  const a = analyze();
+  let g = "";
+
+  const uid = "g" + Math.random().toString(36).slice(2,8);
+  if(o.grid){
+    g += `<defs>
+      <pattern id="${uid}-fine" width="${s}" height="${s}" patternUnits="userSpaceOnUse">
+        <circle cx="0" cy="0" r="1.1" fill="var(--dot)"/>
+      </pattern>
+      <pattern id="${uid}-major" width="${s*6}" height="${s*6}" patternUnits="userSpaceOnUse">
+        <circle cx="0" cy="0" r="2" fill="var(--dot-major)"/>
+      </pattern>
+    </defs>`;
+    g += `<rect x="0" y="0" width="${state.panel.w*s}" height="${state.panel.h*s}" fill="#FFFFFF"/>`;
+    g += `<rect x="0" y="0" width="${state.panel.w*s}" height="${state.panel.h*s}" fill="url(#${uid}-fine)"/>`;
+    g += `<rect x="0" y="0" width="${state.panel.w*s}" height="${state.panel.h*s}" fill="url(#${uid}-major)"/>`;
+  }
+
+  // pieces
+  for(const r of a.rows){
+    const p = r.piece;
+    const selected = o.chrome && state.sel.includes(p.id);
+    g += `<rect data-id="${p.id}" x="${p.x*s}" y="${p.y*s}" width="${p.w*s}" height="${p.h*s}"
+      fill="${p.color}" stroke="${selected?'#3F7A52':'#32332B'}" stroke-width="${selected?2:0.8}"/>`;
+  }
+  // hem edges drawn over the top
+  for(const r of a.rows){
+    const p = r.piece;
+    const seg = {
+      top:[p.x,p.y,p.x+p.w,p.y], bottom:[p.x,p.y+p.h,p.x+p.w,p.y+p.h],
+      left:[p.x,p.y,p.x,p.y+p.h], right:[p.x+p.w,p.y,p.x+p.w,p.y+p.h]
+    };
+    for(const side of ["top","right","bottom","left"]){
+      const k = r.edges[side];
+      if(k === "interior") continue;
+      const c = seg[side];
+      const col = (k === "hem") ? "#9C5B3C" : "#9C5B3C";
+      g += `<line x1="${c[0]*s}" y1="${c[1]*s}" x2="${c[2]*s}" y2="${c[3]*s}"
+        stroke="${col}" stroke-width="2.5" stroke-dasharray="${k==='hem'?'6 4':'2 3'}" stroke-linecap="butt"/>`;
+    }
+  }
+  // labels and per-piece dimensions
+  const estW = (txt, fs) => txt.length * fs * 0.53;
+  for(const r of a.rows){
+    const p = r.piece;
+    const pw = p.w*s, ph = p.h*s;
+    const dark = isDark(p.color);
+    const inkCol = dark ? "#FAF8F0" : "#32332B";
+    const cutCol = dark ? "#A9D6B6" : "#3F7A52";
+
+    const finTxt = `${fmt(p.w)} × ${fmt(p.h)}`;
+    const cutTxt = `cut ${fmt(r.cutW)} × ${fmt(r.cutH)}`;
+    const finFs = 10.5, cutFs = 9.5;
+
+    const wantDims = o.pieceDims;
+    const showFin = wantDims && ph >= 34 && pw >= estW(finTxt, finFs) + 10;
+    const showCut = showFin && ph >= 52 && pw >= estW(cutTxt, cutFs) + 10;
+
+    let labFs = Math.min(pw*0.4, ph*0.4, 20);
+    if(showFin) labFs = Math.min(pw*0.34, (ph - (showCut?26:14))*0.55, 21);
+    if(labFs < 7 && !showFin) continue;
+    labFs = Math.max(labFs, 8);
+
+    const lines = [{t:r.label, fs:labFs, c:inkCol, op:0.9, ff:"Spectral, Georgia, serif"}];
+    if(showFin) lines.push({t:finTxt, fs:finFs, c:inkCol, op:0.62, ff:"IBM Plex Sans, sans-serif"});
+    if(showCut) lines.push({t:cutTxt, fs:cutFs, c:cutCol, op:0.95, ff:"IBM Plex Sans, sans-serif"});
+
+    const gap = 3;
+    const total = lines.reduce((n,l)=>n+l.fs, 0) + gap*(lines.length-1);
+    let cursor = (p.y+p.h/2)*s - total/2;
+    for(const l of lines){
+      const baseline = cursor + l.fs*0.78;
+      g += `<text x="${(p.x+p.w/2)*s}" y="${baseline}" font-family="${l.ff}"
+        font-size="${l.fs}" fill="${l.c}" opacity="${l.op}"
+        text-anchor="middle" pointer-events="none">${l.t}</text>`;
+      cursor += l.fs + gap;
+    }
+  }
+  // panel outline
+  g += `<rect x="0" y="0" width="${state.panel.w*s}" height="${state.panel.h*s}" fill="none" stroke="#32332B" stroke-width="1.2"/>`;
+
+  // overall panel dimensions
+  if(o.dims){
+    const off = 16, W = state.panel.w*s, H = state.panel.h*s, col = "#6B6A5B";
+    const face = "IBM Plex Sans, system-ui, sans-serif";
+    g += `<g stroke="${col}" stroke-width="1" fill="none">
+      <line x1="0" y1="${-off}" x2="${W}" y2="${-off}"/>
+      <line x1="0.5" y1="${-off-4}" x2="0.5" y2="${-off+4}"/>
+      <line x1="${W-0.5}" y1="${-off-4}" x2="${W-0.5}" y2="${-off+4}"/>
+      <line x1="${-off}" y1="0" x2="${-off}" y2="${H}"/>
+      <line x1="${-off-4}" y1="0.5" x2="${-off+4}" y2="0.5"/>
+      <line x1="${-off-4}" y1="${H-0.5}" x2="${-off+4}" y2="${H-0.5}"/>
+    </g>`;
+    g += `<text x="${W/2}" y="${-off-7}" text-anchor="middle" font-family="${face}"
+      font-size="11.5" fill="${col}">${fmt(state.panel.w)} wide</text>`;
+    g += `<text x="${-off-7}" y="${H/2}" text-anchor="middle" font-family="${face}"
+      font-size="11.5" fill="${col}"
+      transform="rotate(-90 ${-off-7} ${H/2})">${fmt(state.panel.h)} tall</text>`;
+  }
+
+  // resize handles on a single selection
+  if(o.chrome && state.sel.length === 1 && !drag){
+    const p = state.pieces.find(z => z.id === state.sel[0]);
+    if(p){
+      const hs = 4.5;
+      const spots = {
+        nw:[p.x, p.y], n:[p.x+p.w/2, p.y], ne:[p.x+p.w, p.y],
+        w:[p.x, p.y+p.h/2], e:[p.x+p.w, p.y+p.h/2],
+        sw:[p.x, p.y+p.h], s:[p.x+p.w/2, p.y+p.h], se:[p.x+p.w, p.y+p.h]
+      };
+      const cursors = {nw:"nwse-resize", n:"ns-resize", ne:"nesw-resize", w:"ew-resize",
+                       e:"ew-resize", sw:"nesw-resize", s:"ns-resize", se:"nwse-resize"};
+      for(const k in spots){
+        const [hx,hy] = spots[k];
+        g += `<rect data-handle="${k}" x="${hx*s-hs}" y="${hy*s-hs}" width="${hs*2}" height="${hs*2}"
+          fill="#fff" stroke="#3F7A52" stroke-width="1.5" style="cursor:${cursors[k]}"/>`;
+      }
+    }
+  }
+
+  if(o.chrome && ghost){
+    if(ghost.type === "line"){
+      g += `<line x1="${ghost.x1*s}" y1="${ghost.y1*s}" x2="${ghost.x2*s}" y2="${ghost.y2*s}"
+        stroke="#3F7A52" stroke-width="1.5" stroke-dasharray="5 3"/>`;
+    } else if(ghost.type === "rect"){
+      g += `<rect x="${ghost.x*s}" y="${ghost.y*s}" width="${ghost.w*s}" height="${ghost.h*s}"
+        fill="rgba(63,122,82,.14)" stroke="#3F7A52" stroke-width="1.5" stroke-dasharray="5 3"/>`;
+    }
+  }
+
+  return {
+    width:W, height:H,
+    inner:`<g transform="translate(${pad},${pad})">${g}</g>`
+  };
+}
+
+function isDark(hex){
+  const c = hex.replace("#","");
+  const r = parseInt(c.substr(0,2),16), g = parseInt(c.substr(2,2),16), b = parseInt(c.substr(4,2),16);
+  return (0.299*r + 0.587*g + 0.114*b) < 140;
+}
+
+function render(){
+  computeScale();
+  const d = diagramSVG();
+  board.setAttribute("width", d.width);
+  board.setAttribute("height", d.height);
+  board.setAttribute("viewBox", `0 0 ${d.width} ${d.height}`);
+  board.innerHTML = d.inner;
+  renderList();
+  renderStatus();
+  renderInspector();
+  renderSwatches();
+  document.getElementById("undo-btn").disabled = !history.length;
+  document.getElementById("redo-btn").disabled = !future.length;
+  autosave();
+}
+
+function hemWord(r){
+  const list = ["top","right","bottom","left"].filter(s => r.edges[s] !== "interior");
+  if(!list.length) return "";
+  return list.join(", ");
+}
+
+function renderList(){
+  const a = analyze();
+  const el = document.getElementById("cutlist");
+  if(!a.rows.length){ el.innerHTML = '<p class="empty">No pieces yet. Draw one on the grid.</p>'; return; }
+  let html = `<table class="cuts"><thead><tr>
+    <th>Piece</th><th>Finished</th><th>Cut to</th></tr></thead><tbody>`;
+  for(const r of a.rows){
+    const sel = state.sel.includes(r.piece.id) ? ' class="sel"' : "";
+    const hw = hemWord(r);
+    html += `<tr${sel} data-id="${r.piece.id}">
+      <td><span class="chip" style="background:${r.piece.color}"></span><span class="lab">${r.label}</span></td>
+      <td>${fmt(r.piece.w)} × ${fmt(r.piece.h)}</td>
+      <td><span class="cut">${fmt(r.cutW)} × ${fmt(r.cutH)}</span>
+        ${hw ? `<br><span class="hemnote">hem: ${hw}</span>` : ""}</td>
+    </tr>`;
+  }
+  html += "</tbody></table>";
+
+  // fabric summary
+  const byColor = new Map();
+  for(const r of a.rows){
+    const k = r.piece.color;
+    const e = byColor.get(k) || {n:0, area:0};
+    e.n++; e.area += r.cutW*r.cutH;
+    byColor.set(k, e);
+  }
+  html += `<div class="summary"><b>${a.rows.length}</b> pieces in <b>${byColor.size}</b> fabrics<br>`;
+  for(const [c,e] of byColor){
+    html += `<span class="chip" style="background:${c}"></span>${e.n} piece${e.n>1?"s":""} · ${(e.area/144).toFixed(2)} sq ft cut<br>`;
+  }
+  html += "</div>";
+  el.innerHTML = html;
+
+  el.querySelectorAll("tbody tr").forEach(tr=>{
+    tr.addEventListener("click", ev=>{
+      const id = +tr.dataset.id;
+      if(ev.shiftKey){
+        state.sel.includes(id) ? state.sel = state.sel.filter(v=>v!==id) : state.sel.push(id);
+      } else state.sel = [id];
+      render();
+    });
+  });
+}
+
+function renderStatus(){
+  const a = analyze();
+  const s = document.getElementById("status");
+  let bits = [];
+  if(!state.pieces.length){
+    s.innerHTML = `<span class="ok">Empty panel. Drag on the grid to draw your first piece.</span>`;
+    return;
+  }
+  if(a.over > EPS) bits.push(`<span class="warn">Pieces overlap over ${a.over.toFixed(1)} sq in — they can't both be cut.</span>`);
+  if(a.gap > EPS) bits.push(`<span class="warn">${a.gap.toFixed(1)} sq in of the panel isn't covered by any piece.</span>`);
+  if(a.outside.length) bits.push(`<span class="warn">${a.outside.length} piece(s) sit outside the panel.</span>`);
+  if(a.mixed.length) bits.push(`<span class="warn">${a.mixed.map(r=>r.label).join(", ")}: an edge is only partly joined, so it's been given the hem allowance. Check it by hand.</span>`);
+  if(!bits.length) bits.push(`<span class="ok">Panel is complete and sewable.</span>`);
+  bits.push(`<span class="key"><i></i> hem edge</span>`);
+  bits.push(`<span class="key"><i class="solid"></i> seam</span>`);
+  s.innerHTML = bits.join("");
+}
+
+function renderInspector(){
+  const el = document.getElementById("inspector");
+  if(state.sel.length !== 1){
+    el.innerHTML = state.sel.length
+      ? `<p class="empty">${state.sel.length} pieces selected. Pick a fabric colour, or press Delete.</p>`
+      : '<p class="empty">Nothing selected.</p>';
+    return;
+  }
+  const p = state.pieces.find(x=>x.id===state.sel[0]);
+  if(!p){ el.innerHTML = '<p class="empty">Nothing selected.</p>'; return; }
+  const a = analyze();
+  const r = a.rows.find(r=>r.piece.id===p.id);
+  el.innerHTML = `
+    <div class="field"><label for="iw">Width</label><input id="iw" type="text" value="${fmt(p.w).replace('"','')}"></div>
+    <div class="field"><label for="ih">Height</label><input id="ih" type="text" value="${fmt(p.h).replace('"','')}"></div>
+    <div class="field"><label for="ix">From left</label><input id="ix" type="text" value="${fmt(p.x).replace('"','')}"></div>
+    <div class="field"><label for="iy">From top</label><input id="iy" type="text" value="${fmt(p.y).replace('"','')}"></div>
+    <p class="hint">Piece ${r.label} · cut ${fmt(r.cutW)} × ${fmt(r.cutH)}</p>
+    <button class="action" id="del-btn" style="margin-top:.5rem">Delete piece</button>`;
+
+  const apply = () => {
+    const nw = parseLen(document.getElementById("iw").value);
+    const nh = parseLen(document.getElementById("ih").value);
+    const nx = parseLen(document.getElementById("ix").value);
+    const ny = parseLen(document.getElementById("iy").value);
+    if([nw,nh,nx,ny].some(v=>isNaN(v)) || nw<=0 || nh<=0){ render(); return; }
+    pushHistory();
+    p.w = nw; p.h = nh; p.x = nx; p.y = ny;
+    render();
+  };
+  ["iw","ih","ix","iy"].forEach(id=>{
+    const n = document.getElementById(id);
+    if(!n || n.disabled) return;
+    n.addEventListener("change", apply);
+    n.addEventListener("keydown", e=>{ if(e.key==="Enter") apply(); });
+  });
+  document.getElementById("del-btn").addEventListener("click", ()=>{
+    pushHistory();
+    state.pieces = state.pieces.filter(x=>x.id!==p.id);
+    state.sel = [];
+    render();
+  });
+}
+
+function renderSwatches(){
+  const el = document.getElementById("swatches");
+  el.innerHTML = state.palette.map(c =>
+    `<button class="sw" style="background:${c}" data-c="${c}" aria-pressed="${c===state.activeColor}" aria-label="Fabric ${c}"></button>`
+  ).join("");
+  el.querySelectorAll(".sw").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      state.activeColor = b.dataset.c;
+      if(state.sel.length){
+        pushHistory();
+        state.pieces.forEach(p=>{ if(state.sel.includes(p.id)) p.color = state.activeColor; });
+      }
+      render();
+    });
+  });
+}
+
+/* ---------------- pointer interaction ---------------- */
+let drag = null;
+
+board.addEventListener("pointermove", ev=>{
+  const {x,y} = toIn(ev);
+
+  if(drag && drag.kind === "draw"){
+    const cx = snapEdge(x, "x", null), cy = snapEdge(y, "y", null);
+    const x0 = Math.min(drag.x0, cx), y0 = Math.min(drag.y0, cy);
+    const x1 = Math.max(drag.x0, cx), y1 = Math.max(drag.y0, cy);
+    ghost = {type:"rect", x:x0, y:y0, w:x1-x0, h:y1-y0};
+    render(); return;
+  }
+  if(drag && drag.kind === "move"){
+    const p = state.pieces.find(q=>q.id===drag.id);
+    if(p){
+      p.x = snapSpan(drag.px + (x - drag.x0), p.w, "x", p.id);
+      p.y = snapSpan(drag.py + (y - drag.y0), p.h, "y", p.id);
+      render();
+    }
+    return;
+  }
+  if(drag && drag.kind === "resize"){
+    const p = state.pieces.find(q=>q.id===drag.id);
+    if(p){
+      const o = drag.orig;
+      let L = o.x, T = o.y, R = o.x+o.w, B = o.y+o.h;
+      if(drag.handle.includes("w")) L = snapEdge(x, "x", p.id);
+      if(drag.handle.includes("e")) R = snapEdge(x, "x", p.id);
+      if(drag.handle.includes("n")) T = snapEdge(y, "y", p.id);
+      if(drag.handle.includes("s")) B = snapEdge(y, "y", p.id);
+      if(R-L >= state.snap-EPS && B-T >= state.snap-EPS){
+        p.x = L; p.y = T; p.w = R-L; p.h = B-T;
+      }
+      render();
+    }
+    return;
+  }
+
+  if(state.tool === "splitv" || state.tool === "splith"){
+    const p = pieceAt(x,y);
+    if(!p){ if(ghost){ ghost = null; render(); } return; }
+    if(state.tool === "splitv"){
+      const c = Math.min(Math.max(snapv(x), p.x+state.snap), p.x+p.w-state.snap);
+      ghost = {type:"line", x1:c, y1:p.y, x2:c, y2:p.y+p.h};
+    } else {
+      const c = Math.min(Math.max(snapv(y), p.y+state.snap), p.y+p.h-state.snap);
+      ghost = {type:"line", x1:p.x, y1:c, x2:p.x+p.w, y2:c};
+    }
+    render();
+  }
+});
+
+board.addEventListener("pointerleave", ()=>{ if(ghost && !drag){ ghost = null; render(); } });
+
+board.addEventListener("pointerdown", ev=>{
+  board.setPointerCapture(ev.pointerId);
+  const {x,y} = toIn(ev);
+
+  // resize handle takes priority over everything
+  const h = ev.target && ev.target.dataset ? ev.target.dataset.handle : null;
+  if(h && state.sel.length === 1){
+    const p = state.pieces.find(z=>z.id===state.sel[0]);
+    if(p){
+      pushHistory();
+      drag = {kind:"resize", id:p.id, handle:h, orig:{x:p.x,y:p.y,w:p.w,h:p.h}};
+      return;
+    }
+  }
+
+  const p = pieceAt(x,y);
+
+  if(state.tool === "splitv" || state.tool === "splith"){
+    if(!p) return;
+    if(state.tool === "splitv"){
+      const c = Math.min(Math.max(snapv(x), p.x+state.snap), p.x+p.w-state.snap);
+      if(c <= p.x+EPS || c >= p.x+p.w-EPS) return;
+      pushHistory();
+      const right = {id:state.nextId++, x:c, y:p.y, w:p.x+p.w-c, h:p.h, color:p.color};
+      p.w = c - p.x;
+      state.pieces.push(right);
+    } else {
+      const c = Math.min(Math.max(snapv(y), p.y+state.snap), p.y+p.h-state.snap);
+      if(c <= p.y+EPS || c >= p.y+p.h-EPS) return;
+      pushHistory();
+      const low = {id:state.nextId++, x:p.x, y:c, w:p.w, h:p.y+p.h-c, color:p.color};
+      p.h = c - p.y;
+      state.pieces.push(low);
+    }
+    ghost = null;
+    render();
+    return;
+  }
+
+  if(state.tool === "draw"){
+    drag = {kind:"draw", x0:snapEdge(x,"x",null), y0:snapEdge(y,"y",null)};
+    return;
+  }
+
+  if(state.tool === "merge"){
+    if(!p) return;
+    if(state.sel.length === 1 && state.sel[0] !== p.id){
+      const q = state.pieces.find(z=>z.id===state.sel[0]);
+      const merged = tryMerge(q,p);
+      if(merged){
+        pushHistory();
+        q.x = merged.x; q.y = merged.y; q.w = merged.w; q.h = merged.h;
+        state.pieces = state.pieces.filter(z=>z.id!==p.id);
+        state.sel = [q.id];
+      } else {
+        state.sel = [p.id];
+      }
+    } else state.sel = [p.id];
+    render();
+    return;
+  }
+
+  // select tool
+  if(!p){ state.sel = []; render(); return; }
+  if(ev.shiftKey){
+    state.sel.includes(p.id) ? state.sel = state.sel.filter(v=>v!==p.id) : state.sel.push(p.id);
+    render(); return;
+  }
+  state.sel = [p.id];
+  pushHistory();
+  drag = {kind:"move", id:p.id, x0:x, y0:y, px:p.x, py:p.y};
+  render();
+});
+
+board.addEventListener("pointerup", ev=>{
+  if(drag && drag.kind === "draw" && ghost && ghost.w > EPS && ghost.h > EPS){
+    pushHistory();
+    const np = {id:state.nextId++, x:ghost.x, y:ghost.y, w:ghost.w, h:ghost.h, color:state.activeColor};
+    state.pieces.push(np);
+    state.sel = [np.id];
+  }
+  drag = null; ghost = null;
+  render();
+});
+
+function tryMerge(a,b){
+  // side by side, same height
+  if(approx(a.y,b.y) && approx(a.h,b.h)){
+    if(approx(a.x+a.w, b.x)) return {x:a.x,y:a.y,w:a.w+b.w,h:a.h};
+    if(approx(b.x+b.w, a.x)) return {x:b.x,y:a.y,w:a.w+b.w,h:a.h};
+  }
+  // stacked, same width
+  if(approx(a.x,b.x) && approx(a.w,b.w)){
+    if(approx(a.y+a.h, b.y)) return {x:a.x,y:a.y,w:a.w,h:a.h+b.h};
+    if(approx(b.y+b.h, a.y)) return {x:a.x,y:b.y,w:a.w,h:a.h+b.h};
+  }
+  return null;
+}
+
+document.addEventListener("keydown", ev=>{
+  if(/input|select|textarea/i.test(ev.target.tagName)) return;
+  if((ev.key === "Delete" || ev.key === "Backspace") && state.sel.length){
+    ev.preventDefault(); pushHistory();
+    state.pieces = state.pieces.filter(p=>!state.sel.includes(p.id));
+    state.sel = []; render();
+  }
+  if((ev.metaKey||ev.ctrlKey) && ev.key.toLowerCase()==="z"){
+    ev.preventDefault(); ev.shiftKey ? redo() : undo();
+  }
+});
+
+/* ---------------- controls ---------------- */
+function setTool(t){
+  state.tool = t;
+  document.querySelectorAll(".tool").forEach(b=>b.setAttribute("aria-pressed", b.dataset.tool===t));
+  const hints = {
+    draw:"Drag on the grid to make a new rectangle. Edges snap to neighbours.",
+    select:"Click a piece to select it, drag to move, pull a handle to resize. Shift-click to add more.",
+    splitv:"Click inside a piece to cut it top to bottom.",
+    splith:"Click inside a piece to cut it side to side.",
+    merge:"Click one piece, then a neighbour, to join them back into one."
+  };
+  document.getElementById("toolhint").textContent = hints[t];
+  ghost = null;
+  render();
+}
+document.querySelectorAll(".tool").forEach(b=> b.onclick = ()=> setTool(b.dataset.tool));
+document.getElementById("magnet").onchange = e=>{ state.magnet = e.target.checked; };
+document.getElementById("piecedims").onchange = e=>{ state.showPieceDims = e.target.checked; render(); };
+
+function bindLen(id, get, set){
+  const el = document.getElementById(id);
+  const go = ()=>{
+    const v = parseLen(el.value);
+    if(isNaN(v) || v <= 0){ el.value = fmt(get()).replace('"',''); return; }
+    set(v); render();
+    el.value = fmt(get()).replace('"','');
+  };
+  el.addEventListener("change", go);
+  el.addEventListener("keydown", e=>{ if(e.key==="Enter") go(); });
+}
+bindLen("pw", ()=>state.panel.w, v=>{
+  pushHistory();
+  const k = v/state.panel.w;
+  state.pieces.forEach(p=>{ p.x*=k; p.w*=k; });
+  state.panel.w = v;
+});
+bindLen("ph", ()=>state.panel.h, v=>{
+  pushHistory();
+  const k = v/state.panel.h;
+  state.pieces.forEach(p=>{ p.y*=k; p.h*=k; });
+  state.panel.h = v;
+});
+bindLen("sai", ()=>state.sa.interior, v=>{ state.sa.interior = v; });
+bindLen("sah", ()=>state.sa.hem, v=>{ state.sa.hem = v; });
+
+document.getElementById("n-frac").onclick = ()=>{
+  state.numbers = "frac";
+  document.getElementById("n-frac").setAttribute("aria-pressed","true");
+  document.getElementById("n-dec").setAttribute("aria-pressed","false");
+  syncFields(); render();
+};
+document.getElementById("n-dec").onclick = ()=>{
+  state.numbers = "dec";
+  document.getElementById("n-dec").setAttribute("aria-pressed","true");
+  document.getElementById("n-frac").setAttribute("aria-pressed","false");
+  syncFields(); render();
+};
+document.getElementById("snapsel").onchange = e=>{ state.snap = parseFloat(e.target.value); };
+document.getElementById("projname").addEventListener("input", e=>{
+  state.name = e.target.value; autosave(); renderProjects();
+});
+
+document.getElementById("addcolor").onclick = ()=>{
+  const c = document.getElementById("customcolor").value.toUpperCase();
+  if(!state.palette.includes(c)) state.palette.push(c);
+  state.activeColor = c;
+  if(state.sel.length){
+    pushHistory();
+    state.pieces.forEach(p=>{ if(state.sel.includes(p.id)) p.color = c; });
+  }
+  render();
+};
+
+document.getElementById("undo-btn").onclick = undo;
+document.getElementById("redo-btn").onclick = redo;
+document.getElementById("reset-btn").onclick = ()=>{
+  pushHistory();
+  state.pieces = [];
+  state.sel = [];
+  render();
+};
+
+function syncFields(){
+  document.getElementById("pw").value = fmt(state.panel.w).replace('"','');
+  document.getElementById("ph").value = fmt(state.panel.h).replace('"','');
+  document.getElementById("sai").value = fmt(state.sa.interior).replace('"','');
+  document.getElementById("sah").value = fmt(state.sa.hem).replace('"','');
+  document.getElementById("projname").value = state.name;
+  document.getElementById("snapsel").value = String(state.snap);
+  document.getElementById("magnet").checked = state.magnet !== false;
+  document.getElementById("piecedims").checked = state.showPieceDims !== false;
+}
+
+/* ---------------- export ---------------- */
+document.getElementById("copy-btn").onclick = async ()=>{
+  const a = analyze();
+  let t = "Piece\tFabric\tFinished W\tFinished H\tCut W\tCut H\tHem edges\n";
+  for(const r of a.rows){
+    t += [r.label, r.piece.color, fmt(r.piece.w), fmt(r.piece.h), fmt(r.cutW), fmt(r.cutH), hemWord(r) || "none"].join("\t") + "\n";
+  }
+  const btn = document.getElementById("copy-btn");
+  try{ await navigator.clipboard.writeText(t); btn.textContent = "Copied"; }
+  catch(e){ btn.textContent = "Couldn't copy — use Print instead"; }
+  setTimeout(()=>{ btn.textContent = "Copy list as a table"; }, 1800);
+};
+
+document.getElementById("print-btn").onclick = ()=>{
+  const a = analyze();
+  const s = Math.min(560/state.panel.w, 560/state.panel.h);
+  const savedSel = state.sel; state.sel = [];
+  const d = diagramSVG({scale:s, grid:false, chrome:false, dims:true, pad:34});
+  state.sel = savedSel;
+
+  const byColor = new Map();
+  for(const r of a.rows){
+    const e = byColor.get(r.piece.color) || {n:0, area:0};
+    e.n++; e.area += r.cutW*r.cutH;
+    byColor.set(r.piece.color, e);
+  }
+
+  let rows = "";
+  for(const r of a.rows){
+    rows += `<tr>
+      <td><b>${r.label}</b></td>
+      <td><span style="display:inline-block;width:9px;height:9px;background:${r.piece.color};border:1px solid #999"></span> ${r.piece.color}</td>
+      <td>${fmt(r.piece.w)} × ${fmt(r.piece.h)}</td>
+      <td><b>${fmt(r.cutW)} × ${fmt(r.cutH)}</b></td>
+      <td>${hemWord(r) || "—"}</td></tr>`;
+  }
+  let fab = "";
+  for(const [c,e] of byColor){
+    fab += `<tr><td><span style="display:inline-block;width:9px;height:9px;background:${c};border:1px solid #999"></span> ${c}</td>
+      <td>${e.n}</td><td>${(e.area/144).toFixed(2)} sq ft</td></tr>`;
+  }
+
+  document.getElementById("print").innerHTML = `
+    <div class="pr-head">
+      <h2>${escapeHtml(state.name || "Pojagi panel")}</h2>
+      <div class="pr-meta">Finished panel ${fmt(state.panel.w)} × ${fmt(state.panel.h)} ·
+      ${a.rows.length} pieces · interior seam allowance ${fmt(state.sa.interior)} · outer hem allowance ${fmt(state.sa.hem)} ·
+      ${new Date().toLocaleDateString()}</div>
+    </div>
+    <div class="pr-diagram">
+      <svg width="${d.width}" height="${d.height}" viewBox="0 0 ${d.width} ${d.height}" xmlns="http://www.w3.org/2000/svg">${d.inner}</svg>
+      <div style="font-size:.72rem;color:#444;margin-top:.3rem">Dashed edges sit on the outside of the panel and take the hem allowance.</div>
+    </div>
+    <table class="pr">
+      <thead><tr><th>Piece</th><th>Fabric</th><th>Finished size</th><th>Cut to</th><th>Hem edges</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <h3 style="font-family:Spectral,Georgia,serif;font-weight:500;font-size:1rem;margin:1.2rem 0 .4rem">Fabric needed</h3>
+    <table class="pr">
+      <thead><tr><th>Fabric</th><th>Pieces</th><th>Total cut area</th></tr></thead>
+      <tbody>${fab}</tbody>
+    </table>
+    <p class="pr-note">Cut sizes already include allowance: ${fmt(state.sa.interior)} on every edge that meets
+    another piece, ${fmt(state.sa.hem)} on edges along the outside of the panel. In a ssamsol seam the two pieces
+    are offset rather than matched edge to edge, so the wrapping side gives up more fabric than the wrapped side —
+    trim the excess as you go. Piece letters run left to right, top to bottom.</p>`;
+  window.print();
+};
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* ---------------- projects library ---------------- */
+const FORMAT = "pojagi-drafting-table";
+let library = [];
+let storageOK = false;
+
+function projectData(){
+  const d = JSON.parse(JSON.stringify(state));
+  delete d.sel;
+  return d;
+}
+function stamp(){ return new Date().toISOString(); }
+function niceDate(iso){
+  const d = new Date(iso);
+  return isNaN(d) ? "" : d.toLocaleDateString(undefined,{month:"short",day:"numeric"}) +
+    " " + d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"});
+}
+
+async function loadLibrary(){
+  try{
+    if(window.storage && window.storage.get){
+      storageOK = true;
+      const r = await window.storage.get("pojagi:library");
+      if(r && r.value){
+        const parsed = JSON.parse(r.value);
+        if(Array.isArray(parsed)) library = parsed;
+      }
+    }
+  }catch(e){
+    // key may simply not exist yet — storage is still usable
+    if(window.storage && window.storage.set) storageOK = true;
+  }
+}
+async function saveLibrary(){
+  try{
+    if(window.storage && window.storage.set){
+      await window.storage.set("pojagi:library", JSON.stringify(library));
+    }
+  }catch(e){ storageOK = false; renderProjects(); }
+}
+
+function uniqueName(base){
+  const taken = new Set(library.map(p=>p.name));
+  if(!taken.has(base)) return base;
+  let n = 2;
+  while(taken.has(`${base} (${n})`)) n++;
+  return `${base} (${n})`;
+}
+
+function saveCurrentProject(){
+  const name = (state.name || "").trim() || "Untitled panel";
+  const existing = library.find(p => p.name === name);
+  if(existing){
+    if(!confirm(`Replace the saved project "${name}" with what's on screen?`)) return;
+    existing.data = projectData();
+    existing.savedAt = stamp();
+  } else {
+    library.push({id:"p"+Date.now().toString(36), name, savedAt:stamp(), data:projectData()});
+  }
+  library.sort((a,b)=> b.savedAt.localeCompare(a.savedAt));
+  saveLibrary();
+  renderProjects();
+}
+
+function openProject(id){
+  const p = library.find(x=>x.id===id);
+  if(!p) return;
+  if(state.pieces.length && !confirm(`Open "${p.name}"? Anything unsaved on screen will be replaced.`)) return;
+  pushHistory();
+  state = Object.assign(blankState(), JSON.parse(JSON.stringify(p.data)));
+  state.sel = [];
+  syncFields();
+  setTool(state.tool || "draw");
+  renderProjects();
+}
+
+function deleteProject(id){
+  const p = library.find(x=>x.id===id);
+  if(!p) return;
+  if(!confirm(`Delete the saved project "${p.name}"? This can't be undone.`)) return;
+  library = library.filter(x=>x.id!==id);
+  saveLibrary();
+  renderProjects();
+}
+
+function renderProjects(){
+  const el = document.getElementById("projlist");
+  if(!el) return;
+  if(!library.length){
+    el.innerHTML = '<p class="empty" style="margin:.5rem 0 0">Nothing saved yet.</p>';
+  } else {
+    el.innerHTML = library.map(p=>`
+      <div class="proj ${p.name === state.name ? "current" : ""}">
+        <span class="pmeta">
+          <span class="pname">${escapeHtml(p.name)}</span>
+          <span class="pdate">${p.data.pieces.length} pieces · ${niceDate(p.savedAt)}</span>
+        </span>
+        <button data-open="${p.id}">Open</button>
+        <button class="del" data-del="${p.id}" aria-label="Delete ${escapeHtml(p.name)}">×</button>
+      </div>`).join("");
+    el.querySelectorAll("[data-open]").forEach(b=> b.onclick = ()=> openProject(b.dataset.open));
+    el.querySelectorAll("[data-del]").forEach(b=> b.onclick = ()=> deleteProject(b.dataset.del));
+  }
+  const hint = document.getElementById("storagehint");
+  if(hint){
+    hint.textContent = storageOK
+      ? "Saved projects stay in this browser. Download a copy to keep them safely or move them to another device."
+      : "This browser isn't storing projects between visits, so download a copy before you close the tab.";
+  }
+}
+
+function downloadJSON(obj, filename){
+  const blob = new Blob([JSON.stringify(obj,null,2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+}
+function safeName(s){
+  return (String(s||"pojagi").replace(/[^\w\- ]/g,"").trim() || "pojagi").replace(/\s+/g,"-");
+}
+function today(){ return new Date().toISOString().slice(0,10); }
+
+document.getElementById("saveproj-btn").onclick = saveCurrentProject;
+
+document.getElementById("dlall-btn").onclick = ()=>{
+  const projects = library.slice();
+  const name = (state.name || "").trim() || "Untitled panel";
+  if(!projects.some(p => p.name === name)){
+    projects.unshift({id:"current", name, savedAt:stamp(), data:projectData()});
+  }
+  downloadJSON({format:FORMAT, version:1, exported:stamp(), projects},
+    `pojagi-projects-${today()}.json`);
+};
+
+document.getElementById("dlone-btn").onclick = ()=>{
+  const name = (state.name || "").trim() || "Untitled panel";
+  downloadJSON({format:FORMAT, version:1, exported:stamp(),
+    projects:[{id:"current", name, savedAt:stamp(), data:projectData()}]},
+    `${safeName(name)}.json`);
+};
+
+document.getElementById("import-btn").onclick = ()=> document.getElementById("fileinput").click();
+
+document.getElementById("fileinput").onchange = e=>{
+  const f = e.target.files[0];
+  if(!f) return;
+  const rd = new FileReader();
+  rd.onload = ()=>{
+    let incoming = [];
+    try{
+      const d = JSON.parse(rd.result);
+      if(Array.isArray(d.projects)){
+        incoming = d.projects.filter(p => p && p.data && p.data.panel && Array.isArray(p.data.pieces));
+      } else if(d.panel && Array.isArray(d.pieces)){
+        // a single project saved by an earlier version
+        incoming = [{name:d.name || "Imported panel", savedAt:stamp(), data:d}];
+      }
+      if(!incoming.length) throw new Error("nothing usable");
+    }catch(err){
+      alert("That file doesn't look like a saved pojagi panel.");
+      return;
+    }
+    for(const p of incoming){
+      library.push({
+        id:"p"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),
+        name:uniqueName(p.name || "Imported panel"),
+        savedAt:p.savedAt || stamp(),
+        data:p.data
+      });
+    }
+    library.sort((a,b)=> b.savedAt.localeCompare(a.savedAt));
+    saveLibrary();
+    renderProjects();
+    alert(`Imported ${incoming.length} project${incoming.length>1?"s":""}.`);
+  };
+  rd.readAsText(f);
+  e.target.value = "";
+};
+
+/* ---------------- autosave (optional) ---------------- */
+let saveTimer = null;
+function autosave(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
+    try{
+      if(window.storage && window.storage.set){
+        await window.storage.set("pojagi:panel", JSON.stringify(state));
+      }
+    }catch(e){ /* storage unavailable — file save still works */ }
+  }, 700);
+}
+async function loadSaved(){
+  try{
+    if(window.storage && window.storage.get){
+      const r = await window.storage.get("pojagi:panel");
+      if(r && r.value){
+        const d = JSON.parse(r.value);
+        if(d && d.pieces && d.panel) return Object.assign(blankState(), d);
+      }
+    }
+  }catch(e){ /* nothing saved */ }
+  return null;
+}
+
+/* ---------------- boot ---------------- */
+(async function boot(){
+  await loadLibrary();
+  state = (await loadSaved()) || blankState();
+  state.sel = [];
+  syncFields();
+  setTool(state.tool || "draw");
+  render();
+  renderProjects();
+})();
+
+let rt = null;
+window.addEventListener("resize", ()=>{ clearTimeout(rt); rt = setTimeout(render, 120); });
+</script>
+</body>
+</html>
