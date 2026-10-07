@@ -8,20 +8,23 @@ async function setup() {
   createCanvas(800, 1200);
 
   const files = [
-    { file: 'purple-linen-sm.jpeg',   x: 50,  y: 100, w: 60,  h: 60  },
-    { file: 'plaid-sm.jpeg',          x: 200, y: 100, w: 60,  h: 60  },
-    { file: 'light-chambray-sm.jpeg', x: 330, y: 100, w: 60,  h: 60  },
-    { file: 'dark-chambray-sm.jpeg',  x: 450, y: 100, w: 60,  h: 60  },
-    { file: 'daisys-small-sm.jpeg',   x: 50,  y: 280, w: 60,  h: 60  },
-    { file: 'blue-waxed-sm.jpeg',     x: 200, y: 280, w: 108, h: 108 },
-    {file: 'large-flower-square.jpeg', x:200, y: 320, w:120, h:120},
-    {file: 'large-dark-chambray.jpeg', x:320, y: 320, w:156, h:108},
-    {file: 'large-flowers.jpeg', x:400, y: 320, w:144, h:144}
+    { file: 'purple-linen-sm.jpeg',     x: 50,  y: 100, w: 60,  h: 60  },
+    { file: 'plaid-sm.jpeg',            x: 200, y: 100, w: 60,  h: 60  },
+    { file: 'light-chambray-sm.jpeg',   x: 330, y: 100, w: 60,  h: 60  },
+    { file: 'dark-chambray-sm.jpeg',    x: 450, y: 100, w: 60,  h: 60  },
+    { file: 'daisys-small-sm.jpeg',     x: 50,  y: 280, w: 60,  h: 60  },
+    { file: 'blue-waxed-sm.jpeg',       x: 200, y: 280, w: 108, h: 108 },
+    { file: 'large-flower-square.jpeg', x: 200, y: 320, w: 120, h: 120 },
+    { file: 'large-dark-chambray.jpeg', x: 320, y: 320, w: 156, h: 108 },
+    { file: 'large-flowers.jpeg',       x: 400, y: 320, w: 144, h: 144 }
   ];
 
-  pantsImg = await loadImage('pants.JPG');
-
-  const imgs = await Promise.all(files.map(f => loadImage(f.file)));
+  // Load the pants and all the swatches at the same time
+  const [pants, ...imgs] = await Promise.all([
+    loadImage('pants.JPG'),
+    ...files.map(f => loadImage(f.file))
+  ]);
+  pantsImg = pants;
 
   for (let i = 0; i < files.length; i++) {
     const f = files[i];
@@ -60,6 +63,7 @@ function drawScene() {
     pop();
   }
 }
+
 // Is the mouse over this piece, taking its rotation into account?
 function isOver(p) {
   const dx = mouseX - (p.x + p.w / 2);
@@ -101,10 +105,10 @@ function mouseWheel(event) {
 }
 
 function keyTyped() {
-if (key === 's') {
-  drawScene();          // repaint without the text
-  save('image.png');
-}
+  if (key === 's') {
+    drawScene();          // repaint without the text
+    save('image.png');
+  }
   if (selected && key === 'r') {
     selected.angle += radians(5);
   }
