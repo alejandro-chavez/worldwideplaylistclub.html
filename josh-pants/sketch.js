@@ -5,7 +5,7 @@ let offsetX, offsetY;
 let pantsImg;
 
 async function setup() {
-  createCanvas(1000, 1600);
+  createCanvas(800, 1200);
 
   const files = [
     { file: 'purple-linen-sm.jpeg',   x: 50,  y: 100, w: 60,  h: 60  },
@@ -13,9 +13,10 @@ async function setup() {
     { file: 'light-chambray-sm.jpeg', x: 330, y: 100, w: 60,  h: 60  },
     { file: 'dark-chambray-sm.jpeg',  x: 450, y: 100, w: 60,  h: 60  },
     { file: 'daisys-small-sm.jpeg',   x: 50,  y: 280, w: 60,  h: 60  },
-    { file: 'blue-waxed-sm.jpeg',     x: 200, y: 280, w: 105, h: 105 },
-    {file: 'large-flower-square.jpeg', x:200, y: 320, w:140, h:140},
-    {file: 'large-dark-chambray.jpeg', x:320, y: 320, w:140, h:140}
+    { file: 'blue-waxed-sm.jpeg',     x: 200, y: 280, w: 108, h: 108 },
+    {file: 'large-flower-square.jpeg', x:200, y: 320, w:120, h:120},
+    {file: 'large-dark-chambray.jpeg', x:320, y: 320, w:156, h:108},
+    {file: 'large-flowers.jpeg', x:400, y: 320, w:144, h:144}
   ];
 
   pantsImg = await loadImage('pants.JPG');
@@ -29,27 +30,36 @@ async function setup() {
 }
 
 function draw() {
-  background(255);
-  image(pantsImg, 0, 0, 800, 1200);
-
   if (dragged) {
     dragged.x = mouseX + offsetX;
     dragged.y = mouseY + offsetY;
   }
 
-  for (const p of pieces) {
-    push();                                   // save the drawing settings
-    translate(p.x + p.w / 2, p.y + p.h / 2);  // move to the piece's center
-    rotate(p.angle);                          // spin around that center
-    imageMode(CENTER);
-    image(p.img, 0, 0, p.w, p.h);
-    pop();                                    // restore, so the next piece isn't affected
-  }
-  textSize(22);
+  drawScene();   // pants + pieces
+
+  // instructions (only drawn on screen, not in the saved image)
+  textSize(30);
   fill('yellow');
-  text('press e to rotate counter-clockwise,', 6, 20);
+  stroke(0);
+  strokeWeight(4);
+  text('press e to rotate counter-clockwise,', 26, 30);
+  text('press r for clockwise', 26, 60);
+  text('press s to save/download your image', 26, 90);
 }
 
+function drawScene() {
+  background(255);
+  image(pantsImg, 0, 0, 800, 1200);
+
+  for (const p of pieces) {
+    push();
+    translate(p.x + p.w / 2, p.y + p.h / 2);
+    rotate(p.angle);
+    imageMode(CENTER);
+    image(p.img, 0, 0, p.w, p.h);
+    pop();
+  }
+}
 // Is the mouse over this piece, taking its rotation into account?
 function isOver(p) {
   const dx = mouseX - (p.x + p.w / 2);
@@ -91,9 +101,10 @@ function mouseWheel(event) {
 }
 
 function keyTyped() {
-  if (key === 's') {
-    save('image.png');
-  }
+if (key === 's') {
+  drawScene();          // repaint without the text
+  save('image.png');
+}
   if (selected && key === 'r') {
     selected.angle += radians(5);
   }
